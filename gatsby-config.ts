@@ -1,0 +1,58 @@
+import type { GatsbyConfig } from "gatsby";
+
+const siteUrl = process.env.URL || process.env.DEPLOY_URL || "https://www.clearpeakexteriors.com";
+
+const config: GatsbyConfig = {
+  siteMetadata: {
+    title: "ClearPeak Exteriors | Denver's Premium Exterior Cleaning Company",
+    description:
+      "Denver Metro's premium exterior cleaning company. Pressure washing, soft washing, window cleaning, roof & concrete cleaning. Fully insured, locally owned, five-star rated.",
+    siteUrl,
+    author: "ClearPeak Exteriors",
+    phone: "(720) 555-0182",
+    email: "hello@clearpeakexteriors.com",
+  },
+  trailingSlash: "never",
+  graphqlTypegen: true,
+  plugins: [
+    "gatsby-plugin-image",
+    "gatsby-plugin-sharp",
+    "gatsby-transformer-sharp",
+    "gatsby-plugin-postcss",
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: "images",
+        path: `${__dirname}/src/images`,
+      },
+    },
+    {
+      resolve: "gatsby-plugin-manifest",
+      options: {
+        name: "ClearPeak Exteriors",
+        short_name: "ClearPeak",
+        start_url: "/",
+        background_color: "#FFFFFF",
+        theme_color: "#00D4FF",
+        display: "standalone",
+        icon: "src/images/icon.png",
+      },
+    },
+    {
+      resolve: "gatsby-plugin-sitemap",
+      options: {
+        excludes: ["/404", "/404.html"],
+      },
+    },
+    {
+      resolve: "gatsby-plugin-robots-txt",
+      options: {
+        host: siteUrl,
+        sitemap: `${siteUrl}/sitemap-index.xml`,
+        policy: [{ userAgent: "*", allow: "/" }],
+      },
+    },
+  ],
+};
+
+export default config;

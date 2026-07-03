@@ -1,0 +1,21 @@
+export default {
+  name: "siteSettings",
+  title: "Site Settings",
+  type: "document",
+  fields: [
+    { name: "siteName", title: "Site Name", type: "string", initialValue: "ClearPeak Exteriors" },
+    { name: "tagline", title: "Tagline", type: "string" },
+    { name: "logo", title: "Logo", type: "image" },
+    { name: "phone", title: "Phone Number", type: "string" },
+    { name: "email", title: "Email", type: "string" },
+    { name: "address", title: "Street Address", type: "string" },
+    { name: "city", title: "City", type: "string" },
+    { name: "state", title: "State", type: "string" },
+    { name: "zip", title: "Zip Code", type: "string" },
+    { name: "hours", title: "Business Hours", type: "string" },
+    { name: "googleReviewUrl", title: "Google Reviews URL", type: "url" },
+    { name: "facebookUrl", title: "Facebook URL", type: "url" },
+    { name: "instagramUrl", title: "Instagram URL", type: "url" },
+    { name: "defaultSeo", title: "Default SEO", type: "seo" },
+  ],
+};

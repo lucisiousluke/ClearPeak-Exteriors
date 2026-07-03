@@ -1,0 +1,49 @@
+{
+  "name": "clearpeak-exteriors",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ClearPeak Exteriors — premium residential & commercial exterior cleaning, Denver Metro.",
+  "scripts": {
+    "predevelop": "node scripts/fetch-sanity-content.mjs || echo 'Skipping Sanity fetch — using existing src/data files'",
+    "develop": "gatsby develop",
+    "start": "gatsby develop",
+    "prebuild": "node scripts/fetch-sanity-content.mjs",
+    "build": "gatsby build",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean",
+    "typecheck": "tsc --noEmit",
+    "sync:sanity": "node scripts/fetch-sanity-content.mjs",
+    "seed:sanity": "tsx scripts/seed-sanity.ts"
+  },
+  "dependencies": {
+    "@sanity/client": "^6.24.1",
+    "@sanity/image-url": "^1.1.0",
+    "clsx": "^2.1.1",
+    "framer-motion": "^11.11.17",
+    "gatsby": "^5.14.0",
+    "gatsby-plugin-image": "^3.14.0",
+    "gatsby-plugin-manifest": "^5.14.0",
+    "gatsby-plugin-postcss": "^6.14.0",
+    "gatsby-plugin-robots-txt": "^1.8.0",
+    "gatsby-plugin-sharp": "^5.14.0",
+    "gatsby-plugin-sitemap": "^6.14.0",
+    "gatsby-source-filesystem": "^5.14.0",
+    "gatsby-transformer-sharp": "^5.14.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-icons": "^5.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.15",
+    "tsx": "^4.22.5",
+    "typescript": "^5.6.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

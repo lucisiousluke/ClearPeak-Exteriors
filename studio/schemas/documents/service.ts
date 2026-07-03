@@ -1,0 +1,31 @@
+export default {
+  name: "service",
+  title: "Service",
+  type: "document",
+  fields: [
+    { name: "name", title: "Service Name", type: "string", validation: (Rule: any) => Rule.required() },
+    { name: "slug", title: "Slug", type: "slug", options: { source: "name" }, validation: (Rule: any) => Rule.required() },
+    { name: "icon", title: "Icon Name", type: "string", description: "react-icons/fi icon name, e.g. FiZap" },
+    { name: "tagline", title: "Tagline", type: "string" },
+    { name: "description", title: "Description", type: "text", rows: 4 },
+    { name: "heroImage", title: "Hero Image", type: "image", options: { hotspot: true } },
+    { name: "startingPrice", title: "Starting Price", type: "string" },
+    { name: "featured", title: "Featured on Homepage", type: "boolean", initialValue: false },
+    { name: "benefits", title: "Benefits", type: "array", of: [{ type: "string" }] },
+    { name: "process", title: "Process Steps", type: "array", of: [{ type: "string" }] },
+    {
+      name: "faqs",
+      title: "FAQs",
+      type: "array",
+      of: [{ type: "reference", to: [{ type: "faq" }] }],
+    },
+    {
+      name: "category",
+      title: "Category",
+      type: "reference",
+      to: [{ type: "category" }],
+    },
+    { name: "order", title: "Sort Order", type: "number" },
+    { name: "seo", title: "SEO", type: "seo" },
+  ],
+};

@@ -1,0 +1,11 @@
+node_modules/
+.cache/
+public/
+.env
+.env.*
+!.env.example
+.DS_Store
+npm-debug.log*
+.netlify/
+studio/node_modules/
+studio/dist/

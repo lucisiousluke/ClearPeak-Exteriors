@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-aqua: #00d4ff;
+  --color-pink: #ff4fa3;
+  --color-coral: #ff7a59;
+  --color-ink: #172b4d;
+  --color-soft: #f6fcff;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-white text-ink-800 antialiased;
+    font-family: "Inter", sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Space Grotesk", sans-serif;
+    @apply text-ink-800;
+  }
+
+  ::selection {
+    @apply bg-aqua-200 text-ink-900;
+  }
+}
+
+@layer components {
+  .text-gradient-brand {
+    @apply bg-gradient-brand bg-clip-text text-transparent;
+  }
+
+  .text-gradient-brand-2 {
+    @apply bg-gradient-brand-2 bg-clip-text text-transparent;
+  }
+
+  .bg-gradient-brand-animated {
+    @apply bg-gradient-brand-3 bg-[length:200%_200%] animate-gradient-x;
+  }
+
+  .glass {
+    @apply bg-white/70 backdrop-blur-md border border-white/60;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
