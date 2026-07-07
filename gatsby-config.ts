@@ -13,7 +13,15 @@ const config: GatsbyConfig = {
     email: "hello@clearpeakexteriors.com",
   },
   trailingSlash: "never",
-  graphqlTypegen: true,
+  // Output path is deliberately outside src/ — Gatsby's dev-server watcher
+  // monitors src/ to trigger rebuilds, and the default output path
+  // (src/gatsby-types.d.ts) sits inside that watched tree. Every rebuild
+  // regenerates the file, which the watcher then sees as a source change,
+  // triggering another rebuild — an infinite loop. Keeping the generated
+  // types outside src/ breaks that cycle.
+  graphqlTypegen: {
+    typesOutputPath: "gatsby-types.d.ts",
+  },
   plugins: [
     "gatsby-plugin-image",
     "gatsby-plugin-sharp",

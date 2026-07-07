@@ -32,4 +32,10 @@ export default {
     { name: "finalCtaSubtext", title: "Final CTA Subtext", type: "text", rows: 2 },
     { name: "seo", title: "SEO", type: "seo" },
   ],
+  preview: {
+    select: { title: "heroHeadline", subtitle: "heroHighlight" },
+    prepare({ title, subtitle }: { title?: string; subtitle?: string }) {
+      return { title: title ? `${title} ${subtitle ?? ""}`.trim() : "Homepage" };
+    },
+  },
 };

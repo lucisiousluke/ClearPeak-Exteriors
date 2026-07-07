@@ -35,4 +35,9 @@ export default {
     },
     { name: "legalLinks", title: "Legal Links", type: "array", of: [{ type: "object", name: "legalLink", fields: [{ name: "label", title: "Label", type: "string" }, { name: "url", title: "URL", type: "string" }] }] },
   ],
+  preview: {
+    prepare() {
+      return { title: "Site Footer" };
+    },
+  },
 };

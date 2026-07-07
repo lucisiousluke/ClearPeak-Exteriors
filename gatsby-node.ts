@@ -11,6 +11,16 @@ export const onCreateWebpackConfig: GatsbyNode["onCreateWebpackConfig"] = ({ act
         "~": path.resolve(__dirname, "src"),
       },
     },
+    // studio/ and scripts/ are separate tools that live inside this repo but
+    // aren't part of the site bundle — excluding them from the dev-server
+    // watcher stops their own file churn (Sanity Studio's node_modules, its
+    // build/dev artifacts, etc.) from triggering spurious Gatsby rebuilds.
+    watchOptions: {
+      ignored: [
+        path.resolve(__dirname, "studio") + "/**",
+        path.resolve(__dirname, "scripts") + "/**",
+      ],
+    },
   });
 };
 

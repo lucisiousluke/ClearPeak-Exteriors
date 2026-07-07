@@ -18,4 +18,10 @@ export default {
     { name: "instagramUrl", title: "Instagram URL", type: "url" },
     { name: "defaultSeo", title: "Default SEO", type: "seo" },
   ],
+  preview: {
+    select: { title: "siteName", subtitle: "phone" },
+    prepare({ title, subtitle }: { title?: string; subtitle?: string }) {
+      return { title: title || "Site Settings", subtitle };
+    },
+  },
 };

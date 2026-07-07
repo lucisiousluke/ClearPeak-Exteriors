@@ -8,4 +8,10 @@ export default {
     { name: "primaryCta", title: "Primary CTA", type: "ctaButton" },
     { name: "secondaryCta", title: "Secondary CTA", type: "ctaButton" },
   ],
+  preview: {
+    select: { title: "headline" },
+    prepare({ title }: { title?: string }) {
+      return { title: title || "Global CTA" };
+    },
+  },
 };

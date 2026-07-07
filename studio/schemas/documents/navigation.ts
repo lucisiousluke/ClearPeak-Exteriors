@@ -20,4 +20,13 @@ export default {
     },
     { name: "headerCta", title: "Header CTA Button", type: "ctaButton" },
   ],
+  preview: {
+    select: { links: "mainLinks" },
+    prepare({ links }: { links?: unknown[] }) {
+      return {
+        title: "Site Navigation",
+        subtitle: `${links?.length ?? 0} nav link${links?.length === 1 ? "" : "s"}`,
+      };
+    },
+  },
 };
