@@ -213,7 +213,7 @@ async function fetchGallery() {
       `*[_type == "galleryItem"] | order(_createdAt asc) { "id": _id, title, "category": category->title, image }`
     ),
     client.fetch(
-      `*[_type == "beforeAfter"] | order(_createdAt asc) { "id": _id, title, "service": service->name, beforeImage, afterImage }`
+      `*[_type == "beforeAfter" && featured == true] | order(coalesce(order, 9999) asc, _createdAt asc) { "id": _id, title, "service": service->name, beforeImage, afterImage }`
     ),
   ]);
   if (!galleryDocs.length && !beforeAfterDocs.length) return null;
