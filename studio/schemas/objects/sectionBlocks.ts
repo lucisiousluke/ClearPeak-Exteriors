@@ -86,6 +86,12 @@ export const faqBlock = marker(
   "Shows the sitewide FAQ list. Heading text comes from Section Headings → Homepage FAQ Section — nothing to edit here."
 );
 
+export const promotionBlock = marker(
+  "promotionBlock",
+  "Promotion",
+  "Shows the active Promotion document(s) with Placement set to \"Homepage Section\" — create/edit those under Promotion. Nothing to edit here."
+);
+
 export const processBlock = {
   name: "processBlock",
   title: "Process Steps (\"How It Works\")",
@@ -115,4 +121,5 @@ export const sectionBlockTypes = [
   serviceAreasBlock,
   blogPreviewBlock,
   faqBlock,
+  promotionBlock,
 ];

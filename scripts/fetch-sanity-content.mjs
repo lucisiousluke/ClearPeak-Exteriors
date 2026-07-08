@@ -15,7 +15,11 @@ const client = createClient({
   projectId: process.env.GATSBY_SANITY_PROJECT_ID || "vgi0saae",
   dataset: process.env.GATSBY_SANITY_DATASET || "production",
   apiVersion: "2024-01-01",
-  useCdn: true,
+  // Fresh reads, not CDN-cached: this runs once per build (not per visitor),
+  // so the tiny latency cost is worth it — the Sanity CDN can lag ~30-60s
+  // behind a publish, and a webhook-triggered build can fire within seconds
+  // of that publish, risking a build that bakes in stale content.
+  useCdn: false,
 });
 
 const builder = imageUrlBuilder(client);
@@ -506,6 +510,34 @@ async function fetchSiteContent() {
   );
 }
 
+async function fetchPromotions() {
+  // Always writes the file, even with zero documents — components import
+  // this unconditionally, so it must exist from the very first run.
+  const docs = await client.fetch(
+    `*[_type == "promotion"] | order(_createdAt desc) { title, message, cta, startDate, endDate, active, placement }`
+  );
+
+  const body = docs
+    .map(
+      (p) => `  {
+    title: ${esc(p.title)},
+    message: ${esc(p.message)},
+    cta: ${ctaLiteral(p.cta)},
+    startDate: ${esc(p.startDate)},
+    endDate: ${esc(p.endDate)},
+    active: ${!!p.active},
+    placement: ${esc(p.placement)},
+  }`
+    )
+    .join(",\n");
+
+  return (
+    banner("promotion documents") +
+    `import type { Promotion } from "~/types";\n\n` +
+    `export const promotions: Promotion[] = [\n${body}\n];\n`
+  );
+}
+
 async function main() {
   const jobs = [
     ["services.ts", fetchServices],
@@ -524,6 +556,7 @@ async function main() {
     ["trustBadgesSection.ts", fetchTrustBadgesSection],
     ["aboutPage.ts", fetchAboutPage],
     ["siteContent.ts", fetchSiteContent],
+    ["promotions.ts", fetchPromotions],
   ];
 
   let written = 0;

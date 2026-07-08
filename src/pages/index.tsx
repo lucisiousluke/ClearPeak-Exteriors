@@ -14,6 +14,7 @@ import ServiceAreas from "~/components/sections/ServiceAreas";
 import BlogPreview from "~/components/sections/BlogPreview";
 import FAQ from "~/components/sections/FAQ";
 import FinalCTA from "~/components/sections/FinalCTA";
+import PromotionSection from "~/components/sections/PromotionSection";
 import { homepage } from "~/data/homepage";
 import type { HomepageSection } from "~/types";
 
@@ -51,6 +52,8 @@ const renderSection = (section: HomepageSection, key: string): React.ReactNode =
       return <BlogPreview key={key} />;
     case "faqBlock":
       return <FAQ key={key} />;
+    case "promotionBlock":
+      return <PromotionSection key={key} />;
     default:
       return null;
   }

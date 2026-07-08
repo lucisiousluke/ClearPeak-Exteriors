@@ -100,7 +100,8 @@ export type MarkerBlockType =
   | "reviewsBlock"
   | "serviceAreasBlock"
   | "blogPreviewBlock"
-  | "faqBlock";
+  | "faqBlock"
+  | "promotionBlock";
 
 export interface MarkerBlock {
   type: MarkerBlockType;
@@ -132,4 +133,14 @@ export interface GlobalCtaContent {
   subtext: string;
   primaryCta: CtaButton;
   secondaryCta: CtaButton;
+}
+
+export interface Promotion {
+  title: string;
+  message: string;
+  cta?: CtaButton;
+  startDate?: string;
+  endDate?: string;
+  active: boolean;
+  placement: "Top Banner" | "Homepage Section";
 }

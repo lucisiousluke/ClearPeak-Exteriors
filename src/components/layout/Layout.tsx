@@ -3,6 +3,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import FloatingQuoteButton from "./FloatingQuoteButton";
 import MobileCallBar from "./MobileCallBar";
+import TopPromoBanner from "~/components/shared/TopPromoBanner";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -11,6 +12,7 @@ interface LayoutProps {
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <div className="flex min-h-screen flex-col overflow-x-hidden">
+      <TopPromoBanner />
       <Header />
       <main className="flex-1 pb-16 md:pb-0">{children}</main>
       <Footer />

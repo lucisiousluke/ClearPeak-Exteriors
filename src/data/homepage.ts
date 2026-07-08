@@ -20,8 +20,8 @@ export const homepage: HomepageContent = {
   heroSecondaryCta: { label: "View Our Work", url: "/gallery", style: "white" },
   trustBadges: ["Fully Insured", "Locally Owned", "Satisfaction Guaranteed", "Five-Star Rated"],
   sections: [
-  { type: "servicesBlock" },
   { type: "trustBadgesBlock" },
+  { type: "servicesBlock" },
   { type: "beforeAfterBlock" },
   { type: "galleryBlock" },
   { type: "whyChooseUsBlock" },
