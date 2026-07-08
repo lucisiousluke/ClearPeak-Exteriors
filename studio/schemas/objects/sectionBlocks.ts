@@ -5,14 +5,25 @@
 // section here" and its position in the array controls the page order.
 // processBlock is the exception: its content isn't shared anywhere else, so
 // it carries its own fields.
+//
+// The "about" field below is intentionally read-only with a fixed value —
+// earlier this had an editable-looking empty text field, which made the
+// block's edit panel look like an empty form inviting input, and made it
+// easy to accidentally trigger a delete while trying to close it. Read-only
+// text renders as plain gray text, nothing to click into or worry about.
 
-const marker = (name: string, title: string, description: string) => ({
+const marker = (name: string, title: string, about: string) => ({
   name,
   title,
   type: "object",
   fields: [
-    // Sanity object types need at least one field even if unused.
-    { name: "note", title: "Note (not shown on site)", type: "string", description },
+    {
+      name: "about",
+      title: "About this section",
+      type: "string",
+      readOnly: true,
+      initialValue: about,
+    },
   ],
   preview: {
     prepare() {
@@ -24,55 +35,55 @@ const marker = (name: string, title: string, description: string) => ({
 export const trustBadgesBlock = marker(
   "trustBadgesBlock",
   "Trust Badges & Stats",
-  "Content comes from the shared Trust Badges & Stats document."
+  "Content comes from the shared Trust Badges & Stats document — nothing to edit here, this just marks where it appears."
 );
 
 export const servicesBlock = marker(
   "servicesBlock",
   "Services Grid",
-  "Shows all Service documents. Heading text comes from Section Headings → Services Section."
+  "Shows all Service documents. Heading text comes from Section Headings → Services Section — nothing to edit here."
 );
 
 export const beforeAfterBlock = marker(
   "beforeAfterBlock",
   "Before / After Slider",
-  "Shows all Before & After documents. Heading text comes from Section Headings → Before/After Section."
+  "Shows all Before & After documents. Heading text comes from Section Headings → Before/After Section — nothing to edit here."
 );
 
 export const galleryBlock = marker(
   "galleryBlock",
   "Gallery Preview",
-  "Shows a preview of Gallery Item documents. Heading text comes from Section Headings → Gallery Section."
+  "Shows a preview of Gallery Item documents. Heading text comes from Section Headings → Gallery Section — nothing to edit here."
 );
 
 export const whyChooseUsBlock = marker(
   "whyChooseUsBlock",
   "Why Choose Us",
-  "Content comes from the shared Why Choose Us Section document."
+  "Content comes from the shared Why Choose Us Section document — nothing to edit here."
 );
 
 export const reviewsBlock = marker(
   "reviewsBlock",
   "Customer Reviews",
-  "Shows Testimonial documents. Heading text comes from Section Headings → Reviews Section."
+  "Shows Testimonial documents. Heading text comes from Section Headings → Reviews Section — nothing to edit here."
 );
 
 export const serviceAreasBlock = marker(
   "serviceAreasBlock",
   "Service Areas Map",
-  "Shows all Service Area documents. Heading text comes from Section Headings → Service Areas Section."
+  "Shows all Service Area documents. Heading text comes from Section Headings → Service Areas Section — nothing to edit here."
 );
 
 export const blogPreviewBlock = marker(
   "blogPreviewBlock",
   "Blog Preview",
-  "Shows recent Blog Post documents. Heading text comes from Section Headings → Blog Section."
+  "Shows recent Blog Post documents. Heading text comes from Section Headings → Blog Section — nothing to edit here."
 );
 
 export const faqBlock = marker(
   "faqBlock",
   "FAQ Accordion",
-  "Shows the sitewide FAQ list. Heading text comes from Section Headings → Homepage FAQ Section."
+  "Shows the sitewide FAQ list. Heading text comes from Section Headings → Homepage FAQ Section — nothing to edit here."
 );
 
 export const processBlock = {
