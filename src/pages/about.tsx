@@ -1,7 +1,6 @@
 import * as React from "react";
 import type { HeadFC, PageProps } from "gatsby";
 import { motion } from "framer-motion";
-import { FiTarget, FiHeart, FiShield } from "react-icons/fi";
 import Layout from "~/components/layout/Layout";
 import SEO from "~/components/shared/SEO";
 import { Container, Section, SectionHeading, Photo, Card } from "~/components/ui";
@@ -9,28 +8,7 @@ import TrustBadges from "~/components/sections/TrustBadges";
 import WhyChooseUs from "~/components/sections/WhyChooseUs";
 import Reviews from "~/components/sections/Reviews";
 import FinalCTA from "~/components/sections/FinalCTA";
-import { images } from "~/data/images";
-
-const values = [
-  {
-    icon: FiTarget,
-    title: "Our Mission",
-    description:
-      "To help every Denver Metro homeowner and business take pride in how their property looks — through honest, high-quality exterior cleaning.",
-  },
-  {
-    icon: FiHeart,
-    title: "Our Values",
-    description:
-      "Integrity, craftsmanship, and genuine care for our customers' homes and the environment guide every job we take on.",
-  },
-  {
-    icon: FiShield,
-    title: "Our Promise",
-    description:
-      "Fully insured, transparent pricing, and a satisfaction guarantee on every single service we provide.",
-  },
-];
+import { aboutPage } from "~/data/aboutPage";
 
 const AboutPage: React.FC<PageProps> = () => {
   return (
@@ -40,14 +18,9 @@ const AboutPage: React.FC<PageProps> = () => {
         <Container className="relative grid items-center gap-14 lg:grid-cols-2">
           <div>
             <h1 className="font-display text-display-md font-bold text-ink-800 md:text-display-lg">
-              Colorado-Owned. <span className="text-gradient-brand">Customer-Obsessed.</span>
+              {aboutPage.heroHeadline} <span className="text-gradient-brand">{aboutPage.heroHighlight}</span>
             </h1>
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-500">
-              ClearPeak Exteriors was founded on a simple idea: Denver Metro homeowners deserve an exterior cleaning
-              company that shows up on time, does the job right, and treats every property like their own. Since
-              then, we've grown into one of the area's most trusted names in residential and commercial exterior
-              care.
-            </p>
+            <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-500">{aboutPage.heroBody}</p>
           </div>
           <motion.div
             initial={{ opacity: 0, scale: 0.94 }}
@@ -55,7 +28,7 @@ const AboutPage: React.FC<PageProps> = () => {
             transition={{ duration: 0.6 }}
             className="aspect-[4/3] overflow-hidden rounded-4xl shadow-lift"
           >
-            <Photo src={images.coupleOutdoor} alt="ClearPeak Exteriors team" wrapperClassName="h-full w-full" />
+            <Photo src={aboutPage.heroImage} alt="ClearPeak Exteriors team" wrapperClassName="h-full w-full" />
           </motion.div>
         </Container>
       </section>
@@ -64,9 +37,9 @@ const AboutPage: React.FC<PageProps> = () => {
 
       <Section background="white">
         <Container>
-          <SectionHeading eyebrow="What Drives Us" title="Built on Trust, Backed by Results" />
+          <SectionHeading eyebrow={aboutPage.valuesEyebrow} title={aboutPage.valuesTitle} />
           <div className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-3">
-            {values.map((v) => (
+            {aboutPage.values.map((v) => (
               <Card key={v.title}>
                 <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-brand text-white shadow-glow">
                   <v.icon size={22} />

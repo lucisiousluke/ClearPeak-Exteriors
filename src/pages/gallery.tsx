@@ -6,6 +6,7 @@ import { Container, Section, SectionHeading } from "~/components/ui";
 import BeforeAfter from "~/components/sections/BeforeAfter";
 import Gallery from "~/components/sections/Gallery";
 import FinalCTA from "~/components/sections/FinalCTA";
+import { siteContent } from "~/data/siteContent";
 
 const GalleryPage: React.FC<PageProps> = () => {
   return (
@@ -13,9 +14,9 @@ const GalleryPage: React.FC<PageProps> = () => {
       <Section background="soft" className="pb-0 pt-16 md:pt-20">
         <Container>
           <SectionHeading
-            eyebrow="Our Work"
-            title="See the ClearPeak Difference"
-            description="Browse before-and-after transformations and a full gallery of recent projects across the Denver Metro area."
+            eyebrow={siteContent.gallerySection.eyebrow}
+            title={siteContent.gallerySection.title}
+            description={siteContent.gallerySection.description}
           />
         </Container>
       </Section>

@@ -4,6 +4,7 @@ import { FiZoomIn } from "react-icons/fi";
 import { Container, Section, SectionHeading, Photo } from "~/components/ui";
 import { Lightbox } from "~/components/shared/Lightbox";
 import { galleryItems } from "~/data/gallery";
+import { siteContent } from "~/data/siteContent";
 
 const categories = ["All", ...Array.from(new Set(galleryItems.map((g) => g.category)))];
 
@@ -27,9 +28,9 @@ export const Gallery: React.FC<GalleryProps> = ({ compact = false }) => {
       <Container>
         {!compact && (
           <SectionHeading
-            eyebrow="Our Work"
-            title="A Portfolio of Transformations"
-            description="Browse real projects across the Denver Metro area — filter by service to find exactly what you're looking for."
+            eyebrow={siteContent.gallerySection.eyebrow}
+            title={siteContent.gallerySection.title}
+            description={siteContent.gallerySection.description}
           />
         )}
 

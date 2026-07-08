@@ -5,6 +5,7 @@ import { Container, Section, SectionHeading, StarRating } from "~/components/ui"
 import { ReviewCard } from "~/components/shared/ReviewCard";
 import { testimonials } from "~/data/testimonials";
 import { site } from "~/data/site";
+import { siteContent } from "~/data/siteContent";
 
 const GROUP_SIZE = 3;
 
@@ -22,9 +23,9 @@ export const Reviews: React.FC = () => {
       <Container>
         <div className="flex flex-col items-center gap-6 md:flex-row md:items-end md:justify-between">
           <SectionHeading
-            eyebrow="Reviews"
+            eyebrow={siteContent.reviewsSection.eyebrow}
             align="left"
-            title="Loved by Homeowners Across Denver"
+            title={siteContent.reviewsSection.title}
             description={
               <span className="flex items-center gap-3">
                 <StarRating rating={5} />

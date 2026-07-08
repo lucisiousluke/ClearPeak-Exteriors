@@ -3,13 +3,13 @@ import { Link } from "gatsby";
 import { FiPhone, FiMail, FiMapPin, FiInstagram, FiFacebook } from "react-icons/fi";
 import { Container } from "~/components/ui";
 import { site } from "~/data/site";
-import { footerLinks } from "~/data/navigation";
+import { footerDescription, footerColumns, legalLinks } from "~/data/footer";
 
 export const Footer: React.FC = () => {
   return (
     <footer className="bg-ink-800 pt-20 text-white">
       <Container>
-        <div className="grid grid-cols-2 gap-10 pb-16 md:grid-cols-5">
+        <div className="grid grid-cols-2 gap-10 pb-16 lg:grid-cols-6">
           <div className="col-span-2">
             <Link to="/" className="flex items-center gap-2 font-display text-xl font-bold text-white">
               <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-brand text-white">
@@ -17,10 +17,7 @@ export const Footer: React.FC = () => {
               </span>
               ClearPeak Exteriors
             </Link>
-            <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/60">
-              Denver Metro's premium exterior cleaning company — pressure washing, soft washing, window cleaning,
-              and more.
-            </p>
+            <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/60">{footerDescription}</p>
             <div className="mt-6 flex gap-3">
               <a
                 href={site.social.facebook}
@@ -41,31 +38,20 @@ export const Footer: React.FC = () => {
             </div>
           </div>
 
-          <div>
-            <h4 className="font-display font-semibold text-white/90">Services</h4>
-            <ul className="mt-4 space-y-3 text-sm text-white/60">
-              {footerLinks.services.map((l) => (
-                <li key={l.href}>
-                  <Link to={l.href} className="transition-colors hover:text-aqua-400">
-                    {l.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="font-display font-semibold text-white/90">Service Areas</h4>
-            <ul className="mt-4 space-y-3 text-sm text-white/60">
-              {footerLinks.areas.map((l) => (
-                <li key={l.href}>
-                  <Link to={l.href} className="transition-colors hover:text-aqua-400">
-                    {l.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {footerColumns.map((column) => (
+            <div key={column.heading}>
+              <h4 className="font-display font-semibold text-white/90">{column.heading}</h4>
+              <ul className="mt-4 space-y-3 text-sm text-white/60">
+                {column.links.map((l) => (
+                  <li key={l.href}>
+                    <Link to={l.href} className="transition-colors hover:text-aqua-400">
+                      {l.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
 
           <div>
             <h4 className="font-display font-semibold text-white/90">Contact</h4>
@@ -95,12 +81,11 @@ export const Footer: React.FC = () => {
         <div className="flex flex-col items-center justify-between gap-4 border-t border-white/10 py-8 text-sm text-white/50 md:flex-row">
           <p>© {new Date().getFullYear()} ClearPeak Exteriors. All rights reserved.</p>
           <div className="flex gap-6">
-            <Link to="/privacy-policy" className="hover:text-white">
-              Privacy Policy
-            </Link>
-            <Link to="/terms" className="hover:text-white">
-              Terms of Service
-            </Link>
+            {legalLinks.map((l) => (
+              <Link key={l.href} to={l.href} className="hover:text-white">
+                {l.label}
+              </Link>
+            ))}
           </div>
         </div>
       </Container>

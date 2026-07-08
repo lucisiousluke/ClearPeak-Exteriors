@@ -4,18 +4,16 @@ import { motion } from "framer-motion";
 import { FiArrowRight, FiArrowUpRight } from "react-icons/fi";
 import { Container, Section, SectionHeading, Photo, Badge, Button } from "~/components/ui";
 import { blogPosts } from "~/data/blogPosts";
+import { siteContent } from "~/data/siteContent";
 
 export const BlogPreview: React.FC = () => {
   const posts = blogPosts.slice(0, 3);
+  const { eyebrow, title, description } = siteContent.blogSection;
 
   return (
     <Section background="white">
       <Container>
-        <SectionHeading
-          eyebrow="From the Blog"
-          title="Tips, Guides & Local Know-How"
-          description="Practical advice on keeping your Colorado home looking its best, all year long."
-        />
+        <SectionHeading eyebrow={eyebrow} title={title} description={description} />
 
         <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-3">
           {posts.map((post, i) => (

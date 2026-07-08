@@ -23,7 +23,8 @@ import { faqs as globalFaqs } from "../src/data/faqs";
 import { blogPosts } from "../src/data/blogPosts";
 import { galleryItems, beforeAfterItems } from "../src/data/gallery";
 import { site } from "../src/data/site";
-import { navLinks, footerLinks } from "../src/data/navigation";
+import { navLinks } from "../src/data/navigation";
+import { images } from "../src/data/images";
 
 const client = createClient({
   projectId: "vgi0saae",
@@ -249,6 +250,34 @@ async function run() {
   console.log("✓ Navigation");
 
   // --- Footer (singleton) ---
+  // Link data is inlined here (rather than imported from src/data/footer,
+  // which is itself generated FROM this document) to avoid a circular
+  // dependency between the seed script and its own output.
+  const footerLinkGroups = {
+    services: [
+      { label: "Pressure Washing", href: "/services/pressure-washing" },
+      { label: "House Soft Washing", href: "/services/house-soft-washing" },
+      { label: "Window Cleaning", href: "/services/window-cleaning" },
+      { label: "Roof Cleaning", href: "/services/roof-cleaning" },
+      { label: "Concrete Cleaning", href: "/services/concrete-cleaning" },
+      { label: "Commercial Services", href: "/services/commercial-services" },
+    ],
+    areas: [
+      { label: "Denver", href: "/service-areas/denver" },
+      { label: "Littleton", href: "/service-areas/littleton" },
+      { label: "Highlands Ranch", href: "/service-areas/highlands-ranch" },
+      { label: "Castle Rock", href: "/service-areas/castle-rock" },
+      { label: "Parker", href: "/service-areas/parker" },
+      { label: "Aurora", href: "/service-areas/aurora" },
+    ],
+    company: [
+      { label: "About Us", href: "/about" },
+      { label: "Gallery", href: "/gallery" },
+      { label: "Blog", href: "/blog" },
+      { label: "Contact", href: "/contact" },
+    ],
+  };
+
   await client.createOrReplace({
     _id: "footer",
     _type: "footer",
@@ -259,19 +288,19 @@ async function run() {
         _type: "footerColumn",
         _key: randKey(),
         heading: "Services",
-        links: footerLinks.services.map((l) => ({ _type: "footerLink", _key: randKey(), label: l.label, url: l.href })),
+        links: footerLinkGroups.services.map((l) => ({ _type: "footerLink", _key: randKey(), label: l.label, url: l.href })),
       },
       {
         _type: "footerColumn",
         _key: randKey(),
         heading: "Service Areas",
-        links: footerLinks.areas.map((l) => ({ _type: "footerLink", _key: randKey(), label: l.label, url: l.href })),
+        links: footerLinkGroups.areas.map((l) => ({ _type: "footerLink", _key: randKey(), label: l.label, url: l.href })),
       },
       {
         _type: "footerColumn",
         _key: randKey(),
         heading: "Company",
-        links: footerLinks.company.map((l) => ({ _type: "footerLink", _key: randKey(), label: l.label, url: l.href })),
+        links: footerLinkGroups.company.map((l) => ({ _type: "footerLink", _key: randKey(), label: l.label, url: l.href })),
       },
     ],
     legalLinks: [
@@ -353,6 +382,189 @@ async function run() {
     formFields: contactFormFields,
   });
   console.log("✓ Contact page");
+
+  // --- Why Choose Us Section (singleton) ---
+  await client.createOrReplace({
+    _id: "whyChooseUsSection",
+    _type: "whyChooseUsSection",
+    eyebrow: "Why ClearPeak",
+    title: "Higher Standards, Better Results",
+    description:
+      "We built ClearPeak to be the exterior cleaning company Denver homeowners actually recommend to their neighbors.",
+    reasons: [
+      {
+        icon: "FiTool",
+        title: "Professional Equipment",
+        description: "Commercial-grade pressure washers and soft-wash systems calibrated for every surface type.",
+      },
+      {
+        icon: "FiFeather",
+        title: "Eco-Friendly Products",
+        description: "Biodegradable cleaning solutions that are safe for your family, pets, and landscaping.",
+      },
+      {
+        icon: "FiClock",
+        title: "Fast Response",
+        description: "Most estimate requests are answered within one business hour, with flexible scheduling.",
+      },
+      {
+        icon: "FiHeart",
+        title: "Premium Customer Service",
+        description: "Friendly, communicative crews who treat your property like their own.",
+      },
+      {
+        icon: "FiDollarSign",
+        title: "Transparent Pricing",
+        description: "Upfront, itemized quotes with no hidden fees or last-minute upsells.",
+      },
+      {
+        icon: "FiTarget",
+        title: "Attention to Detail",
+        description: "From tracks and sills to corners and edges, we don't cut corners — literally.",
+      },
+      {
+        icon: "FiHome",
+        title: "Locally Owned",
+        description: "Proudly Denver-based and invested in the community we serve every day.",
+      },
+    ].map((r) => ({ _type: "iconCard", _key: randKey(), ...r })),
+  });
+  console.log("✓ Why Choose Us section");
+
+  // --- Process Section (singleton) ---
+  await client.createOrReplace({
+    _id: "processSection",
+    _type: "processSection",
+    eyebrow: "How It Works",
+    title: "Simple, Start to Finish",
+    description: "No hassle, no surprises — just a straightforward path to a beautifully clean exterior.",
+    steps: [
+      {
+        icon: "FiClipboard",
+        title: "Request Quote",
+        description: "Tell us about your property and the services you need. Get a transparent, free estimate fast.",
+      },
+      {
+        icon: "FiCalendar",
+        title: "Schedule",
+        description: "Pick a date and time that works for you — including evenings and weekends.",
+      },
+      {
+        icon: "FiDroplet",
+        title: "We Clean",
+        description: "Our insured, professional crew arrives on time and treats your property with care.",
+      },
+      {
+        icon: "FiSmile",
+        title: "Enjoy",
+        description: "Step back and enjoy a home that looks brand new — backed by our satisfaction guarantee.",
+      },
+    ].map((s) => ({ _type: "iconCard", _key: randKey(), ...s })),
+  });
+  console.log("✓ Process section");
+
+  // --- Trust Badges & Stats (singleton) ---
+  await client.createOrReplace({
+    _id: "trustBadgesSection",
+    _type: "trustBadgesSection",
+    badges: [
+      { icon: "FiShield", label: "Fully Insured" },
+      { icon: "FiHome", label: "Locally Owned" },
+      { icon: "FiThumbsUp", label: "Satisfaction Guaranteed" },
+      { icon: "FiStar", label: "Five-Star Rated" },
+    ].map((b) => ({ _type: "iconLabel", _key: randKey(), ...b })),
+    stats: [
+      { value: 3200, suffix: "+", label: "Homes Cleaned", decimal: false },
+      { value: 4.9, suffix: "★", label: "Average Rating", decimal: true },
+      { value: 10, suffix: "+", label: "Cities Served", decimal: false },
+      { value: 8, suffix: " yrs", label: "In Business", decimal: false },
+    ].map((s) => ({ _type: "statItem", _key: randKey(), ...s })),
+  });
+  console.log("✓ Trust badges & stats");
+
+  // --- About Page (singleton) ---
+  await client.createOrReplace({
+    _id: "aboutPage",
+    _type: "aboutPage",
+    heroHeadline: "Colorado-Owned.",
+    heroHighlight: "Customer-Obsessed.",
+    heroBody:
+      "ClearPeak Exteriors was founded on a simple idea: Denver Metro homeowners deserve an exterior cleaning company that shows up on time, does the job right, and treats every property like their own. Since then, we've grown into one of the area's most trusted names in residential and commercial exterior care.",
+    heroImage: await imageField(images.coupleOutdoor, "about-hero.jpg"),
+    valuesEyebrow: "What Drives Us",
+    valuesTitle: "Built on Trust, Backed by Results",
+    values: [
+      {
+        icon: "FiTarget",
+        title: "Our Mission",
+        description:
+          "To help every Denver Metro homeowner and business take pride in how their property looks — through honest, high-quality exterior cleaning.",
+      },
+      {
+        icon: "FiHeart",
+        title: "Our Values",
+        description:
+          "Integrity, craftsmanship, and genuine care for our customers' homes and the environment guide every job we take on.",
+      },
+      {
+        icon: "FiShield",
+        title: "Our Promise",
+        description: "Fully insured, transparent pricing, and a satisfaction guarantee on every single service we provide.",
+      },
+    ].map((v) => ({ _type: "iconCard", _key: randKey(), ...v })),
+  });
+  console.log("✓ About page");
+
+  // --- Section Headings (singleton) ---
+  await client.createOrReplace({
+    _id: "siteContent",
+    _type: "siteContent",
+    servicesSection: {
+      _type: "sectionHeading",
+      eyebrow: "What We Do",
+      title: "Full-Service Exterior Cleaning",
+      description:
+        "From your roofline to your driveway, we've got every exterior surface covered — with the equipment, expertise, and care to do it right.",
+    },
+    beforeAfterSection: {
+      _type: "sectionHeading",
+      eyebrow: "Real Results",
+      title: "See the ClearPeak Difference",
+      description: "Drag the slider to see the transformation. These are real results from real Denver Metro properties.",
+    },
+    gallerySection: {
+      _type: "sectionHeading",
+      eyebrow: "Our Work",
+      title: "A Portfolio of Transformations",
+      description:
+        "Browse real projects across the Denver Metro area — filter by service to find exactly what you're looking for.",
+    },
+    reviewsSection: {
+      _type: "sectionHeading",
+      eyebrow: "Reviews",
+      title: "Loved by Homeowners Across Denver",
+      description: "",
+    },
+    serviceAreasSection: {
+      _type: "sectionHeading",
+      eyebrow: "Where We Work",
+      title: "Proudly Serving the Denver Metro Area",
+      description: "Click your city to see local pricing, neighborhoods we serve, and service availability.",
+    },
+    blogSection: {
+      _type: "sectionHeading",
+      eyebrow: "From the Blog",
+      title: "Tips, Guides & Local Know-How",
+      description: "Practical advice on keeping your Colorado home looking its best, all year long.",
+    },
+    faqSection: {
+      _type: "sectionHeading",
+      eyebrow: "FAQ",
+      title: "Frequently Asked Questions",
+      description: "",
+    },
+  });
+  console.log("✓ Section headings");
 
   console.log("\nSeed complete.");
 }

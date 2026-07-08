@@ -7,6 +7,7 @@ import SEO from "~/components/shared/SEO";
 import { Container, Section, SectionHeading, Photo } from "~/components/ui";
 import FinalCTA from "~/components/sections/FinalCTA";
 import { cities } from "~/data/cities";
+import { siteContent } from "~/data/siteContent";
 
 const ServiceAreasPage: React.FC<PageProps> = () => {
   return (
@@ -14,9 +15,9 @@ const ServiceAreasPage: React.FC<PageProps> = () => {
       <Section background="soft" className="pt-16 md:pt-20">
         <Container>
           <SectionHeading
-            eyebrow="Service Areas"
-            title="Proudly Serving the Denver Metro Area"
-            description="Select your city below to learn about local pricing, neighborhoods we cover, and availability."
+            eyebrow={siteContent.serviceAreasSection.eyebrow}
+            title={siteContent.serviceAreasSection.title}
+            description={siteContent.serviceAreasSection.description}
           />
           <div className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {cities.map((city) => (

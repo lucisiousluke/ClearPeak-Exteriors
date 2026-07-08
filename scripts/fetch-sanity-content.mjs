@@ -22,10 +22,15 @@ const builder = imageUrlBuilder(client);
 const urlFor = (image) => (image ? builder.image(image).width(1600).height(1200).fit("crop").auto("format").url() : "");
 const urlForSquare = (image) => (image ? builder.image(image).width(800).height(800).fit("crop").auto("format").url() : "");
 
-const KNOWN_ICONS = [
-  "FiZap", "FiSun", "FiGrid", "FiTriangle", "FiSquare", "FiTruck",
-  "FiUmbrella", "FiLayers", "FiHexagon", "FiBriefcase",
-];
+// Any Feather icon name is accepted (react-icons/fi exports hundreds); we
+// only guard against garbage strings, falling back to a safe default so a
+// bad value in Sanity never breaks the build.
+const FEATHER_ICON_RE = /^Fi[A-Z][A-Za-z0-9]*$/;
+const sanitizeIcon = (name, fallback = "FiCircle") => {
+  if (name && FEATHER_ICON_RE.test(name)) return name;
+  if (name) console.warn(`Unknown/invalid icon "${name}", falling back to ${fallback}`);
+  return fallback;
+};
 
 const esc = (str = "") => JSON.stringify(str ?? "");
 const arr = (items = []) => `[${items.map(esc).join(", ")}]`;
@@ -51,9 +56,7 @@ async function fetchServices() {
   );
   if (!docs.length) return null;
 
-  const usedIcons = Array.from(
-    new Set(docs.map((d) => (KNOWN_ICONS.includes(d.icon) ? d.icon : (console.warn(`Unknown icon "${d.icon}", falling back to FiZap`), "FiZap"))))
-  );
+  const usedIcons = Array.from(new Set(docs.map((d) => sanitizeIcon(d.icon, "FiZap"))));
 
   const body = docs
     .map(
@@ -61,7 +64,7 @@ async function fetchServices() {
     slug: ${esc(s.slug)},
     name: ${esc(s.name)},
     shortName: ${esc(s.name)},
-    icon: ${s.icon && usedIcons.includes(s.icon) ? s.icon : "FiZap"},
+    icon: ${sanitizeIcon(s.icon, "FiZap")},
     tagline: ${esc(s.tagline)},
     description: ${esc(s.description)},
     heroImage: ${esc(urlFor(s.heroImage))},
@@ -349,6 +352,159 @@ async function fetchGlobalCta() {
   );
 }
 
+async function fetchNavigation() {
+  const n = await client.fetch(`*[_id == "navigation"][0]`);
+  if (!n) return null;
+
+  const links = (n.mainLinks || [])
+    .map((l) => `  { label: ${esc(l.label)}, href: ${esc(l.url)} }`)
+    .join(",\n");
+
+  return (
+    banner("navigation document") +
+    `import type { CtaButton } from "~/types";\n\n` +
+    `export const navLinks = [\n${links}\n];\n\n` +
+    `export const headerCta: CtaButton = ${ctaLiteral(n.headerCta)};\n`
+  );
+}
+
+async function fetchFooter() {
+  const f = await client.fetch(`*[_id == "footer"][0]`);
+  if (!f) return null;
+
+  const columns = (f.columns || [])
+    .map(
+      (c) => `  {
+    heading: ${esc(c.heading)},
+    links: [\n${(c.links || []).map((l) => `      { label: ${esc(l.label)}, href: ${esc(l.url)} }`).join(",\n")}\n    ],
+  }`
+    )
+    .join(",\n");
+
+  const legalLinks = (f.legalLinks || [])
+    .map((l) => `  { label: ${esc(l.label)}, href: ${esc(l.url)} }`)
+    .join(",\n");
+
+  return (
+    banner("footer document") +
+    `export const footerDescription = ${esc(f.description)};\n\n` +
+    `export const footerColumns = [\n${columns}\n];\n\n` +
+    `export const legalLinks = [\n${legalLinks}\n];\n`
+  );
+}
+
+const iconCardLiteral = (card) =>
+  `{ icon: ${sanitizeIcon(card?.icon)}, title: ${esc(card?.title)}, description: ${esc(card?.description)} }`;
+
+async function fetchWhyChooseUsSection() {
+  const w = await client.fetch(`*[_id == "whyChooseUsSection"][0]`);
+  if (!w) return null;
+
+  const reasons = w.reasons || [];
+  const usedIcons = Array.from(new Set(reasons.map((r) => sanitizeIcon(r.icon))));
+
+  return (
+    banner("whyChooseUsSection document") +
+    (usedIcons.length ? `import {\n  ${usedIcons.join(",\n  ")},\n} from "react-icons/fi";\n\n` : "") +
+    `export const whyChooseUsSection = {\n` +
+    `  eyebrow: ${esc(w.eyebrow)},\n` +
+    `  title: ${esc(w.title)},\n` +
+    `  description: ${esc(w.description)},\n` +
+    `  reasons: [\n${reasons.map((r) => `    ${iconCardLiteral(r)}`).join(",\n")}\n  ],\n` +
+    `};\n`
+  );
+}
+
+async function fetchProcessSection() {
+  const p = await client.fetch(`*[_id == "processSection"][0]`);
+  if (!p) return null;
+
+  const steps = p.steps || [];
+  const usedIcons = Array.from(new Set(steps.map((s) => sanitizeIcon(s.icon))));
+
+  return (
+    banner("processSection document") +
+    (usedIcons.length ? `import {\n  ${usedIcons.join(",\n  ")},\n} from "react-icons/fi";\n\n` : "") +
+    `export const processSection = {\n` +
+    `  eyebrow: ${esc(p.eyebrow)},\n` +
+    `  title: ${esc(p.title)},\n` +
+    `  description: ${esc(p.description)},\n` +
+    `  steps: [\n${steps.map((s) => `    ${iconCardLiteral(s)}`).join(",\n")}\n  ],\n` +
+    `};\n`
+  );
+}
+
+async function fetchTrustBadgesSection() {
+  const t = await client.fetch(`*[_id == "trustBadgesSection"][0]`);
+  if (!t) return null;
+
+  const badges = t.badges || [];
+  const stats = t.stats || [];
+  const usedIcons = Array.from(new Set(badges.map((b) => sanitizeIcon(b.icon))));
+
+  const badgesBody = badges
+    .map((b) => `    { icon: ${sanitizeIcon(b.icon)}, label: ${esc(b.label)} }`)
+    .join(",\n");
+  const statsBody = stats
+    .map(
+      (s) =>
+        `    { value: ${Number(s.value) || 0}, suffix: ${esc(s.suffix)}, label: ${esc(s.label)}, decimal: ${!!s.decimal} }`
+    )
+    .join(",\n");
+
+  return (
+    banner("trustBadgesSection document") +
+    (usedIcons.length ? `import {\n  ${usedIcons.join(",\n  ")},\n} from "react-icons/fi";\n\n` : "") +
+    `export const trustBadgesSection = {\n` +
+    `  badges: [\n${badgesBody}\n  ],\n` +
+    `  stats: [\n${statsBody}\n  ],\n` +
+    `};\n`
+  );
+}
+
+async function fetchAboutPage() {
+  const a = await client.fetch(`*[_id == "aboutPage"][0]`);
+  if (!a) return null;
+
+  const values = a.values || [];
+  const usedIcons = Array.from(new Set(values.map((v) => sanitizeIcon(v.icon))));
+
+  return (
+    banner("aboutPage document") +
+    (usedIcons.length ? `import {\n  ${usedIcons.join(",\n  ")},\n} from "react-icons/fi";\n\n` : "") +
+    `export const aboutPage = {\n` +
+    `  heroHeadline: ${esc(a.heroHeadline)},\n` +
+    `  heroHighlight: ${esc(a.heroHighlight)},\n` +
+    `  heroBody: ${esc(a.heroBody)},\n` +
+    `  heroImage: ${esc(urlFor(a.heroImage))},\n` +
+    `  valuesEyebrow: ${esc(a.valuesEyebrow)},\n` +
+    `  valuesTitle: ${esc(a.valuesTitle)},\n` +
+    `  values: [\n${values.map((v) => `    ${iconCardLiteral(v)}`).join(",\n")}\n  ],\n` +
+    `};\n`
+  );
+}
+
+const sectionHeadingLiteral = (s) =>
+  `{ eyebrow: ${esc(s?.eyebrow)}, title: ${esc(s?.title)}, description: ${esc(s?.description)} }`;
+
+async function fetchSiteContent() {
+  const c = await client.fetch(`*[_id == "siteContent"][0]`);
+  if (!c) return null;
+
+  return (
+    banner("siteContent document") +
+    `export const siteContent = {\n` +
+    `  servicesSection: ${sectionHeadingLiteral(c.servicesSection)},\n` +
+    `  beforeAfterSection: ${sectionHeadingLiteral(c.beforeAfterSection)},\n` +
+    `  gallerySection: ${sectionHeadingLiteral(c.gallerySection)},\n` +
+    `  reviewsSection: ${sectionHeadingLiteral(c.reviewsSection)},\n` +
+    `  serviceAreasSection: ${sectionHeadingLiteral(c.serviceAreasSection)},\n` +
+    `  blogSection: ${sectionHeadingLiteral(c.blogSection)},\n` +
+    `  faqSection: ${sectionHeadingLiteral(c.faqSection)},\n` +
+    `};\n`
+  );
+}
+
 async function main() {
   const jobs = [
     ["services.ts", fetchServices],
@@ -361,6 +517,13 @@ async function main() {
     ["contactPage.ts", fetchContactPage],
     ["homepage.ts", fetchHomepage],
     ["globalCta.ts", fetchGlobalCta],
+    ["navigation.ts", fetchNavigation],
+    ["footer.ts", fetchFooter],
+    ["whyChooseUsSection.ts", fetchWhyChooseUsSection],
+    ["processSection.ts", fetchProcessSection],
+    ["trustBadgesSection.ts", fetchTrustBadgesSection],
+    ["aboutPage.ts", fetchAboutPage],
+    ["siteContent.ts", fetchSiteContent],
   ];
 
   let written = 0;

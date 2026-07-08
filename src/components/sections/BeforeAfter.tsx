@@ -3,19 +3,17 @@ import { motion } from "framer-motion";
 import { Container, Section, SectionHeading, Badge } from "~/components/ui";
 import { BeforeAfterSlider } from "~/components/shared/BeforeAfterSlider";
 import { beforeAfterItems } from "~/data/gallery";
+import { siteContent } from "~/data/siteContent";
 
 export const BeforeAfter: React.FC = () => {
   const [active, setActive] = React.useState(0);
   const item = beforeAfterItems[active];
+  const { eyebrow, title, description } = siteContent.beforeAfterSection;
 
   return (
     <Section background="white">
       <Container>
-        <SectionHeading
-          eyebrow="Real Results"
-          title="See the ClearPeak Difference"
-          description="Drag the slider to see the transformation. These are real results from real Denver Metro properties."
-        />
+        <SectionHeading eyebrow={eyebrow} title={title} description={description} />
 
         <div className="mt-14 grid gap-10 lg:grid-cols-[1fr_320px]">
           <motion.div

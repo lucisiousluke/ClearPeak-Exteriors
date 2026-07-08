@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { FiMenu, FiX, FiPhone, FiChevronDown } from "react-icons/fi";
 import { Container, Button } from "~/components/ui";
 import { site } from "~/data/site";
-import { navLinks } from "~/data/navigation";
+import { navLinks, headerCta } from "~/data/navigation";
 import { services } from "~/data/services";
 
 export const Header: React.FC = () => {
@@ -87,8 +87,8 @@ export const Header: React.FC = () => {
           >
             <FiPhone /> {site.phone}
           </a>
-          <Button as="a" href="/contact" size="sm">
-            Get Free Estimate
+          <Button as="a" href={headerCta.url} variant={headerCta.style} size="sm">
+            {headerCta.label}
           </Button>
         </div>
 
@@ -144,8 +144,8 @@ export const Header: React.FC = () => {
                 <a href={site.phoneHref} className="flex items-center justify-center gap-2 font-semibold text-ink-700">
                   <FiPhone /> {site.phone}
                 </a>
-                <Button as="a" href="/contact">
-                  Get Free Estimate
+                <Button as="a" href={headerCta.url} variant={headerCta.style}>
+                  {headerCta.label}
                 </Button>
               </div>
             </motion.div>

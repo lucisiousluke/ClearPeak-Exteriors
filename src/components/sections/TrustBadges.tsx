@@ -1,23 +1,11 @@
 import * as React from "react";
 import { motion } from "framer-motion";
-import { FiShield, FiHome, FiThumbsUp, FiStar } from "react-icons/fi";
 import { Container, Counter } from "~/components/ui";
-
-const badges = [
-  { icon: FiShield, label: "Fully Insured" },
-  { icon: FiHome, label: "Locally Owned" },
-  { icon: FiThumbsUp, label: "Satisfaction Guaranteed" },
-  { icon: FiStar, label: "Five-Star Rated" },
-];
-
-const stats = [
-  { to: 3200, suffix: "+", label: "Homes Cleaned" },
-  { to: 4.9, suffix: "★", label: "Average Rating", decimal: true },
-  { to: 10, suffix: "+", label: "Cities Served" },
-  { to: 8, suffix: " yrs", label: "In Business" },
-];
+import { trustBadgesSection } from "~/data/trustBadgesSection";
 
 export const TrustBadges: React.FC = () => {
+  const { badges, stats } = trustBadgesSection;
+
   return (
     <section className="border-y border-ink-100 bg-white py-12">
       <Container>
@@ -50,11 +38,7 @@ export const TrustBadges: React.FC = () => {
               className="text-center"
             >
               <p className="font-display text-4xl font-bold text-gradient-brand md:text-5xl">
-                {s.decimal ? (
-                  `${s.to}${s.suffix}`
-                ) : (
-                  <Counter to={s.to} suffix={s.suffix} />
-                )}
+                {s.decimal ? `${s.value}${s.suffix}` : <Counter to={s.value} suffix={s.suffix} />}
               </p>
               <p className="mt-2 text-sm font-semibold text-ink-500">{s.label}</p>
             </motion.div>

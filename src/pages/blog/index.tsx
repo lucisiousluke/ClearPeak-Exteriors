@@ -8,6 +8,7 @@ import SEO from "~/components/shared/SEO";
 import { Container, Section, SectionHeading, Photo, Badge } from "~/components/ui";
 import FinalCTA from "~/components/sections/FinalCTA";
 import { blogPosts } from "~/data/blogPosts";
+import { siteContent } from "~/data/siteContent";
 
 const BlogIndexPage: React.FC<PageProps> = () => {
   const [featured, ...rest] = blogPosts;
@@ -17,9 +18,9 @@ const BlogIndexPage: React.FC<PageProps> = () => {
       <Section background="soft" className="pt-16 md:pt-20">
         <Container>
           <SectionHeading
-            eyebrow="Blog"
-            title="Tips, Guides & Local Know-How"
-            description="Practical advice on keeping your Colorado home's exterior looking its best, all year long."
+            eyebrow={siteContent.blogSection.eyebrow}
+            title={siteContent.blogSection.title}
+            description={siteContent.blogSection.description}
           />
 
           <Link

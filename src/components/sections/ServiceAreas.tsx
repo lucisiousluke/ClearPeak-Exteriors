@@ -4,18 +4,16 @@ import { motion } from "framer-motion";
 import { FiMapPin, FiArrowRight } from "react-icons/fi";
 import { Container, Section, SectionHeading } from "~/components/ui";
 import { cities } from "~/data/cities";
+import { siteContent } from "~/data/siteContent";
 
 export const ServiceAreas: React.FC = () => {
   const [hovered, setHovered] = React.useState<string | null>(null);
+  const { eyebrow, title, description } = siteContent.serviceAreasSection;
 
   return (
     <Section background="white">
       <Container>
-        <SectionHeading
-          eyebrow="Where We Work"
-          title="Proudly Serving the Denver Metro Area"
-          description="Click your city to see local pricing, neighborhoods we serve, and service availability."
-        />
+        <SectionHeading eyebrow={eyebrow} title={title} description={description} />
 
         <div className="mt-16 grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:items-center">
           <div className="relative mx-auto aspect-square w-full max-w-lg overflow-hidden rounded-4xl bg-gradient-mesh shadow-soft">
