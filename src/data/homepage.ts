@@ -18,6 +18,7 @@ export const homepage: HomepageContent = {
   heroSubheadline: "Denver's premium exterior cleaning company specializing in pressure washing, soft washing, window cleaning, and exterior restoration.",
   heroPrimaryCta: { label: "Get Free Estimate", url: "/contact", style: "primary" },
   heroSecondaryCta: { label: "View Our Work", url: "/gallery", style: "white" },
+  heroBadge: "Same-Week Availability",
   trustBadges: ["Fully Insured", "Locally Owned", "Satisfaction Guaranteed", "Five-Star Rated"],
   sections: [
   { type: "trustBadgesBlock" },

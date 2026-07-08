@@ -354,6 +354,7 @@ async function fetchHomepage() {
     `  heroSubheadline: ${esc(h.heroSubheadline)},\n` +
     `  heroPrimaryCta: ${ctaLiteral(h.heroPrimaryCta)},\n` +
     `  heroSecondaryCta: ${ctaLiteral(h.heroSecondaryCta)},\n` +
+    `  heroBadge: ${esc(h.heroBadge)},\n` +
     `  trustBadges: ${arr(h.trustBadges)},\n` +
     `  sections: [\n${sections.map(sectionLiteral).join(",\n")}\n  ],\n` +
     `};\n`

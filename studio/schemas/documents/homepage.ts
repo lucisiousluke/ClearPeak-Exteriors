@@ -20,6 +20,13 @@ export default {
     { name: "heroPrimaryCta", title: "Hero Primary CTA", type: "ctaButton", fieldset: "hero" },
     { name: "heroSecondaryCta", title: "Hero Secondary CTA", type: "ctaButton", fieldset: "hero" },
     {
+      name: "heroBadge",
+      title: "Hero Floating Badge (pink tag on the hero photo)",
+      type: "string",
+      description: "Short callout shown on the small pink badge overlaid on the hero image, e.g. \"Same-Week Availability\".",
+      fieldset: "hero",
+    },
+    {
       name: "trustBadges",
       title: "Trust Badges (small text row under hero buttons)",
       type: "array",

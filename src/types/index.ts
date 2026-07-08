@@ -124,6 +124,7 @@ export interface HomepageContent {
   heroSubheadline: string;
   heroPrimaryCta: CtaButton;
   heroSecondaryCta: CtaButton;
+  heroBadge: string;
   trustBadges: string[];
   sections: HomepageSection[];
 }

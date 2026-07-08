@@ -115,7 +115,7 @@ export const Hero: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.7 }}
             className="absolute -right-4 top-8 rounded-2xl bg-gradient-brand-2 px-5 py-3 text-white shadow-glow-pink md:-right-8"
           >
-            <p className="font-display text-sm font-bold">Same-Week Availability</p>
+            <p className="font-display text-sm font-bold">{homepage.heroBadge}</p>
           </motion.div>
         </motion.div>
       </Container>

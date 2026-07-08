@@ -5,5 +5,13 @@
 import type { Promotion } from "~/types";
 
 export const promotions: Promotion[] = [
-
+  {
+    title: "Testing Promo",
+    message: "get a discount text",
+    cta: { label: "contact us ", url: "/contact", style: "primary" },
+    startDate: "2026-07-08",
+    endDate: "2026-07-15",
+    active: true,
+    placement: "Top Banner",
+  }
 ];
