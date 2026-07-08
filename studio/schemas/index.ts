@@ -5,6 +5,7 @@ import sectionHeading from "./objects/sectionHeading";
 import iconCard from "./objects/iconCard";
 import iconLabel from "./objects/iconLabel";
 import statItem from "./objects/statItem";
+import { sectionBlockTypes } from "./objects/sectionBlocks";
 
 import homepage from "./documents/homepage";
 import service from "./documents/service";
@@ -38,6 +39,7 @@ export const schemaTypes = [
   iconCard,
   iconLabel,
   statItem,
+  ...sectionBlockTypes,
   // documents
   homepage,
   service,

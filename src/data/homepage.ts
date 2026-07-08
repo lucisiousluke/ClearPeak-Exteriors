@@ -19,7 +19,15 @@ export const homepage: HomepageContent = {
   heroPrimaryCta: { label: "Get Free Estimate", url: "/contact", style: "primary" },
   heroSecondaryCta: { label: "View Our Work", url: "/gallery", style: "white" },
   trustBadges: ["Fully Insured", "Locally Owned", "Satisfaction Guaranteed", "Five-Star Rated"],
-  process: {
+  sections: [
+  { type: "servicesBlock" },
+  { type: "trustBadgesBlock" },
+  { type: "beforeAfterBlock" },
+  { type: "galleryBlock" },
+  { type: "whyChooseUsBlock" },
+  { type: "reviewsBlock" },
+  {
+    type: "processBlock",
     eyebrow: "How It Works",
     title: "Simple, Start to Finish",
     description: "No hassle, no surprises — just a straightforward path to a beautifully clean exterior.",
@@ -30,4 +38,8 @@ export const homepage: HomepageContent = {
       { icon: FiSmile, title: "Enjoy", description: "Step back and enjoy a home that looks brand new — backed by our satisfaction guarantee." }
     ],
   },
+  { type: "serviceAreasBlock" },
+  { type: "blogPreviewBlock" },
+  { type: "faqBlock" }
+  ],
 };

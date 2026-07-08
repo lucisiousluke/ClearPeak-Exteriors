@@ -14,21 +14,53 @@ import ServiceAreas from "~/components/sections/ServiceAreas";
 import BlogPreview from "~/components/sections/BlogPreview";
 import FAQ from "~/components/sections/FAQ";
 import FinalCTA from "~/components/sections/FinalCTA";
+import { homepage } from "~/data/homepage";
+import type { HomepageSection } from "~/types";
+
+// Maps each block type from homepage.sections to the component that renders
+// it. Order and presence are entirely controlled by that array (editable in
+// the Studio) — this file just knows HOW to render each block, not in what
+// order or how many.
+const renderSection = (section: HomepageSection, key: string): React.ReactNode => {
+  switch (section.type) {
+    case "trustBadgesBlock":
+      return <TrustBadges key={key} />;
+    case "servicesBlock":
+      return <Services key={key} />;
+    case "beforeAfterBlock":
+      return <BeforeAfter key={key} />;
+    case "galleryBlock":
+      return <Gallery key={key} compact />;
+    case "whyChooseUsBlock":
+      return <WhyChooseUs key={key} />;
+    case "reviewsBlock":
+      return <Reviews key={key} />;
+    case "processBlock":
+      return (
+        <Process
+          key={key}
+          eyebrow={section.eyebrow}
+          title={section.title}
+          description={section.description}
+          steps={section.steps}
+        />
+      );
+    case "serviceAreasBlock":
+      return <ServiceAreas key={key} />;
+    case "blogPreviewBlock":
+      return <BlogPreview key={key} />;
+    case "faqBlock":
+      return <FAQ key={key} />;
+    default:
+      return null;
+  }
+};
 
 const IndexPage: React.FC<PageProps> = () => {
   return (
     <Layout>
       <Hero />
-      <TrustBadges />
-      <Services />
-      <BeforeAfter />
-      <Gallery compact />
-      <WhyChooseUs />
-      <Reviews />
-      <Process />
-      <ServiceAreas />
-      <BlogPreview />
-      <FAQ />
+      {homepage.sections.map((section, i) => renderSection(section, `${section.type}-${i}`))}
       <FinalCTA />
     </Layout>
   );

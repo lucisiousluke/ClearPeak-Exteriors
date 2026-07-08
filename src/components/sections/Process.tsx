@@ -1,11 +1,11 @@
 import * as React from "react";
 import { motion } from "framer-motion";
 import { Container, Section, SectionHeading } from "~/components/ui";
-import { homepage } from "~/data/homepage";
+import type { ProcessBlock } from "~/types";
 
-export const Process: React.FC = () => {
-  const { eyebrow, title, description, steps } = homepage.process;
+type ProcessProps = Omit<ProcessBlock, "type">;
 
+export const Process: React.FC<ProcessProps> = ({ eyebrow, title, description, steps }) => {
   return (
     <Section background="ink">
       <div className="pointer-events-none absolute inset-0 bg-gradient-mesh opacity-40" />

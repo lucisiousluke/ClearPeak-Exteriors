@@ -1,15 +1,10 @@
+import { sectionBlockTypes } from "../objects/sectionBlocks";
+
 export default {
   name: "homepage",
   title: "Homepage",
   type: "document",
-  fieldsets: [
-    { name: "hero", title: "Hero Section", options: { collapsible: true, collapsed: false } },
-    {
-      name: "process",
-      title: "Process Section (\"How It Works\")",
-      options: { collapsible: true, collapsed: true },
-    },
-  ],
+  fieldsets: [{ name: "hero", title: "Hero Section", options: { collapsible: true, collapsed: false } }],
   fields: [
     { name: "heroEyebrow", title: "Hero Eyebrow Badge", type: "string", fieldset: "hero" },
     { name: "heroHeadline", title: "Hero Headline", type: "string", fieldset: "hero" },
@@ -32,14 +27,13 @@ export default {
       fieldset: "hero",
     },
     {
-      name: "processEyebrow",
-      title: "Eyebrow Badge",
-      type: "string",
-      fieldset: "process",
+      name: "sections",
+      title: "Page Sections",
+      description:
+        "Drag to reorder, add/remove/duplicate sections. This controls what appears between the Hero and the closing CTA, and in what order.",
+      type: "array",
+      of: sectionBlockTypes.map((t) => ({ type: t.name })),
     },
-    { name: "processTitle", title: "Title", type: "string", fieldset: "process" },
-    { name: "processDescription", title: "Description", type: "text", rows: 2, fieldset: "process" },
-    { name: "processSteps", title: "Process Steps", type: "array", of: [{ type: "iconCard" }], fieldset: "process" },
     {
       name: "featuredServices",
       title: "Featured Services",
@@ -52,8 +46,6 @@ export default {
       type: "array",
       of: [{ type: "reference", to: [{ type: "testimonial" }] }],
     },
-    { name: "finalCtaHeadline", title: "Final CTA Headline (unused — see Global CTA)", type: "string" },
-    { name: "finalCtaSubtext", title: "Final CTA Subtext (unused — see Global CTA)", type: "text", rows: 2 },
     { name: "seo", title: "SEO", type: "seo" },
   ],
   preview: {

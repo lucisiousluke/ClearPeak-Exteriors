@@ -91,6 +91,31 @@ export interface IconCardItem {
   description: string;
 }
 
+export type MarkerBlockType =
+  | "trustBadgesBlock"
+  | "servicesBlock"
+  | "beforeAfterBlock"
+  | "galleryBlock"
+  | "whyChooseUsBlock"
+  | "reviewsBlock"
+  | "serviceAreasBlock"
+  | "blogPreviewBlock"
+  | "faqBlock";
+
+export interface MarkerBlock {
+  type: MarkerBlockType;
+}
+
+export interface ProcessBlock {
+  type: "processBlock";
+  eyebrow: string;
+  title: string;
+  description: string;
+  steps: IconCardItem[];
+}
+
+export type HomepageSection = MarkerBlock | ProcessBlock;
+
 export interface HomepageContent {
   heroEyebrow: string;
   heroHeadline: string;
@@ -99,12 +124,7 @@ export interface HomepageContent {
   heroPrimaryCta: CtaButton;
   heroSecondaryCta: CtaButton;
   trustBadges: string[];
-  process: {
-    eyebrow: string;
-    title: string;
-    description: string;
-    steps: IconCardItem[];
-  };
+  sections: HomepageSection[];
 }
 
 export interface GlobalCtaContent {

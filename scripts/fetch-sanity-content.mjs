@@ -321,8 +321,23 @@ async function fetchHomepage() {
   const h = await client.fetch(`*[_id == "homepage"][0]`);
   if (!h) return null;
 
-  const steps = h.processSteps || [];
-  const usedIcons = Array.from(new Set(steps.map((s) => sanitizeIcon(s.icon))));
+  const sections = h.sections || [];
+  const allSteps = sections.flatMap((s) => s.steps || []);
+  const usedIcons = Array.from(new Set(allSteps.map((s) => sanitizeIcon(s.icon))));
+
+  const sectionLiteral = (s) => {
+    if (s._type === "processBlock") {
+      const steps = s.steps || [];
+      return `  {
+    type: "processBlock",
+    eyebrow: ${esc(s.eyebrow)},
+    title: ${esc(s.title)},
+    description: ${esc(s.description)},
+    steps: [\n${steps.map((st) => `      ${iconCardLiteral(st)}`).join(",\n")}\n    ],
+  }`;
+    }
+    return `  { type: ${esc(s._type)} }`;
+  };
 
   return (
     banner("homepage document") +
@@ -336,12 +351,7 @@ async function fetchHomepage() {
     `  heroPrimaryCta: ${ctaLiteral(h.heroPrimaryCta)},\n` +
     `  heroSecondaryCta: ${ctaLiteral(h.heroSecondaryCta)},\n` +
     `  trustBadges: ${arr(h.trustBadges)},\n` +
-    `  process: {\n` +
-    `    eyebrow: ${esc(h.processEyebrow)},\n` +
-    `    title: ${esc(h.processTitle)},\n` +
-    `    description: ${esc(h.processDescription)},\n` +
-    `    steps: [\n${steps.map((s) => `      ${iconCardLiteral(s)}`).join(",\n")}\n    ],\n` +
-    `  },\n` +
+    `  sections: [\n${sections.map(sectionLiteral).join(",\n")}\n  ],\n` +
     `};\n`
   );
 }
