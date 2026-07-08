@@ -284,11 +284,29 @@ async function fetchContactPage() {
   const c = await client.fetch(`*[_id == "contactPage"][0]`);
   if (!c) return null;
 
+  const fields = c.formFields || [];
+  const fieldsBody = fields
+    .map(
+      (f) => `  {
+    name: ${esc(f.name)},
+    label: ${esc(f.label)},
+    fieldType: ${esc(f.fieldType)},
+    placeholder: ${esc(f.placeholder)},
+    required: ${!!f.required},
+    width: ${esc(f.width || "full")},
+    dynamicOptionsSource: ${esc(f.dynamicOptionsSource || "none")},
+    options: ${arr(f.options)},
+  }`
+    )
+    .join(",\n");
+
   return (
     banner("contactPage document") +
+    `import type { ContactFormField } from "~/types";\n\n` +
     `export const contactPage = {\n` +
     `  headline: ${esc(c.headline)},\n` +
     `  subheadline: ${esc(c.subheadline)},\n` +
+    `  formFields: [\n${fieldsBody}\n  ] as ContactFormField[],\n` +
     `};\n`
   );
 }

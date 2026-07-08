@@ -67,3 +67,14 @@ export interface GalleryItem {
   category: string;
   image: string;
 }
+
+export interface ContactFormField {
+  name: string;
+  label: string;
+  fieldType: "text" | "email" | "tel" | "textarea" | "select";
+  placeholder?: string;
+  required?: boolean;
+  width: "half" | "full";
+  dynamicOptionsSource?: "none" | "services" | "cities";
+  options?: string[];
+}

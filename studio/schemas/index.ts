@@ -1,5 +1,6 @@
 import seo from "./objects/seo";
 import ctaButton from "./objects/ctaButton";
+import formField from "./objects/formField";
 
 import homepage from "./documents/homepage";
 import service from "./documents/service";
@@ -24,6 +25,7 @@ export const schemaTypes = [
   // objects
   seo,
   ctaButton,
+  formField,
   // documents
   homepage,
   service,

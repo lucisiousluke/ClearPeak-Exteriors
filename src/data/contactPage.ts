@@ -2,7 +2,71 @@
 // Do not edit directly — edit content in the Sanity Studio instead, then re-run
 // `npm run sync:sanity` (or just `npm run develop` / `npm run build`).
 
+import type { ContactFormField } from "~/types";
+
 export const contactPage = {
   headline: "Let's Get Your Free Estimate",
   subheadline: "Fill out the form and we'll respond within one business hour with a free, no-obligation quote.",
+  formFields: [
+  {
+    name: "name",
+    label: "Full Name",
+    fieldType: "text",
+    placeholder: "Jane Doe",
+    required: true,
+    width: "half",
+    dynamicOptionsSource: "none",
+    options: [],
+  },
+  {
+    name: "phone",
+    label: "Phone Number",
+    fieldType: "tel",
+    placeholder: "(720) 555-0100",
+    required: true,
+    width: "half",
+    dynamicOptionsSource: "none",
+    options: [],
+  },
+  {
+    name: "email",
+    label: "Email Address",
+    fieldType: "email",
+    placeholder: "jane@example.com",
+    required: true,
+    width: "full",
+    dynamicOptionsSource: "none",
+    options: [],
+  },
+  {
+    name: "service",
+    label: "Service Needed",
+    fieldType: "select",
+    placeholder: "",
+    required: false,
+    width: "half",
+    dynamicOptionsSource: "services",
+    options: [],
+  },
+  {
+    name: "city",
+    label: "City",
+    fieldType: "select",
+    placeholder: "",
+    required: false,
+    width: "half",
+    dynamicOptionsSource: "cities",
+    options: [],
+  },
+  {
+    name: "message",
+    label: "Additional Details",
+    fieldType: "textarea",
+    placeholder: "Tell us about your project...",
+    required: false,
+    width: "full",
+    dynamicOptionsSource: "none",
+    options: [],
+  }
+  ] as ContactFormField[],
 };

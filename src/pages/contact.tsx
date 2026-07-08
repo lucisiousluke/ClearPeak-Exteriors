@@ -116,94 +116,52 @@ const ContactPage: React.FC<PageProps> = () => {
                   </label>
                 </p>
 
-                <div className="grid gap-5 sm:grid-cols-2">
-                  <div>
-                    <label className="text-sm font-semibold text-ink-700" htmlFor="name">
-                      Full Name
-                    </label>
-                    <input
-                      id="name"
-                      name="name"
-                      required
-                      className="mt-2 w-full rounded-xl border border-ink-100 px-4 py-3 outline-none transition-colors focus:border-aqua-400"
-                      placeholder="Jane Doe"
-                    />
-                  </div>
-                  <div>
-                    <label className="text-sm font-semibold text-ink-700" htmlFor="phone">
-                      Phone Number
-                    </label>
-                    <input
-                      id="phone"
-                      name="phone"
-                      required
-                      type="tel"
-                      className="mt-2 w-full rounded-xl border border-ink-100 px-4 py-3 outline-none transition-colors focus:border-aqua-400"
-                      placeholder="(720) 555-0100"
-                    />
-                  </div>
-                </div>
+                <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                  {contactPage.formFields.map((field) => {
+                    const inputClass =
+                      "mt-2 w-full rounded-xl border border-ink-100 px-4 py-3 outline-none transition-colors focus:border-aqua-400";
+                    const dynamicOptions =
+                      field.dynamicOptionsSource === "services"
+                        ? services.map((s) => s.name)
+                        : field.dynamicOptionsSource === "cities"
+                          ? cities.map((c) => c.name)
+                          : field.options || [];
 
-                <div>
-                  <label className="text-sm font-semibold text-ink-700" htmlFor="email">
-                    Email Address
-                  </label>
-                  <input
-                    id="email"
-                    name="email"
-                    required
-                    type="email"
-                    className="mt-2 w-full rounded-xl border border-ink-100 px-4 py-3 outline-none transition-colors focus:border-aqua-400"
-                    placeholder="jane@example.com"
-                  />
-                </div>
-
-                <div className="grid gap-5 sm:grid-cols-2">
-                  <div>
-                    <label className="text-sm font-semibold text-ink-700" htmlFor="service">
-                      Service Needed
-                    </label>
-                    <select
-                      id="service"
-                      name="service"
-                      className="mt-2 w-full rounded-xl border border-ink-100 px-4 py-3 outline-none transition-colors focus:border-aqua-400"
-                    >
-                      {services.map((s) => (
-                        <option key={s.slug} value={s.name}>
-                          {s.name}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  <div>
-                    <label className="text-sm font-semibold text-ink-700" htmlFor="city">
-                      City
-                    </label>
-                    <select
-                      id="city"
-                      name="city"
-                      className="mt-2 w-full rounded-xl border border-ink-100 px-4 py-3 outline-none transition-colors focus:border-aqua-400"
-                    >
-                      {cities.map((c) => (
-                        <option key={c.slug} value={c.name}>
-                          {c.name}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-
-                <div>
-                  <label className="text-sm font-semibold text-ink-700" htmlFor="message">
-                    Additional Details
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows={4}
-                    className="mt-2 w-full rounded-xl border border-ink-100 px-4 py-3 outline-none transition-colors focus:border-aqua-400"
-                    placeholder="Tell us about your project..."
-                  />
+                    return (
+                      <div key={field.name} className={field.width === "full" ? "sm:col-span-2" : undefined}>
+                        <label className="text-sm font-semibold text-ink-700" htmlFor={field.name}>
+                          {field.label}
+                        </label>
+                        {field.fieldType === "textarea" ? (
+                          <textarea
+                            id={field.name}
+                            name={field.name}
+                            required={field.required}
+                            rows={4}
+                            className={inputClass}
+                            placeholder={field.placeholder}
+                          />
+                        ) : field.fieldType === "select" ? (
+                          <select id={field.name} name={field.name} required={field.required} className={inputClass}>
+                            {dynamicOptions.map((opt) => (
+                              <option key={opt} value={opt}>
+                                {opt}
+                              </option>
+                            ))}
+                          </select>
+                        ) : (
+                          <input
+                            id={field.name}
+                            name={field.name}
+                            type={field.fieldType}
+                            required={field.required}
+                            className={inputClass}
+                            placeholder={field.placeholder}
+                          />
+                        )}
+                      </div>
+                    );
+                  })}
                 </div>
 
                 <Button type="submit" className="w-full" size="lg" icon={<FiSend />} disabled={submitting}>

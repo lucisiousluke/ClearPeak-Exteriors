@@ -315,12 +315,42 @@ async function run() {
   console.log("✓ Homepage");
 
   // --- Contact Page (singleton) ---
+  const contactFormFields = [
+    { name: "name", label: "Full Name", fieldType: "text", placeholder: "Jane Doe", required: true, width: "half" },
+    {
+      name: "phone",
+      label: "Phone Number",
+      fieldType: "tel",
+      placeholder: "(720) 555-0100",
+      required: true,
+      width: "half",
+    },
+    {
+      name: "email",
+      label: "Email Address",
+      fieldType: "email",
+      placeholder: "jane@example.com",
+      required: true,
+      width: "full",
+    },
+    { name: "service", label: "Service Needed", fieldType: "select", dynamicOptionsSource: "services", width: "half" },
+    { name: "city", label: "City", fieldType: "select", dynamicOptionsSource: "cities", width: "half" },
+    {
+      name: "message",
+      label: "Additional Details",
+      fieldType: "textarea",
+      placeholder: "Tell us about your project...",
+      width: "full",
+    },
+  ].map((f) => ({ _type: "formField", _key: randKey(), ...f }));
+
   await client.createOrReplace({
     _id: "contactPage",
     _type: "contactPage",
     headline: "Let's Get Your Free Estimate",
     subheadline:
       "Fill out the form and we'll respond within one business hour with a free, no-obligation quote.",
+    formFields: contactFormFields,
   });
   console.log("✓ Contact page");
 
