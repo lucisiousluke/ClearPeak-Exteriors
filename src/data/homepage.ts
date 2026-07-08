@@ -2,6 +2,13 @@
 // Do not edit directly — edit content in the Sanity Studio instead, then re-run
 // `npm run sync:sanity` (or just `npm run develop` / `npm run build`).
 
+import {
+  FiClipboard,
+  FiCalendar,
+  FiDroplet,
+  FiSmile,
+} from "react-icons/fi";
+
 import type { HomepageContent } from "~/types";
 
 export const homepage: HomepageContent = {
@@ -12,4 +19,15 @@ export const homepage: HomepageContent = {
   heroPrimaryCta: { label: "Get Free Estimate", url: "/contact", style: "primary" },
   heroSecondaryCta: { label: "View Our Work", url: "/gallery", style: "white" },
   trustBadges: ["Fully Insured", "Locally Owned", "Satisfaction Guaranteed", "Five-Star Rated"],
+  process: {
+    eyebrow: "How It Works",
+    title: "Simple, Start to Finish",
+    description: "No hassle, no surprises — just a straightforward path to a beautifully clean exterior.",
+    steps: [
+      { icon: FiClipboard, title: "Request Quote", description: "Tell us about your property and the services you need. Get a transparent, free estimate fast." },
+      { icon: FiCalendar, title: "Schedule", description: "Pick a date and time that works for you — including evenings and weekends." },
+      { icon: FiDroplet, title: "We Clean", description: "Our insured, professional crew arrives on time and treats your property with care." },
+      { icon: FiSmile, title: "Enjoy", description: "Step back and enjoy a home that looks brand new — backed by our satisfaction guarantee." }
+    ],
+  },
 };

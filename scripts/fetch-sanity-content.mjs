@@ -321,8 +321,12 @@ async function fetchHomepage() {
   const h = await client.fetch(`*[_id == "homepage"][0]`);
   if (!h) return null;
 
+  const steps = h.processSteps || [];
+  const usedIcons = Array.from(new Set(steps.map((s) => sanitizeIcon(s.icon))));
+
   return (
     banner("homepage document") +
+    (usedIcons.length ? `import {\n  ${usedIcons.join(",\n  ")},\n} from "react-icons/fi";\n\n` : "") +
     `import type { HomepageContent } from "~/types";\n\n` +
     `export const homepage: HomepageContent = {\n` +
     `  heroEyebrow: ${esc(h.heroEyebrow)},\n` +
@@ -332,6 +336,12 @@ async function fetchHomepage() {
     `  heroPrimaryCta: ${ctaLiteral(h.heroPrimaryCta)},\n` +
     `  heroSecondaryCta: ${ctaLiteral(h.heroSecondaryCta)},\n` +
     `  trustBadges: ${arr(h.trustBadges)},\n` +
+    `  process: {\n` +
+    `    eyebrow: ${esc(h.processEyebrow)},\n` +
+    `    title: ${esc(h.processTitle)},\n` +
+    `    description: ${esc(h.processDescription)},\n` +
+    `    steps: [\n${steps.map((s) => `      ${iconCardLiteral(s)}`).join(",\n")}\n    ],\n` +
+    `  },\n` +
     `};\n`
   );
 }
@@ -411,25 +421,6 @@ async function fetchWhyChooseUsSection() {
     `  title: ${esc(w.title)},\n` +
     `  description: ${esc(w.description)},\n` +
     `  reasons: [\n${reasons.map((r) => `    ${iconCardLiteral(r)}`).join(",\n")}\n  ],\n` +
-    `};\n`
-  );
-}
-
-async function fetchProcessSection() {
-  const p = await client.fetch(`*[_id == "processSection"][0]`);
-  if (!p) return null;
-
-  const steps = p.steps || [];
-  const usedIcons = Array.from(new Set(steps.map((s) => sanitizeIcon(s.icon))));
-
-  return (
-    banner("processSection document") +
-    (usedIcons.length ? `import {\n  ${usedIcons.join(",\n  ")},\n} from "react-icons/fi";\n\n` : "") +
-    `export const processSection = {\n` +
-    `  eyebrow: ${esc(p.eyebrow)},\n` +
-    `  title: ${esc(p.title)},\n` +
-    `  description: ${esc(p.description)},\n` +
-    `  steps: [\n${steps.map((s) => `    ${iconCardLiteral(s)}`).join(",\n")}\n  ],\n` +
     `};\n`
   );
 }
@@ -520,7 +511,6 @@ async function main() {
     ["navigation.ts", fetchNavigation],
     ["footer.ts", fetchFooter],
     ["whyChooseUsSection.ts", fetchWhyChooseUsSection],
-    ["processSection.ts", fetchProcessSection],
     ["trustBadgesSection.ts", fetchTrustBadgesSection],
     ["aboutPage.ts", fetchAboutPage],
     ["siteContent.ts", fetchSiteContent],

@@ -11,7 +11,6 @@ const singletonTypes = new Set([
   "globalCta",
   "contactPage",
   "whyChooseUsSection",
-  "processSection",
   "trustBadgesSection",
   "aboutPage",
   "siteContent",
@@ -37,21 +36,30 @@ export default defineConfig({
             S.listItem()
               .title("Contact Page")
               .child(S.document().schemaType("contactPage").documentId("contactPage")),
+            S.divider(),
+            // Content used on more than one page lives here, grouped together
+            // so it's clear why these aren't nested under Homepage.
             S.listItem()
-              .title("Section Headings")
-              .child(S.document().schemaType("siteContent").documentId("siteContent")),
-            S.listItem()
-              .title("Why Choose Us Section")
-              .child(S.document().schemaType("whyChooseUsSection").documentId("whyChooseUsSection")),
-            S.listItem()
-              .title("Process Section")
-              .child(S.document().schemaType("processSection").documentId("processSection")),
-            S.listItem()
-              .title("Trust Badges & Stats")
-              .child(S.document().schemaType("trustBadgesSection").documentId("trustBadgesSection")),
-            S.listItem()
-              .title("Global CTA")
-              .child(S.document().schemaType("globalCta").documentId("globalCta")),
+              .title("Shared Sections")
+              .child(
+                S.list()
+                  .title("Shared Sections")
+                  .items([
+                    S.listItem()
+                      .title("Section Headings")
+                      .child(S.document().schemaType("siteContent").documentId("siteContent")),
+                    S.listItem()
+                      .title("Why Choose Us Section")
+                      .child(S.document().schemaType("whyChooseUsSection").documentId("whyChooseUsSection")),
+                    S.listItem()
+                      .title("Trust Badges & Stats")
+                      .child(S.document().schemaType("trustBadgesSection").documentId("trustBadgesSection")),
+                    S.listItem()
+                      .title("Global CTA")
+                      .child(S.document().schemaType("globalCta").documentId("globalCta")),
+                  ])
+              ),
+            S.divider(),
             S.listItem()
               .title("Navigation")
               .child(S.document().schemaType("navigation").documentId("navigation")),

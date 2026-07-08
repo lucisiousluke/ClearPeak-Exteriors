@@ -85,6 +85,12 @@ export interface CtaButton {
   style?: "primary" | "secondary" | "outline" | "white";
 }
 
+export interface IconCardItem {
+  icon: IconType;
+  title: string;
+  description: string;
+}
+
 export interface HomepageContent {
   heroEyebrow: string;
   heroHeadline: string;
@@ -93,6 +99,12 @@ export interface HomepageContent {
   heroPrimaryCta: CtaButton;
   heroSecondaryCta: CtaButton;
   trustBadges: string[];
+  process: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    steps: IconCardItem[];
+  };
 }
 
 export interface GlobalCtaContent {

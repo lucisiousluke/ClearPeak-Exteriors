@@ -1,10 +1,10 @@
 import * as React from "react";
 import { motion } from "framer-motion";
 import { Container, Section, SectionHeading } from "~/components/ui";
-import { processSection } from "~/data/processSection";
+import { homepage } from "~/data/homepage";
 
 export const Process: React.FC = () => {
-  const { eyebrow, title, description, steps } = processSection;
+  const { eyebrow, title, description, steps } = homepage.process;
 
   return (
     <Section background="ink">
