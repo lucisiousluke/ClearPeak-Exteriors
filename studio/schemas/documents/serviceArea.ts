@@ -4,7 +4,15 @@ export default {
   type: "document",
   fields: [
     { name: "name", title: "City Name", type: "string", validation: (Rule: any) => Rule.required() },
-    { name: "slug", title: "Slug", type: "slug", options: { source: "name" }, validation: (Rule: any) => Rule.required() },
+    {
+      name: "slug",
+      title: "Slug (controls the page URL)",
+      type: "slug",
+      description:
+        "This is what creates the link for this city — cards and links to it point to /service-areas/[this-slug]. Changing it changes the page's actual web address, so any existing links or bookmarks to the old URL will break.",
+      options: { source: "name" },
+      validation: (Rule: any) => Rule.required(),
+    },
     { name: "county", title: "County", type: "string" },
     { name: "blurb", title: "Intro Blurb", type: "text", rows: 3 },
     { name: "heroImage", title: "Hero Image", type: "image", options: { hotspot: true } },

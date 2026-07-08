@@ -4,7 +4,15 @@ export default {
   type: "document",
   fields: [
     { name: "name", title: "Service Name", type: "string", validation: (Rule: any) => Rule.required() },
-    { name: "slug", title: "Slug", type: "slug", options: { source: "name" }, validation: (Rule: any) => Rule.required() },
+    {
+      name: "slug",
+      title: "Slug (controls the page URL)",
+      type: "slug",
+      description:
+        "This is what creates the link for this service — the card on the homepage and everywhere else links to /services/[this-slug]. Changing it changes the page's actual web address, so any existing links or bookmarks to the old URL will break.",
+      options: { source: "name" },
+      validation: (Rule: any) => Rule.required(),
+    },
     { name: "icon", title: "Icon Name", type: "string", description: "react-icons/fi icon name, e.g. FiZap" },
     { name: "tagline", title: "Tagline", type: "string" },
     { name: "description", title: "Description", type: "text", rows: 4 },
