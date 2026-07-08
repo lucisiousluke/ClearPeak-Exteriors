@@ -18,6 +18,7 @@ import category from "./documents/category";
 import teamMember from "./documents/teamMember";
 import promotion from "./documents/promotion";
 import globalCta from "./documents/globalCta";
+import contactPage from "./documents/contactPage";
 
 export const schemaTypes = [
   // objects
@@ -41,4 +42,5 @@ export const schemaTypes = [
   teamMember,
   promotion,
   globalCta,
+  contactPage,
 ];

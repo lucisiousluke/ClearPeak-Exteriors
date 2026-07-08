@@ -3,7 +3,8 @@ import { Link } from "gatsby";
 import { AnimatePresence, motion } from "framer-motion";
 import { FiMenu, FiX, FiPhone, FiChevronDown } from "react-icons/fi";
 import { Container, Button } from "~/components/ui";
-import { navLinks, site } from "~/data/site";
+import { site } from "~/data/site";
+import { navLinks } from "~/data/navigation";
 import { services } from "~/data/services";
 
 export const Header: React.FC = () => {

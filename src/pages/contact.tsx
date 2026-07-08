@@ -4,8 +4,9 @@ import { motion } from "framer-motion";
 import { FiPhone, FiMail, FiMapPin, FiCheck, FiSend } from "react-icons/fi";
 import Layout from "~/components/layout/Layout";
 import SEO from "~/components/shared/SEO";
-import { Container, Section, Button, Badge } from "~/components/ui";
+import { Container, Button, Badge } from "~/components/ui";
 import { site } from "~/data/site";
+import { contactPage } from "~/data/contactPage";
 import { services } from "~/data/services";
 import { cities } from "~/data/cities";
 
@@ -49,12 +50,10 @@ const ContactPage: React.FC<PageProps> = () => {
         <Container className="relative grid gap-14 lg:grid-cols-[1fr_1.2fr]">
           <div>
             <Badge variant="aqua">Get In Touch</Badge>
-            <h1 className="mt-6 font-display text-display-md font-bold text-ink-800">
-              Let's Get Your <span className="text-gradient-brand">Free Estimate</span>
+            <h1 className="mt-6 font-display text-display-md font-bold text-gradient-brand">
+              {contactPage.headline}
             </h1>
-            <p className="mt-5 text-lg leading-relaxed text-ink-500">
-              Fill out the form and we'll respond within one business hour with a free, no-obligation quote.
-            </p>
+            <p className="mt-5 text-lg leading-relaxed text-ink-500">{contactPage.subheadline}</p>
 
             <div className="mt-10 space-y-5">
               <a href={site.phoneHref} className="flex items-center gap-4 rounded-2xl bg-white p-5 shadow-soft">

@@ -22,7 +22,8 @@ import { testimonials } from "../src/data/testimonials";
 import { faqs as globalFaqs } from "../src/data/faqs";
 import { blogPosts } from "../src/data/blogPosts";
 import { galleryItems, beforeAfterItems } from "../src/data/gallery";
-import { site, navLinks, footerLinks } from "../src/data/site";
+import { site } from "../src/data/site";
+import { navLinks, footerLinks } from "../src/data/navigation";
 
 const client = createClient({
   projectId: "vgi0saae",
@@ -312,6 +313,16 @@ async function run() {
     finalCtaSubtext: "Get a free, no-obligation estimate today and see why Denver homeowners trust ClearPeak Exteriors.",
   });
   console.log("✓ Homepage");
+
+  // --- Contact Page (singleton) ---
+  await client.createOrReplace({
+    _id: "contactPage",
+    _type: "contactPage",
+    headline: "Let's Get Your Free Estimate",
+    subheadline:
+      "Fill out the form and we'll respond within one business hour with a free, no-obligation quote.",
+  });
+  console.log("✓ Contact page");
 
   console.log("\nSeed complete.");
 }

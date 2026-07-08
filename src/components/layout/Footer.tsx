@@ -2,7 +2,8 @@ import * as React from "react";
 import { Link } from "gatsby";
 import { FiPhone, FiMail, FiMapPin, FiInstagram, FiFacebook } from "react-icons/fi";
 import { Container } from "~/components/ui";
-import { site, footerLinks } from "~/data/site";
+import { site } from "~/data/site";
+import { footerLinks } from "~/data/navigation";
 
 export const Footer: React.FC = () => {
   return (

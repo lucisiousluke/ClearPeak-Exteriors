@@ -242,6 +242,57 @@ async function fetchGallery() {
   );
 }
 
+const toPhoneHref = (phone = "") => {
+  const digits = phone.replace(/\D/g, "");
+  if (!digits) return "";
+  return `tel:+1${digits.length === 10 ? digits : digits.replace(/^1/, "")}`;
+};
+
+async function fetchSiteSettings() {
+  const s = await client.fetch(`*[_id == "siteSettings"][0]`);
+  if (!s) return null;
+
+  return (
+    banner("siteSettings document") +
+    `export const site = {\n` +
+    `  name: ${esc(s.siteName || "ClearPeak Exteriors")},\n` +
+    `  tagline: ${esc(s.tagline)},\n` +
+    `  phone: ${esc(s.phone)},\n` +
+    `  phoneHref: ${esc(toPhoneHref(s.phone))},\n` +
+    `  email: ${esc(s.email)},\n` +
+    `  address: {\n` +
+    `    street: ${esc(s.address)},\n` +
+    `    city: ${esc(s.city)},\n` +
+    `    state: ${esc(s.state)},\n` +
+    `    zip: ${esc(s.zip)},\n` +
+    `  },\n` +
+    `  social: {\n` +
+    `    facebook: ${esc(s.facebookUrl)},\n` +
+    `    instagram: ${esc(s.instagramUrl)},\n` +
+    `    google: ${esc(s.googleReviewUrl)},\n` +
+    `  },\n` +
+    `  hours: ${esc(s.hours)},\n` +
+    // Not yet editable from Sanity — internal route + review-carousel stats.
+    `  quoteFormUrl: "/contact",\n` +
+    `  rating: 4.9,\n` +
+    `  reviewCount: 312,\n` +
+    `};\n`
+  );
+}
+
+async function fetchContactPage() {
+  const c = await client.fetch(`*[_id == "contactPage"][0]`);
+  if (!c) return null;
+
+  return (
+    banner("contactPage document") +
+    `export const contactPage = {\n` +
+    `  headline: ${esc(c.headline)},\n` +
+    `  subheadline: ${esc(c.subheadline)},\n` +
+    `};\n`
+  );
+}
+
 async function main() {
   const jobs = [
     ["services.ts", fetchServices],
@@ -250,6 +301,8 @@ async function main() {
     ["faqs.ts", fetchFaqs],
     ["blogPosts.ts", fetchBlogPosts],
     ["gallery.ts", fetchGallery],
+    ["site.ts", fetchSiteSettings],
+    ["contactPage.ts", fetchContactPage],
   ];
 
   let written = 0;

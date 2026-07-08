@@ -3,7 +3,7 @@ import { structureTool } from "sanity/structure";
 import { visionTool } from "@sanity/vision";
 import { schemaTypes } from "./schemas";
 
-const singletonTypes = new Set(["homepage", "siteSettings", "navigation", "footer", "globalCta"]);
+const singletonTypes = new Set(["homepage", "siteSettings", "navigation", "footer", "globalCta", "contactPage"]);
 
 export default defineConfig({
   name: "clearpeak-exteriors",
@@ -31,6 +31,9 @@ export default defineConfig({
             S.listItem()
               .title("Global CTA")
               .child(S.document().schemaType("globalCta").documentId("globalCta")),
+            S.listItem()
+              .title("Contact Page")
+              .child(S.document().schemaType("contactPage").documentId("contactPage")),
             S.divider(),
             ...S.documentTypeListItems().filter((item) => item.getId() && !singletonTypes.has(item.getId()!)),
           ]),
