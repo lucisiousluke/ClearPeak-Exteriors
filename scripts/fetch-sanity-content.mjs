@@ -311,6 +311,44 @@ async function fetchContactPage() {
   );
 }
 
+const ctaLiteral = (cta) =>
+  `{ label: ${esc(cta?.label)}, url: ${esc(cta?.url)}, style: ${esc(cta?.style || "primary")} }`;
+
+async function fetchHomepage() {
+  const h = await client.fetch(`*[_id == "homepage"][0]`);
+  if (!h) return null;
+
+  return (
+    banner("homepage document") +
+    `import type { HomepageContent } from "~/types";\n\n` +
+    `export const homepage: HomepageContent = {\n` +
+    `  heroEyebrow: ${esc(h.heroEyebrow)},\n` +
+    `  heroHeadline: ${esc(h.heroHeadline)},\n` +
+    `  heroHighlight: ${esc(h.heroHighlight)},\n` +
+    `  heroSubheadline: ${esc(h.heroSubheadline)},\n` +
+    `  heroPrimaryCta: ${ctaLiteral(h.heroPrimaryCta)},\n` +
+    `  heroSecondaryCta: ${ctaLiteral(h.heroSecondaryCta)},\n` +
+    `  trustBadges: ${arr(h.trustBadges)},\n` +
+    `};\n`
+  );
+}
+
+async function fetchGlobalCta() {
+  const g = await client.fetch(`*[_id == "globalCta"][0]`);
+  if (!g) return null;
+
+  return (
+    banner("globalCta document") +
+    `import type { GlobalCtaContent } from "~/types";\n\n` +
+    `export const globalCta: GlobalCtaContent = {\n` +
+    `  headline: ${esc(g.headline)},\n` +
+    `  subtext: ${esc(g.subtext)},\n` +
+    `  primaryCta: ${ctaLiteral(g.primaryCta)},\n` +
+    `  secondaryCta: ${ctaLiteral(g.secondaryCta)},\n` +
+    `};\n`
+  );
+}
+
 async function main() {
   const jobs = [
     ["services.ts", fetchServices],
@@ -321,6 +359,8 @@ async function main() {
     ["gallery.ts", fetchGallery],
     ["site.ts", fetchSiteSettings],
     ["contactPage.ts", fetchContactPage],
+    ["homepage.ts", fetchHomepage],
+    ["globalCta.ts", fetchGlobalCta],
   ];
 
   let written = 0;

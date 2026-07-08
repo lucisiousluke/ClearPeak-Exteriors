@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { FiArrowRight, FiPhone } from "react-icons/fi";
 import { Container, Button } from "~/components/ui";
 import { site } from "~/data/site";
+import { globalCta } from "~/data/globalCta";
 
 export const FinalCTA: React.FC = () => {
   return (
@@ -25,7 +26,7 @@ export const FinalCTA: React.FC = () => {
           transition={{ duration: 0.6 }}
           className="mx-auto max-w-3xl font-display text-display-md font-bold text-white md:text-display-lg"
         >
-          Ready to Refresh Your Home?
+          {globalCta.headline}
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -34,7 +35,7 @@ export const FinalCTA: React.FC = () => {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="mx-auto mt-5 max-w-xl text-lg text-white/85"
         >
-          Get a free, no-obligation estimate today and see why Denver homeowners trust ClearPeak Exteriors.
+          {globalCta.subtext}
         </motion.p>
 
         <motion.div
@@ -44,9 +45,12 @@ export const FinalCTA: React.FC = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mt-10 flex flex-wrap items-center justify-center gap-4"
         >
-          <Button as="a" href="/contact" variant="white" size="lg" icon={<FiArrowRight />}>
-            Get My Free Quote
+          <Button as="a" href={globalCta.primaryCta.url} variant="white" size="lg" icon={<FiArrowRight />}>
+            {globalCta.primaryCta.label}
           </Button>
+          {/* Phone link always comes from live site settings, not the CMS-edited
+              globalCta.secondaryCta.url, so it can never drift out of sync with
+              the real phone number. */}
           <Button
             as="a"
             href={site.phoneHref}
@@ -55,7 +59,7 @@ export const FinalCTA: React.FC = () => {
             iconPosition="left"
             className="bg-ink-900/20 shadow-none hover:bg-ink-900/30"
           >
-            Call Today: {site.phone}
+            {globalCta.secondaryCta.label}: {site.phone}
           </Button>
         </motion.div>
       </Container>

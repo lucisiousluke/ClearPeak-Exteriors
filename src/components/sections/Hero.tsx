@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { FiArrowRight, FiPlay } from "react-icons/fi";
 import { Container, Button, Photo } from "~/components/ui";
 import { images } from "~/data/images";
+import { homepage } from "~/data/homepage";
 
 export const Hero: React.FC = () => {
   return (
@@ -26,7 +27,7 @@ export const Hero: React.FC = () => {
             className="mb-6 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-ink-700 shadow-soft"
           >
             <span className="flex h-2 w-2 rounded-full bg-success" />
-            Now Booking — Denver Metro
+            {homepage.heroEyebrow}
           </motion.div>
 
           <motion.h1
@@ -35,9 +36,9 @@ export const Hero: React.FC = () => {
             transition={{ duration: 0.7, delay: 0.05 }}
             className="font-display text-5xl font-bold leading-[1.03] tracking-tight text-ink-800 sm:text-6xl md:text-display-xl"
           >
-            Bring Your Home
+            {homepage.heroHeadline}
             <br />
-            <span className="text-gradient-brand">Back to Life.</span>
+            <span className="text-gradient-brand">{homepage.heroHighlight}</span>
           </motion.h1>
 
           <motion.p
@@ -46,8 +47,7 @@ export const Hero: React.FC = () => {
             transition={{ duration: 0.7, delay: 0.15 }}
             className="mt-6 max-w-lg text-lg leading-relaxed text-ink-500 md:text-xl"
           >
-            Denver's premium exterior cleaning company specializing in pressure washing, soft washing, window
-            cleaning, and exterior restoration.
+            {homepage.heroSubheadline}
           </motion.p>
 
           <motion.div
@@ -56,11 +56,18 @@ export const Hero: React.FC = () => {
             transition={{ duration: 0.7, delay: 0.25 }}
             className="mt-10 flex flex-wrap items-center gap-4"
           >
-            <Button as="a" href="/contact" size="lg" icon={<FiArrowRight />}>
-              Get Free Estimate
+            <Button as="a" href={homepage.heroPrimaryCta.url} variant={homepage.heroPrimaryCta.style} size="lg" icon={<FiArrowRight />}>
+              {homepage.heroPrimaryCta.label}
             </Button>
-            <Button as="a" href="/gallery" variant="white" size="lg" icon={<FiPlay />} iconPosition="left">
-              View Our Work
+            <Button
+              as="a"
+              href={homepage.heroSecondaryCta.url}
+              variant={homepage.heroSecondaryCta.style}
+              size="lg"
+              icon={<FiPlay />}
+              iconPosition="left"
+            >
+              {homepage.heroSecondaryCta.label}
             </Button>
           </motion.div>
 
@@ -70,7 +77,7 @@ export const Hero: React.FC = () => {
             transition={{ duration: 0.7, delay: 0.4 }}
             className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-4"
           >
-            {["Fully Insured", "Locally Owned", "Satisfaction Guaranteed", "Five-Star Rated"].map((item) => (
+            {homepage.trustBadges.map((item) => (
               <div key={item} className="text-sm font-semibold text-ink-600">
                 {item}
               </div>

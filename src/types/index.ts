@@ -78,3 +78,26 @@ export interface ContactFormField {
   dynamicOptionsSource?: "none" | "services" | "cities";
   options?: string[];
 }
+
+export interface CtaButton {
+  label: string;
+  url: string;
+  style?: "primary" | "secondary" | "outline" | "white";
+}
+
+export interface HomepageContent {
+  heroEyebrow: string;
+  heroHeadline: string;
+  heroHighlight: string;
+  heroSubheadline: string;
+  heroPrimaryCta: CtaButton;
+  heroSecondaryCta: CtaButton;
+  trustBadges: string[];
+}
+
+export interface GlobalCtaContent {
+  headline: string;
+  subtext: string;
+  primaryCta: CtaButton;
+  secondaryCta: CtaButton;
+}
