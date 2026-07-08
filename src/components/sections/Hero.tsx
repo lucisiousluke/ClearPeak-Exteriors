@@ -4,6 +4,7 @@ import { FiArrowRight, FiPlay } from "react-icons/fi";
 import { Container, Button, Photo } from "~/components/ui";
 import { images } from "~/data/images";
 import { homepage } from "~/data/homepage";
+import { site } from "~/data/site";
 
 export const Hero: React.FC = () => {
   return (
@@ -105,8 +106,8 @@ export const Hero: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.6 }}
             className="absolute -left-6 bottom-8 rounded-3xl bg-white p-5 shadow-lift md:-left-10"
           >
-            <p className="font-display text-3xl font-bold text-gradient-brand">4.9★</p>
-            <p className="text-sm font-semibold text-ink-500">312+ Google Reviews</p>
+            <p className="font-display text-3xl font-bold text-gradient-brand">{site.rating}★</p>
+            <p className="text-sm font-semibold text-ink-500">{site.reviewCount}+ Google Reviews</p>
           </motion.div>
           <motion.div
             initial={{ opacity: 0, y: -20 }}

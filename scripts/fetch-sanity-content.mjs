@@ -275,10 +275,10 @@ async function fetchSiteSettings() {
     `    google: ${esc(s.googleReviewUrl)},\n` +
     `  },\n` +
     `  hours: ${esc(s.hours)},\n` +
-    // Not yet editable from Sanity — internal route + review-carousel stats.
+    // Not yet editable from Sanity — just an internal route, not content.
     `  quoteFormUrl: "/contact",\n` +
-    `  rating: 4.9,\n` +
-    `  reviewCount: 312,\n` +
+    `  rating: ${typeof s.rating === "number" ? s.rating : 4.9},\n` +
+    `  reviewCount: ${typeof s.reviewCount === "number" ? s.reviewCount : 312},\n` +
     `};\n`
   );
 }

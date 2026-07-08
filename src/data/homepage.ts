@@ -7,7 +7,7 @@ import type { HomepageContent } from "~/types";
 export const homepage: HomepageContent = {
   heroEyebrow: "Now Booking — Denver Metro",
   heroHeadline: "Bring Your Home",
-  heroHighlight: "Cleaning UP",
+  heroHighlight: "Back to Life.",
   heroSubheadline: "Denver's premium exterior cleaning company specializing in pressure washing, soft washing, window cleaning, and exterior restoration.",
   heroPrimaryCta: { label: "Get Free Estimate", url: "/contact", style: "primary" },
   heroSecondaryCta: { label: "View Our Work", url: "/gallery", style: "white" },

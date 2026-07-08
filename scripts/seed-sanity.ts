@@ -234,6 +234,8 @@ async function run() {
     state: site.address.state,
     zip: site.address.zip,
     hours: site.hours,
+    rating: site.rating,
+    reviewCount: site.reviewCount,
     googleReviewUrl: site.social.google,
     facebookUrl: site.social.facebook,
     instagramUrl: site.social.instagram,

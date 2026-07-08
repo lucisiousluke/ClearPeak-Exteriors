@@ -13,6 +13,8 @@ export default {
     { name: "state", title: "State", type: "string" },
     { name: "zip", title: "Zip Code", type: "string" },
     { name: "hours", title: "Business Hours", type: "string" },
+    { name: "rating", title: "Average Rating", type: "number", description: "e.g. 4.9", validation: (Rule: any) => Rule.min(0).max(5) },
+    { name: "reviewCount", title: "Review Count", type: "number", description: "e.g. 312" },
     { name: "googleReviewUrl", title: "Google Reviews URL", type: "url" },
     { name: "facebookUrl", title: "Facebook URL", type: "url" },
     { name: "instagramUrl", title: "Instagram URL", type: "url" },
