@@ -45,7 +45,7 @@
   }
 
   .bg-gradient-brand-animated {
-    @apply bg-gradient-brand-3 bg-[length:200%_200%] animate-gradient-x;
+    @apply bg-gradient-brand-3;
   }
 
   .glass {
