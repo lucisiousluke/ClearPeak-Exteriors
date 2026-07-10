@@ -10,28 +10,24 @@ export default {
       title: "Primary (Aqua)",
       type: "color",
       description: "The first stop in the main brand gradient.",
-      initialValue: { hex: "#00D4FF" },
     },
     {
       name: "secondary",
       title: "Secondary (Pink)",
       type: "color",
       description: "The middle/second stop — used most heavily, including the Why ClearPeak icon badges.",
-      initialValue: { hex: "#FF4FA3" },
     },
     {
       name: "accent",
       title: "Accent (Coral)",
       type: "color",
       description: "The final stop in the main brand gradient.",
-      initialValue: { hex: "#FF7A59" },
     },
     {
       name: "ink",
       title: "Text (Ink)",
       type: "color",
       description: "Core dark heading/text color.",
-      initialValue: { hex: "#172B4D" },
     },
   ],
   preview: {
