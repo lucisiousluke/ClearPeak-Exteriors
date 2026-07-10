@@ -1,12 +1,10 @@
+@import "./brandColors.generated.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --color-aqua: #00d4ff;
-  --color-pink: #ff4fa3;
-  --color-coral: #ff7a59;
-  --color-ink: #172b4d;
   --color-soft: #f6fcff;
 }
 

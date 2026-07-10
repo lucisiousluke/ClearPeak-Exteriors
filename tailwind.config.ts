@@ -86,9 +86,10 @@ const config: Config = {
         glass: "0 8px 32px 0 rgba(23, 43, 77, 0.1)",
       },
       backgroundImage: {
-        "gradient-brand": "linear-gradient(135deg, #00D4FF 0%, #FF4FA3 100%)",
-        "gradient-brand-2": "linear-gradient(135deg, #FF4FA3 0%, #FF7A59 100%)",
-        "gradient-brand-3": "linear-gradient(135deg, #00D4FF 0%, #FF4FA3 50%, #FF7A59 100%)",
+        "gradient-brand": "linear-gradient(135deg, var(--color-aqua) 0%, var(--color-pink) 100%)",
+        "gradient-brand-2": "linear-gradient(135deg, var(--color-pink) 0%, var(--color-coral) 100%)",
+        "gradient-brand-3":
+          "linear-gradient(135deg, var(--color-aqua) 0%, var(--color-pink) 50%, var(--color-coral) 100%)",
         "gradient-radial": "radial-gradient(circle at center, var(--tw-gradient-stops))",
         "gradient-mesh": "radial-gradient(at 20% 20%, rgba(0,212,255,0.25) 0px, transparent 50%), radial-gradient(at 80% 0%, rgba(255,79,163,0.25) 0px, transparent 50%), radial-gradient(at 80% 80%, rgba(255,122,89,0.2) 0px, transparent 50%)",
       },

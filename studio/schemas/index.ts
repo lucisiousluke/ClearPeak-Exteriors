@@ -29,6 +29,7 @@ import whyChooseUsSection from "./documents/whyChooseUsSection";
 import trustBadgesSection from "./documents/trustBadgesSection";
 import aboutPage from "./documents/aboutPage";
 import siteContent from "./documents/siteContent";
+import brandColors from "./documents/brandColors";
 
 export const schemaTypes = [
   // objects
@@ -63,4 +64,5 @@ export const schemaTypes = [
   trustBadgesSection,
   aboutPage,
   siteContent,
+  brandColors,
 ];

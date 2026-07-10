@@ -1,6 +1,7 @@
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
 import { visionTool } from "@sanity/vision";
+import { colorInput } from "@sanity/color-input";
 import { schemaTypes } from "./schemas";
 
 const singletonTypes = new Set([
@@ -14,6 +15,7 @@ const singletonTypes = new Set([
   "trustBadgesSection",
   "aboutPage",
   "siteContent",
+  "brandColors",
 ]);
 
 export default defineConfig({
@@ -69,11 +71,15 @@ export default defineConfig({
             S.listItem()
               .title("Site Settings")
               .child(S.document().schemaType("siteSettings").documentId("siteSettings")),
+            S.listItem()
+              .title("Brand Colors")
+              .child(S.document().schemaType("brandColors").documentId("brandColors")),
             S.divider(),
             ...S.documentTypeListItems().filter((item) => item.getId() && !singletonTypes.has(item.getId()!)),
           ]),
     }),
     visionTool(),
+    colorInput(),
   ],
   schema: {
     types: schemaTypes,
