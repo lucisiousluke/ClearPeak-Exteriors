@@ -145,3 +145,10 @@ export interface Promotion {
   active: boolean;
   placement: "Top Banner" | "Homepage Section";
 }
+
+export interface BrandColors {
+  primary: string;
+  secondary: string;
+  accent: string;
+  ink: string;
+}
