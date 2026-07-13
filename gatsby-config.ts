@@ -41,9 +41,9 @@ const config: GatsbyConfig = {
         short_name: "ClearPeak",
         start_url: "/",
         background_color: "#FFFFFF",
-        theme_color: "#00D4FF",
+        theme_color: "#22D3EE",
         display: "standalone",
-        icon: "src/images/icon.png",
+        icon: "src/images/ClearPeak-Exterior-favicon.png",
       },
     },
     {
