@@ -57,7 +57,7 @@ const ContactPage: React.FC<PageProps> = () => {
 
             <div className="mt-10 space-y-5">
               <a href={site.phoneHref} className="flex items-center gap-4 rounded-2xl bg-white p-5 shadow-soft">
-                <span className="flex h-11 w-11 flex-none items-center justify-center rounded-xl bg-gradient-brand text-white">
+                <span className="flex h-11 w-11 flex-none items-center justify-center rounded-xl bg-gradient-brand text-on-primary">
                   <FiPhone />
                 </span>
                 <div>
@@ -66,7 +66,7 @@ const ContactPage: React.FC<PageProps> = () => {
                 </div>
               </a>
               <a href={`mailto:${site.email}`} className="flex items-center gap-4 rounded-2xl bg-white p-5 shadow-soft">
-                <span className="flex h-11 w-11 flex-none items-center justify-center rounded-xl bg-gradient-brand-2 text-white">
+                <span className="flex h-11 w-11 flex-none items-center justify-center rounded-xl bg-gradient-brand-2 text-on-accent">
                   <FiMail />
                 </span>
                 <div>
@@ -75,7 +75,7 @@ const ContactPage: React.FC<PageProps> = () => {
                 </div>
               </a>
               <div className="flex items-center gap-4 rounded-2xl bg-white p-5 shadow-soft">
-                <span className="flex h-11 w-11 flex-none items-center justify-center rounded-xl bg-coral-500 text-white">
+                <span className="flex h-11 w-11 flex-none items-center justify-center rounded-xl bg-coral-500 text-on-accent">
                   <FiMapPin />
                 </span>
                 <div>
@@ -164,7 +164,7 @@ const ContactPage: React.FC<PageProps> = () => {
                   })}
                 </div>
 
-                <Button type="submit" className="w-full" size="lg" icon={<FiSend />} disabled={submitting}>
+                <Button type="submit" className="w-full" size="sm" icon={<FiSend />} disabled={submitting}>
                   {submitting ? "Sending..." : "Get My Free Quote"}
                 </Button>
               </form>

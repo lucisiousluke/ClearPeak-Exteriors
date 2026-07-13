@@ -6,6 +6,7 @@ import { Container, Button } from "~/components/ui";
 import { site } from "~/data/site";
 import { navLinks, headerCta } from "~/data/navigation";
 import { services } from "~/data/services";
+import logo from "~/images/clearpeak-logo-compact.svg";
 
 export const Header: React.FC = () => {
   const [scrolled, setScrolled] = React.useState(false);
@@ -26,11 +27,8 @@ export const Header: React.FC = () => {
       }`}
     >
       <Container className="flex items-center justify-between py-4">
-        <Link to="/" className="flex items-center gap-2 font-display text-xl font-bold text-ink-800">
-          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-brand text-white shadow-glow">
-            CP
-          </span>
-          ClearPeak <span className="hidden text-gradient-brand sm:inline">Exteriors</span>
+        <Link to="/" className="flex items-center">
+          <img src={logo} alt="ClearPeak Exteriors" className="h-12 w-auto md:h-14" />
         </Link>
 
         <nav className="hidden items-center gap-8 lg:flex">
@@ -144,7 +142,7 @@ export const Header: React.FC = () => {
                 <a href={site.phoneHref} className="flex items-center justify-center gap-2 font-semibold text-ink-700">
                   <FiPhone /> {site.phone}
                 </a>
-                <Button as="a" href={headerCta.url} variant={headerCta.style}>
+                <Button as="a" href={headerCta.url} variant={headerCta.style} size="sm">
                   {headerCta.label}
                 </Button>
               </div>

@@ -12,4 +12,4 @@ export const navLinks = [
   { label: "About", href: "/about" }
 ];
 
-export const headerCta: CtaButton = { label: "Get Free Estimate", url: "/contact", style: "primary" };
+export const headerCta: CtaButton = { label: "Get Free Estimate", url: "/contact", style: "secondary" };

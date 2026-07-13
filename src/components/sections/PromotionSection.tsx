@@ -19,7 +19,7 @@ export const PromotionSection: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="flex flex-col items-center gap-5 rounded-4xl bg-gradient-brand-2 px-8 py-10 text-center text-white shadow-glow-pink md:flex-row md:justify-between md:text-left"
+          className="flex flex-col items-center gap-5 rounded-4xl bg-gradient-brand-2 px-8 py-10 text-center text-on-accent shadow-glow-pink md:flex-row md:justify-between md:text-left"
         >
           <div className="flex items-center gap-4">
             <span className="flex h-12 w-12 flex-none items-center justify-center rounded-2xl bg-white/20">
@@ -28,7 +28,7 @@ export const PromotionSection: React.FC = () => {
             <p className="font-display text-xl font-bold md:text-2xl">{promo.message}</p>
           </div>
           {promo.cta?.label && (
-            <Button as="a" href={promo.cta.url} variant="white" size="md" icon={<FiArrowRight />} className="flex-none">
+            <Button as="a" href={promo.cta.url} variant="white" size="sm" icon={<FiArrowRight />} className="flex-none">
               {promo.cta.label}
             </Button>
           )}

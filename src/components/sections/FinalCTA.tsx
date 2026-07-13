@@ -24,7 +24,7 @@ export const FinalCTA: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mx-auto max-w-3xl font-display text-display-md font-bold text-white md:text-display-lg"
+          className="mx-auto max-w-3xl font-display text-display-md font-bold text-on-primary md:text-display-lg"
         >
           {globalCta.headline}
         </motion.h2>
@@ -33,7 +33,7 @@ export const FinalCTA: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="mx-auto mt-5 max-w-xl text-lg text-white/85"
+          className="mx-auto mt-5 max-w-xl text-lg text-on-primary/85"
         >
           {globalCta.subtext}
         </motion.p>
@@ -45,7 +45,7 @@ export const FinalCTA: React.FC = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mt-10 flex flex-wrap items-center justify-center gap-4"
         >
-          <Button as="a" href={globalCta.primaryCta.url} variant="white" size="lg" icon={<FiArrowRight />}>
+          <Button as="a" href={globalCta.primaryCta.url} variant="white" size="sm" icon={<FiArrowRight />}>
             {globalCta.primaryCta.label}
           </Button>
           {/* Phone link always comes from live site settings, not the CMS-edited
@@ -54,10 +54,10 @@ export const FinalCTA: React.FC = () => {
           <Button
             as="a"
             href={site.phoneHref}
-            size="lg"
+            variant="secondary"
+            size="sm"
             icon={<FiPhone />}
             iconPosition="left"
-            className="bg-ink-900/20 shadow-none hover:bg-ink-900/30"
           >
             {globalCta.secondaryCta.label}: {site.phone}
           </Button>

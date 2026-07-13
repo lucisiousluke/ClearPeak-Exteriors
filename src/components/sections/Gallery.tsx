@@ -42,7 +42,7 @@ export const Gallery: React.FC<GalleryProps> = ({ compact = false }) => {
                 onClick={() => setFilter(cat)}
                 className={`rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-200 ${
                   filter === cat
-                    ? "bg-gradient-brand text-white shadow-glow"
+                    ? "bg-gradient-brand text-on-primary shadow-glow"
                     : "bg-white text-ink-600 shadow-soft hover:text-aqua-600"
                 }`}
               >

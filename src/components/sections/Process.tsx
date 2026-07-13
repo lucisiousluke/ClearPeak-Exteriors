@@ -25,7 +25,7 @@ export const Process: React.FC<ProcessProps> = ({ eyebrow, title, description, s
               {i < steps.length - 1 && (
                 <div className="absolute right-0 top-8 hidden h-px w-full bg-gradient-to-r from-white/20 to-transparent lg:block" />
               )}
-              <span className="relative z-10 flex h-16 w-16 items-center justify-center rounded-3xl bg-gradient-brand text-white shadow-glow">
+              <span className="relative z-10 flex h-16 w-16 items-center justify-center rounded-3xl bg-gradient-brand text-on-primary shadow-glow">
                 <step.icon size={26} />
               </span>
               <span className="absolute -top-2 left-10 font-display text-5xl font-bold text-white/10">

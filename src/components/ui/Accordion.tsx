@@ -21,7 +21,7 @@ const AccordionItem: React.FC<AccordionItemProps> = ({ question, answer, isOpen,
       <motion.span
         animate={{ rotate: isOpen ? 45 : 0 }}
         transition={{ duration: 0.25 }}
-        className="flex h-9 w-9 flex-none items-center justify-center rounded-full bg-gradient-brand text-white"
+        className="flex h-9 w-9 flex-none items-center justify-center rounded-full bg-gradient-brand-2 text-on-accent"
       >
         <FiPlus size={18} />
       </motion.span>

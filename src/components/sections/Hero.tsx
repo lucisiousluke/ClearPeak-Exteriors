@@ -57,14 +57,14 @@ export const Hero: React.FC = () => {
             transition={{ duration: 0.7, delay: 0.25 }}
             className="mt-10 flex flex-wrap items-center gap-4"
           >
-            <Button as="a" href={homepage.heroPrimaryCta.url} variant={homepage.heroPrimaryCta.style} size="lg" icon={<FiArrowRight />}>
+            <Button as="a" href={homepage.heroPrimaryCta.url} variant={homepage.heroPrimaryCta.style} size="sm" icon={<FiArrowRight />}>
               {homepage.heroPrimaryCta.label}
             </Button>
             <Button
               as="a"
               href={homepage.heroSecondaryCta.url}
               variant={homepage.heroSecondaryCta.style}
-              size="lg"
+              size="sm"
               icon={<FiPlay />}
               iconPosition="left"
             >
@@ -113,7 +113,7 @@ export const Hero: React.FC = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.7 }}
-            className="absolute -right-4 top-8 rounded-2xl bg-gradient-brand-2 px-5 py-3 text-white shadow-glow-pink md:-right-8"
+            className="absolute -right-4 top-8 rounded-2xl bg-gradient-brand-2 px-5 py-3 text-on-accent shadow-glow-pink md:-right-8"
           >
             <p className="font-display text-sm font-bold">{homepage.heroBadge}</p>
           </motion.div>

@@ -57,7 +57,7 @@ const CityTemplate: React.FC<PageProps<object, CityPageContext>> = ({ pageContex
               </h1>
               <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink-500">{city.blurb}</p>
               <div className="mt-8">
-                <Button as="a" href="/contact" size="lg" icon={<FiArrowRight />}>
+                <Button as="a" href="/contact" variant="secondary" size="sm" icon={<FiArrowRight />}>
                   Get Free Estimate
                 </Button>
               </div>

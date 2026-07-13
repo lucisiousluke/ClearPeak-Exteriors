@@ -18,7 +18,7 @@ export const onRenderBody: GatsbySSR["onRenderBody"] = ({ setHtmlAttributes, set
       // persistent Gatsby/webpack build cache doesn't reliably pick up changes to
       // CSS reached via @import — see fetch-sanity-content.mjs's fetchBrandColors.
       dangerouslySetInnerHTML={{
-        __html: `:root{--color-aqua:${brandColors.primary};--color-pink:${brandColors.secondary};--color-coral:${brandColors.accent};--color-ink:${brandColors.ink};}`,
+        __html: `:root{--color-aqua:${brandColors.primary};--color-ink:${brandColors.secondary};--color-coral:${brandColors.accent};--color-on-primary-rgb:${brandColors.onPrimaryRgb};--color-on-accent-rgb:${brandColors.onAccentRgb};}`,
       }}
     />,
   ]);

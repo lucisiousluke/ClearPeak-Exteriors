@@ -21,9 +21,9 @@ type ButtonProps = ButtonOwnProps &
 
 const variantClass: Record<Variant, string> = {
   primary:
-    "bg-gradient-brand text-white shadow-glow hover:shadow-glow-pink",
+    "bg-gradient-brand text-on-primary shadow-glow hover:shadow-glow-pink",
   secondary:
-    "bg-gradient-brand-2 text-white shadow-glow-pink hover:brightness-105",
+    "bg-gradient-brand-2 text-on-accent shadow-glow-pink hover:brightness-105",
   outline:
     "border-2 border-ink-800 text-ink-800 hover:bg-ink-800 hover:text-white",
   ghost: "text-ink-800 hover:bg-ink-100/60",
@@ -31,9 +31,13 @@ const variantClass: Record<Variant, string> = {
 };
 
 const sizeClass: Record<Size, string> = {
+  // "lg" previously used `py-4.5`, which isn't a real Tailwind spacing step
+  // (the default scale has no 4.5) — it silently produced zero vertical
+  // padding, which is why "lg" CTAs across the site rendered thinner than
+  // the "sm" header button instead of bigger.
   sm: "px-5 py-2.5 text-sm",
   md: "px-7 py-3.5 text-base",
-  lg: "px-9 py-4.5 text-lg",
+  lg: "px-9 py-5 text-lg",
 };
 
 export const Button: React.FC<ButtonProps> = ({

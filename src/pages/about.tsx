@@ -41,7 +41,7 @@ const AboutPage: React.FC<PageProps> = () => {
           <div className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-3">
             {aboutPage.values.map((v) => (
               <Card key={v.title}>
-                <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-brand text-white shadow-glow">
+                <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-brand text-on-primary shadow-glow">
                   <v.icon size={22} />
                 </span>
                 <h3 className="mt-5 font-display text-lg font-bold text-ink-800">{v.title}</h3>

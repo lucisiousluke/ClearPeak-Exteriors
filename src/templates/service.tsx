@@ -39,7 +39,7 @@ const ServiceTemplate: React.FC<PageProps<object, ServicePageContext>> = ({ page
 
           <div className="grid items-center gap-14 lg:grid-cols-2">
             <div>
-              <span className="flex h-16 w-16 items-center justify-center rounded-3xl bg-gradient-brand text-white shadow-glow">
+              <span className="flex h-16 w-16 items-center justify-center rounded-3xl bg-gradient-brand text-on-primary shadow-glow">
                 <Icon size={28} />
               </span>
               <h1 className="mt-6 font-display text-display-md font-bold text-ink-800 md:text-display-lg">
@@ -47,11 +47,11 @@ const ServiceTemplate: React.FC<PageProps<object, ServicePageContext>> = ({ page
               </h1>
               <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink-500">{service.description}</p>
               <div className="mt-8 flex flex-wrap items-center gap-4">
-                <Button as="a" href="/contact" size="lg" icon={<FiArrowRight />}>
+                <Button as="a" href="/contact" variant="secondary" size="sm" icon={<FiArrowRight />}>
                   Get Free Estimate
                 </Button>
                 {service.startingPrice && (
-                  <Badge variant="pink">Starting at {service.startingPrice}</Badge>
+                  <Badge variant="coral">Starting at {service.startingPrice}</Badge>
                 )}
               </div>
             </div>
@@ -88,7 +88,7 @@ const ServiceTemplate: React.FC<PageProps<object, ServicePageContext>> = ({ page
               <div className="mt-8 space-y-6">
                 {service.process.map((step, i) => (
                   <div key={step} className="flex items-start gap-4">
-                    <span className="flex h-9 w-9 flex-none items-center justify-center rounded-full bg-gradient-brand-2 font-display text-sm font-bold text-white">
+                    <span className="flex h-9 w-9 flex-none items-center justify-center rounded-full bg-gradient-brand-2 font-display text-sm font-bold text-on-accent">
                       {i + 1}
                     </span>
                     <p className="pt-1 text-ink-600">{step}</p>

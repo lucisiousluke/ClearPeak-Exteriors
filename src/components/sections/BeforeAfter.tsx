@@ -25,7 +25,7 @@ export const BeforeAfter: React.FC = () => {
             <BeforeAfterSlider beforeImage={item.beforeImage} afterImage={item.afterImage} />
             <div className="mt-5 flex items-center justify-between">
               <h3 className="font-display text-xl font-bold text-ink-800">{item.title}</h3>
-              <Badge variant="pink">{item.service}</Badge>
+              <Badge variant="coral">{item.service}</Badge>
             </div>
           </motion.div>
 
@@ -36,12 +36,12 @@ export const BeforeAfter: React.FC = () => {
                 onClick={() => setActive(i)}
                 className={`flex-none rounded-2xl border-2 px-5 py-4 text-left transition-all duration-200 lg:flex-auto ${
                   i === active
-                    ? "border-transparent bg-gradient-brand text-white shadow-glow"
+                    ? "border-transparent bg-gradient-brand text-on-primary shadow-glow"
                     : "border-ink-100 bg-white text-ink-700 hover:border-aqua-200"
                 }`}
               >
                 <p className="font-display text-sm font-bold">{b.title}</p>
-                <p className={`mt-1 text-xs ${i === active ? "text-white/80" : "text-ink-400"}`}>{b.service}</p>
+                <p className={`mt-1 text-xs ${i === active ? "text-on-primary/80" : "text-ink-400"}`}>{b.service}</p>
               </button>
             ))}
           </div>

@@ -5,8 +5,11 @@
 import type { BrandColors } from "~/types";
 
 export const brandColors: BrandColors = {
-  primary: "#00D4FF",
-  secondary: "#FF4FA3",
-  accent: "#FF7A59",
-  ink: "#172B4D",
+  primary: "#22D3EE",
+  secondary: "#0F172A",
+  accent: "#FB7185",
+  onPrimary: "#0F172A",
+  onPrimaryRgb: "15 23 42",
+  onAccent: "#0F172A",
+  onAccentRgb: "15 23 42",
 };

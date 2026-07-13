@@ -150,5 +150,8 @@ export interface BrandColors {
   primary: string;
   secondary: string;
   accent: string;
-  ink: string;
+  onPrimary: string;
+  onPrimaryRgb: string;
+  onAccent: string;
+  onAccentRgb: string;
 }

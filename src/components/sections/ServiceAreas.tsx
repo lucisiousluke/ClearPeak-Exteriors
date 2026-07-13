@@ -68,7 +68,7 @@ export const ServiceAreas: React.FC = () => {
                 onMouseLeave={() => setHovered(null)}
                 className={`group flex items-center justify-between rounded-2xl border px-5 py-4 transition-all duration-200 ${
                   hovered === city.slug
-                    ? "border-transparent bg-gradient-brand text-white shadow-glow"
+                    ? "border-transparent bg-gradient-brand text-on-primary shadow-glow"
                     : "border-ink-100 bg-white text-ink-700 hover:border-aqua-200"
                 }`}
               >

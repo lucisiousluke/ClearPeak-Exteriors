@@ -34,7 +34,7 @@ const BlogIndexPage: React.FC<PageProps> = () => {
               className="aspect-[16/10] w-full transition-transform duration-500 group-hover:scale-105 lg:aspect-auto lg:h-full"
             />
             <div className="flex flex-col justify-center p-8 md:p-12">
-              <Badge variant="pink" className="w-fit">
+              <Badge variant="coral" className="w-fit">
                 {featured.category}
               </Badge>
               <h2 className="mt-5 font-display text-3xl font-bold leading-tight text-ink-800">{featured.title}</h2>

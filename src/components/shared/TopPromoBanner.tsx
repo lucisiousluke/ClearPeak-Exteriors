@@ -25,7 +25,7 @@ export const TopPromoBanner: React.FC = () => {
         initial={{ height: 0 }}
         animate={{ height: "auto" }}
         exit={{ height: 0 }}
-        className="relative overflow-hidden bg-gradient-brand-animated text-white"
+        className="relative overflow-hidden bg-gradient-brand text-on-primary"
       >
         <div className="mx-auto flex max-w-8xl flex-wrap items-center justify-center gap-3 px-6 py-2.5 text-center text-sm font-semibold">
           <span>{promo.message}</span>

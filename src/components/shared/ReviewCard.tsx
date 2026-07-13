@@ -17,7 +17,7 @@ export const ReviewCard: React.FC<ReviewCardProps> = ({ review, className }) => 
       </div>
       <p className="mt-5 flex-1 text-base leading-relaxed text-ink-700">"{review.quote}"</p>
       <div className="mt-6 flex items-center gap-3">
-        <span className="flex h-11 w-11 flex-none items-center justify-center rounded-full bg-gradient-brand font-display text-sm font-bold text-white">
+        <span className="flex h-11 w-11 flex-none items-center justify-center rounded-full bg-gradient-brand font-display text-sm font-bold text-on-primary">
           {review.avatarInitials}
         </span>
         <div>

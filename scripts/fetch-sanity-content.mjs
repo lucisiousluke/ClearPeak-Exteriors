@@ -542,6 +542,43 @@ async function fetchPromotions() {
 const HEX_RE = /^#[0-9a-fA-F]{3,8}$/;
 const safeHex = (hex, fallback) => (hex && HEX_RE.test(hex) ? hex : fallback);
 
+// --- WCAG contrast helpers -------------------------------------------------
+// Backgrounds always use the exact official brand hex the picker was set to
+// — never darkened or otherwise modified. Instead, the TEXT/icon color drawn
+// on top of each brand background is chosen automatically (white vs. the
+// brand's own Navy/Secondary) to whichever clears WCAG AA (4.5:1). Today
+// that resolves to Navy for both Aqua and Coral, but it re-evaluates from
+// whatever colors are actually picked, so it can't silently go inaccessible.
+function hexToRgb(hex) {
+  const m = hex.replace("#", "");
+  return { r: parseInt(m.slice(0, 2), 16), g: parseInt(m.slice(2, 4), 16), b: parseInt(m.slice(4, 6), 16) };
+}
+const rgbTriplet = (hex) => {
+  const { r, g, b } = hexToRgb(hex);
+  return `${r} ${g} ${b}`;
+};
+function relativeLuminance({ r, g, b }) {
+  const f = (c) => {
+    c /= 255;
+    return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+  };
+  return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b);
+}
+function contrastRatio(hexA, hexB) {
+  const lA = relativeLuminance(hexToRgb(hexA));
+  const lB = relativeLuminance(hexToRgb(hexB));
+  const [lighter, darker] = lA > lB ? [lA, lB] : [lB, lA];
+  return (lighter + 0.05) / (darker + 0.05);
+}
+// Picks whichever candidate (white or the brand's dark/navy color) reads
+// better on the given background, preferring white on a tie since it's the
+// more typical/expected treatment for a bright brand color.
+function bestTextColor(bgHex, darkHex) {
+  const onWhite = contrastRatio(bgHex, "#FFFFFF");
+  const onDark = contrastRatio(bgHex, darkHex);
+  return onDark > onWhite ? darkHex : "#FFFFFF";
+}
+
 // Written as a plain .ts data module (same pattern as every other piece of
 // content here) and injected as an inline <style> tag via gatsby-ssr.tsx.
 // A previous version wrote this as a plain imported .css file instead —
@@ -551,12 +588,16 @@ const safeHex = (hex, fallback) => (hex && HEX_RE.test(hex) ? hex : fallback);
 // .ts modules doesn't hit that caching layer.
 async function fetchBrandColors() {
   const c = await client.fetch(
-    `*[_id == "brandColors"][0]{ "primary": primary.hex, "secondary": secondary.hex, "accent": accent.hex, "ink": ink.hex }`
+    `*[_id == "brandColors"][0]{ "primary": primary.hex, "secondary": secondary.hex, "accent": accent.hex }`
   );
-  const primary = safeHex(c?.primary, "#00D4FF");
-  const secondary = safeHex(c?.secondary, "#FF4FA3");
-  const accent = safeHex(c?.accent, "#FF7A59");
-  const ink = safeHex(c?.ink, "#172B4D");
+  const primary = safeHex(c?.primary, "#22D3EE");
+  const secondary = safeHex(c?.secondary, "#0F172A");
+  const accent = safeHex(c?.accent, "#FB7185");
+  // Text/icon color to draw on top of each brand background — whichever of
+  // white or Secondary/Navy is more readable. Backgrounds stay the exact
+  // official hex; only the foreground adapts.
+  const onPrimary = bestTextColor(primary, secondary);
+  const onAccent = bestTextColor(accent, secondary);
 
   return (
     banner("brandColors document") +
@@ -565,7 +606,10 @@ async function fetchBrandColors() {
     `  primary: ${esc(primary)},\n` +
     `  secondary: ${esc(secondary)},\n` +
     `  accent: ${esc(accent)},\n` +
-    `  ink: ${esc(ink)},\n` +
+    `  onPrimary: ${esc(onPrimary)},\n` +
+    `  onPrimaryRgb: ${esc(rgbTriplet(onPrimary))},\n` +
+    `  onAccent: ${esc(onAccent)},\n` +
+    `  onAccentRgb: ${esc(rgbTriplet(onAccent))},\n` +
     `};\n`
   );
 }

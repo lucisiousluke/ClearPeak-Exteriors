@@ -30,7 +30,7 @@ const BlogPostTemplate: React.FC<PageProps<object, BlogPostContext>> = ({ pageCo
               Blog
             </Link>
           </nav>
-          <Badge variant="pink">{post.category}</Badge>
+          <Badge variant="coral">{post.category}</Badge>
           <h1 className="mt-6 font-display text-4xl font-bold leading-tight text-ink-800 md:text-display-md">
             {post.title}
           </h1>

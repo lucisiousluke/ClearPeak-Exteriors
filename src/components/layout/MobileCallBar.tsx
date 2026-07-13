@@ -14,7 +14,7 @@ export const MobileCallBar: React.FC = () => {
       </a>
       <Link
         to="/contact"
-        className="flex flex-1 items-center justify-center gap-2 bg-gradient-brand py-4 font-display font-semibold text-white"
+        className="flex flex-1 items-center justify-center gap-2 bg-gradient-brand py-4 font-display font-semibold text-on-primary"
       >
         Free Quote <FiArrowRight />
       </Link>

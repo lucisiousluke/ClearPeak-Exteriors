@@ -4,6 +4,7 @@ import { FiPhone, FiMail, FiMapPin, FiInstagram, FiFacebook } from "react-icons/
 import { Container } from "~/components/ui";
 import { site } from "~/data/site";
 import { footerDescription, footerColumns, legalLinks } from "~/data/footer";
+import logo from "~/images/clearpeak-logo-compact-white.svg";
 
 export const Footer: React.FC = () => {
   return (
@@ -11,11 +12,8 @@ export const Footer: React.FC = () => {
       <Container>
         <div className="grid grid-cols-2 gap-10 pb-16 lg:grid-cols-6">
           <div className="col-span-2">
-            <Link to="/" className="flex items-center gap-2 font-display text-xl font-bold text-white">
-              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-brand text-white">
-                CP
-              </span>
-              ClearPeak Exteriors
+            <Link to="/" className="flex items-center">
+              <img src={logo} alt="ClearPeak Exteriors" className="h-14 w-auto" />
             </Link>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/60">{footerDescription}</p>
             <div className="mt-6 flex gap-3">
@@ -23,7 +21,7 @@ export const Footer: React.FC = () => {
                 href={site.social.facebook}
                 target="_blank"
                 rel="noreferrer"
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-gradient-brand"
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-gradient-brand hover:text-on-primary"
               >
                 <FiFacebook />
               </a>
@@ -31,7 +29,7 @@ export const Footer: React.FC = () => {
                 href={site.social.instagram}
                 target="_blank"
                 rel="noreferrer"
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-gradient-brand"
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-gradient-brand hover:text-on-primary"
               >
                 <FiInstagram />
               </a>

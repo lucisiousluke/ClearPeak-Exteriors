@@ -21,7 +21,7 @@ export const WhyChooseUs: React.FC = () => {
               transition={{ duration: 0.5, delay: (i % 6) * 0.06 }}
             >
               <Card className="h-full">
-                <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-brand-2 text-white shadow-glow-pink">
+                <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-brand-2 text-on-accent shadow-glow-pink">
                   <reason.icon size={22} />
                 </span>
                 <h3 className="mt-5 font-display text-lg font-bold text-ink-800">{reason.title}</h3>

@@ -88,7 +88,7 @@ export const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
           onMouseDown={() => (draggingRef.current = true)}
           onTouchStart={() => (draggingRef.current = true)}
           aria-label="Drag to compare before and after"
-          className="absolute top-1/2 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 cursor-ew-resize items-center justify-center rounded-full bg-gradient-brand text-white shadow-glow"
+          className="absolute top-1/2 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 cursor-ew-resize items-center justify-center rounded-full bg-gradient-brand text-on-primary shadow-glow"
         >
           <FiChevronLeft className="-mr-1" size={16} />
           <FiChevronRight className="-ml-1" size={16} />

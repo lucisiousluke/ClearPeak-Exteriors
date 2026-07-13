@@ -29,7 +29,7 @@ export const FloatingQuoteButton: React.FC = () => {
             </p>
             <Link
               to="/contact"
-              className="mt-4 flex items-center justify-center gap-2 rounded-full bg-gradient-brand px-5 py-3 font-display text-sm font-semibold text-white shadow-glow"
+              className="mt-4 flex items-center justify-center gap-2 rounded-full bg-gradient-brand px-5 py-3 font-display text-sm font-semibold text-on-primary shadow-glow"
             >
               Get My Free Quote <FiArrowRight />
             </Link>
@@ -46,7 +46,7 @@ export const FloatingQuoteButton: React.FC = () => {
             whileHover={{ scale: 1.08 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => setOpen((v) => !v)}
-            className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-brand text-white shadow-glow"
+            className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-brand text-on-primary shadow-glow"
             aria-label="Get a free quote"
           >
             {open ? <FiX size={26} /> : <FiMessageCircle size={26} />}
