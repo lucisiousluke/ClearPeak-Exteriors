@@ -4,11 +4,11 @@ const siteUrl = process.env.URL || process.env.DEPLOY_URL || "https://www.clearp
 
 const config: GatsbyConfig = {
   siteMetadata: {
-    title: "ClearPeak Exteriors | Denver's Premium Exterior Cleaning Company",
+    title: "ClearPeak Exterior | Denver's Premium Exterior Cleaning Company",
     description:
       "Denver Metro's premium exterior cleaning company. Pressure washing, soft washing, window cleaning, roof & concrete cleaning. Fully insured, locally owned, five-star rated.",
     siteUrl,
-    author: "ClearPeak Exteriors",
+    author: "ClearPeak Exterior",
     phone: "(720) 555-0182",
     email: "hello@clearpeakexteriors.com",
   },
@@ -37,7 +37,7 @@ const config: GatsbyConfig = {
     {
       resolve: "gatsby-plugin-manifest",
       options: {
-        name: "ClearPeak Exteriors",
+        name: "ClearPeak Exterior",
         short_name: "ClearPeak",
         start_url: "/",
         background_color: "#FFFFFF",

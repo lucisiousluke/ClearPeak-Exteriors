@@ -56,7 +56,7 @@ export default ServiceAreasPage;
 export const Head: HeadFC = () => (
   <SEO
     title="Service Areas"
-    description="ClearPeak Exteriors proudly serves Denver, Littleton, Highlands Ranch, Castle Rock, Parker, Aurora, Lakewood, Centennial, Englewood, and Greenwood Village."
+    description="ClearPeak Exterior proudly serves Denver, Littleton, Highlands Ranch, Castle Rock, Parker, Aurora, Lakewood, Centennial, Englewood, and Greenwood Village."
     pathname="/service-areas"
   />
 );

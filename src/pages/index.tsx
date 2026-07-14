@@ -73,12 +73,12 @@ export default IndexPage;
 
 export const Head: HeadFC = () => (
   <SEO
-    title="ClearPeak Exteriors | Denver's Premium Exterior Cleaning Company"
+    title="ClearPeak Exterior | Denver's Premium Exterior Cleaning Company"
     description="Denver Metro's premium exterior cleaning company. Pressure washing, soft washing, window cleaning, roof & concrete cleaning. Fully insured, locally owned, five-star rated."
     structuredData={{
       "@context": "https://schema.org",
       "@type": "HomeAndConstructionBusiness",
-      name: "ClearPeak Exteriors",
+      name: "ClearPeak Exterior",
       description: "Denver Metro's premium exterior cleaning company.",
       areaServed: "Denver Metro Area, CO",
       aggregateRating: {

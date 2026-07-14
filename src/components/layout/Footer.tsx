@@ -13,7 +13,7 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-2 gap-10 pb-16 lg:grid-cols-6">
           <div className="col-span-2">
             <Link to="/" className="flex items-center">
-              <img src={logo} alt="ClearPeak Exteriors" className="h-14 w-auto" />
+              <img src={logo} alt="ClearPeak Exterior" className="h-14 w-auto" />
             </Link>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/60">{footerDescription}</p>
             <div className="mt-6 flex gap-3">
@@ -77,7 +77,7 @@ export const Footer: React.FC = () => {
         </div>
 
         <div className="flex flex-col items-center justify-between gap-4 border-t border-white/10 py-8 text-sm text-white/50 md:flex-row">
-          <p>© {new Date().getFullYear()} ClearPeak Exteriors. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} ClearPeak Exterior. All rights reserved.</p>
           <div className="flex gap-6">
             {legalLinks.map((l) => (
               <Link key={l.href} to={l.href} className="hover:text-white">

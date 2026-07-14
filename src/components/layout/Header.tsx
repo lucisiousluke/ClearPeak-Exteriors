@@ -28,7 +28,7 @@ export const Header: React.FC = () => {
     >
       <Container className="flex items-center justify-between py-4">
         <Link to="/" className="flex items-center">
-          <img src={logo} alt="ClearPeak Exteriors" className="h-12 w-auto md:h-14" />
+          <img src={logo} alt="ClearPeak Exterior" className="h-12 w-auto md:h-14" />
         </Link>
 
         <nav className="hidden items-center gap-8 lg:flex">

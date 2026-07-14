@@ -11,7 +11,7 @@ import {
 export const aboutPage = {
   heroHeadline: "Colorado-Owned.",
   heroHighlight: "Customer-Obsessed.",
-  heroBody: "ClearPeak Exteriors was founded on a simple idea: Denver Metro homeowners deserve an exterior cleaning company that shows up on time, does the job right, and treats every property like their own. Since then, we've grown into one of the area's most trusted names in residential and commercial exterior care.",
+  heroBody: "ClearPeak Exterior was founded on a simple idea: Denver Metro homeowners deserve an exterior cleaning company that shows up on time, does the job right, and treats every property like their own. Since then, we've grown into one of the area's most trusted names in residential and commercial exterior care.",
   heroImage: "https://cdn.sanity.io/images/vgi0saae/production/1559208971ddf7bef499d59eaa6a42869e2ac6b5-1600x1200.jpg?w=1600&h=1200&fit=crop&auto=format",
   valuesEyebrow: "What Drives Us",
   valuesTitle: "Built on Trust, Backed by Results",

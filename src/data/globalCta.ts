@@ -6,7 +6,7 @@ import type { GlobalCtaContent } from "~/types";
 
 export const globalCta: GlobalCtaContent = {
   headline: "Ready to Refresh Your Home?",
-  subtext: "Get a free, no-obligation estimate today and see why Denver homeowners trust ClearPeak Exteriors.",
+  subtext: "Get a free, no-obligation estimate today and see why Denver homeowners trust ClearPeak Exterior.",
   primaryCta: { label: "Get My Free Quote", url: "/contact", style: "white" },
   secondaryCta: { label: "Call Today", url: "tel:+3033969904", style: "outline" },
 };

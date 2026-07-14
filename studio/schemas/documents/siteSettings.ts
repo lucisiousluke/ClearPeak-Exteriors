@@ -3,7 +3,7 @@ export default {
   title: "Site Settings",
   type: "document",
   fields: [
-    { name: "siteName", title: "Site Name", type: "string", initialValue: "ClearPeak Exteriors" },
+    { name: "siteName", title: "Site Name", type: "string", initialValue: "ClearPeak Exterior" },
     { name: "tagline", title: "Tagline", type: "string" },
     { name: "logo", title: "Logo", type: "image" },
     { name: "phone", title: "Phone Number", type: "string" },

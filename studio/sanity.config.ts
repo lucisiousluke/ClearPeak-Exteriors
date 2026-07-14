@@ -20,7 +20,7 @@ const singletonTypes = new Set([
 
 export default defineConfig({
   name: "clearpeak-exteriors",
-  title: "ClearPeak Exteriors",
+  title: "ClearPeak Exterior",
   projectId: "vgi0saae",
   dataset: "production",
   plugins: [

@@ -133,7 +133,7 @@ export const Head: HeadFC<object, ServicePageContext> = ({ pageContext }) => {
         serviceType: service.name,
         provider: {
           "@type": "LocalBusiness",
-          name: "ClearPeak Exteriors",
+          name: "ClearPeak Exterior",
         },
         areaServed: "Denver Metro Area, CO",
         description: service.description,

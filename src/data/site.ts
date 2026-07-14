@@ -3,7 +3,7 @@
 // `npm run sync:sanity` (or just `npm run develop` / `npm run build`).
 
 export const site = {
-  name: "ClearPeak Exteriors",
+  name: "ClearPeak Exterior",
   tagline: "Denver's Premium Exterior Cleaning Company",
   phone: "(303) 396-9904",
   phoneHref: "tel:+13033969904",

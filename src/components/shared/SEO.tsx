@@ -29,7 +29,7 @@ export const SEO: React.FC<SEOProps> = ({ title, description, image, pathname = 
   `);
 
   const meta = data.site.siteMetadata;
-  const seoTitle = title.includes("ClearPeak") ? title : `${title} | ClearPeak Exteriors`;
+  const seoTitle = title.includes("ClearPeak") ? title : `${title} | ClearPeak Exterior`;
   const seoDescription = description || meta.description;
   const url = `${meta.siteUrl}${pathname}`;
   const seoImage = image || `${meta.siteUrl}/og-image.jpg`;
@@ -46,7 +46,7 @@ export const SEO: React.FC<SEOProps> = ({ title, description, image, pathname = 
       <meta property="og:description" content={seoDescription} />
       <meta property="og:url" content={url} />
       <meta property="og:image" content={seoImage} />
-      <meta property="og:site_name" content="ClearPeak Exteriors" />
+      <meta property="og:site_name" content="ClearPeak Exterior" />
 
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={seoTitle} />

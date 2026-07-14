@@ -25,7 +25,7 @@ const CityTemplate: React.FC<PageProps<object, CityPageContext>> = ({ pageContex
   const cityFaqs = [
     {
       question: `Do you offer exterior cleaning in ${city.name}, CO?`,
-      answer: `Yes — ClearPeak Exteriors proudly serves ${city.name} and the surrounding ${city.county} area, including ${city.neighborhoods.slice(0, 3).join(", ")}.`,
+      answer: `Yes — ClearPeak Exterior proudly serves ${city.name} and the surrounding ${city.county} area, including ${city.neighborhoods.slice(0, 3).join(", ")}.`,
     },
     ...faqs.slice(0, 4),
   ];
@@ -166,7 +166,7 @@ export const Head: HeadFC<object, CityPageContext> = ({ pageContext }) => {
       structuredData={{
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
-        name: `ClearPeak Exteriors - ${city.name}`,
+        name: `ClearPeak Exterior - ${city.name}`,
         areaServed: `${city.name}, CO`,
         geo: {
           "@type": "GeoCoordinates",

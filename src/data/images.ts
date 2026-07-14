@@ -1,5 +1,5 @@
 // Placeholder photography sourced from Unsplash's CDN for layout/visual purposes.
-// Swap these for real ClearPeak Exteriors photography (or Sanity-hosted images) at launch.
+// Swap these for real ClearPeak Exterior photography (or Sanity-hosted images) at launch.
 const unsplash = (id: string, w = 1600, h = 1200) =>
   `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&h=${h}&q=80`;
 

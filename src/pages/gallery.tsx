@@ -32,7 +32,7 @@ export default GalleryPage;
 export const Head: HeadFC = () => (
   <SEO
     title="Gallery"
-    description="Browse before-and-after transformations and a full project gallery from ClearPeak Exteriors."
+    description="Browse before-and-after transformations and a full project gallery from ClearPeak Exterior."
     pathname="/gallery"
   />
 );

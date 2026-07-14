@@ -35,7 +35,7 @@ export default ServicesPage;
 export const Head: HeadFC = () => (
   <SEO
     title="All Services"
-    description="Explore ClearPeak Exteriors' full range of residential and commercial exterior cleaning services in the Denver Metro area."
+    description="Explore ClearPeak Exterior's full range of residential and commercial exterior cleaning services in the Denver Metro area."
     pathname="/services"
   />
 );

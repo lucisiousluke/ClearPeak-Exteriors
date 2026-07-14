@@ -28,7 +28,7 @@ const AboutPage: React.FC<PageProps> = () => {
             transition={{ duration: 0.6 }}
             className="aspect-[4/3] overflow-hidden rounded-4xl shadow-lift"
           >
-            <Photo src={aboutPage.heroImage} alt="ClearPeak Exteriors team" wrapperClassName="h-full w-full" />
+            <Photo src={aboutPage.heroImage} alt="ClearPeak Exterior team" wrapperClassName="h-full w-full" />
           </motion.div>
         </Container>
       </section>
@@ -64,7 +64,7 @@ export default AboutPage;
 export const Head: HeadFC = () => (
   <SEO
     title="About Us"
-    description="Learn about ClearPeak Exteriors — Denver Metro's locally owned, fully insured exterior cleaning company."
+    description="Learn about ClearPeak Exterior — Denver Metro's locally owned, fully insured exterior cleaning company."
     pathname="/about"
   />
 );
