@@ -27,12 +27,14 @@ export const Reviews: React.FC = () => {
             align="left"
             title={siteContent.reviewsSection.title}
             description={
-              <span className="flex items-center gap-3">
-                <StarRating rating={5} />
-                <span className="font-semibold text-ink-700">
-                  {site.rating} average from {site.reviewCount}+ Google reviews
+              site.rating > 0 && site.reviewCount > 0 ? (
+                <span className="flex items-center gap-3">
+                  <StarRating rating={5} />
+                  <span className="font-semibold text-ink-700">
+                    {site.rating} average from {site.reviewCount}+ Google reviews
+                  </span>
                 </span>
-              </span>
+              ) : undefined
             }
             className="mx-0 text-left"
           />

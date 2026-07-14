@@ -19,8 +19,8 @@ export const site = {
     instagram: "https://instagram.com/clearpeakexteriors",
     google: "https://g.page/clearpeakexteriors",
   },
-  hours: "Mon–Sat: 7:00am – 7:00pm",
+  hours: "Mon–Sat: 7:00am – 9:00pm",
   quoteFormUrl: "/contact",
-  rating: 4.9,
-  reviewCount: 312,
+  rating: 0,
+  reviewCount: 0,
 };

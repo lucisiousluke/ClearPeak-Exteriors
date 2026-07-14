@@ -100,15 +100,17 @@ export const Hero: React.FC = () => {
               gradient="brand-3"
             />
           </div>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            className="absolute -left-6 bottom-8 rounded-3xl bg-white p-5 shadow-lift md:-left-10"
-          >
-            <p className="font-display text-3xl font-bold text-gradient-brand">{site.rating}★</p>
-            <p className="text-sm font-semibold text-ink-500">{site.reviewCount}+ Google Reviews</p>
-          </motion.div>
+          {site.rating > 0 && site.reviewCount > 0 && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              className="absolute -left-6 bottom-8 rounded-3xl bg-white p-5 shadow-lift md:-left-10"
+            >
+              <p className="font-display text-3xl font-bold text-gradient-brand">{site.rating}★</p>
+              <p className="text-sm font-semibold text-ink-500">{site.reviewCount}+ Google Reviews</p>
+            </motion.div>
+          )}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
