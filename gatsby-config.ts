@@ -1,6 +1,6 @@
 import type { GatsbyConfig } from "gatsby";
 
-const siteUrl = process.env.URL || process.env.DEPLOY_URL || "https://www.clearpeakexteriors.com";
+const siteUrl = process.env.URL || process.env.DEPLOY_URL || "https://clearpeakexterior.com";
 
 const config: GatsbyConfig = {
   siteMetadata: {
@@ -10,7 +10,7 @@ const config: GatsbyConfig = {
     siteUrl,
     author: "ClearPeak Exterior",
     phone: "(720) 555-0182",
-    email: "hello@clearpeakexteriors.com",
+    email: "hello@clearpeakexterior.com",
   },
   trailingSlash: "never",
   // Output path is deliberately outside src/ — Gatsby's dev-server watcher
