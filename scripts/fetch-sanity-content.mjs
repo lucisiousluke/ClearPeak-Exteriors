@@ -128,7 +128,10 @@ async function fetchTestimonials() {
       name, location, rating, quote, "service": service->name
     }`
   );
-  if (!docs.length) return null;
+  // Always writes the file, even with zero documents — the Reviews section
+  // reads testimonials.length to decide whether to render at all, so a
+  // legitimate zero-testimonial state must produce a real empty array, not
+  // silently leave a stale (possibly non-empty) file in place.
 
   const initials = (name) =>
     name

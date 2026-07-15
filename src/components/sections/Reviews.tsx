@@ -18,6 +18,8 @@ export const Reviews: React.FC = () => {
 
   const visible = testimonials.slice(page * GROUP_SIZE, page * GROUP_SIZE + GROUP_SIZE);
 
+  if (testimonials.length === 0) return null;
+
   return (
     <Section background="soft">
       <Container>

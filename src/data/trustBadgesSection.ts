@@ -17,9 +17,9 @@ export const trustBadgesSection = {
     { icon: FiStar, label: "Five-Star Rated" }
   ],
   stats: [
-    { value: 3200, suffix: "+", label: "Homes Cleaned", decimal: false },
-    { value: 4.9, suffix: "★", label: "Average Rating", decimal: true },
-    { value: 10, suffix: "+", label: "Cities Served", decimal: false },
-    { value: 8, suffix: " yrs", label: "In Business", decimal: false }
+    { value: 20, suffix: "+", label: "Homes Cleaned", decimal: false },
+    { value: 5, suffix: "★", label: "Average Rating", decimal: true },
+    { value: 20, suffix: "+", label: "Cities Served", decimal: false },
+    { value: 1, suffix: " yrs", label: "In Business", decimal: false }
   ],
 };

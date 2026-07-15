@@ -5,52 +5,5 @@
 import type { Testimonial } from "~/types";
 
 export const testimonials: Testimonial[] = [
-  {
-    name: "David Chen",
-    location: "Littleton, CO",
-    rating: 5,
-    quote: "I've used a few pressure washing companies over the years and ClearPeak is by far the best. Our driveway looks like it was just poured. Booking was easy and the team communicated every step.",
-    service: "Pressure Washing",
-    avatarInitials: "DC",
-  },
-  {
-    name: "Sarah Mitchell",
-    location: "Highlands Ranch, CO",
-    rating: 5,
-    quote: "ClearPeak transformed our siding — it looked brand new by the time they finished. The crew was on time, professional, and left our yard spotless. Worth every penny.",
-    service: "House Soft Washing",
-    avatarInitials: "SM",
-  },
-  {
-    name: "Amanda Torres",
-    location: "Parker, CO",
-    rating: 5,
-    quote: "Our windows haven't been this clear since we moved in. They even cleaned the tracks and screens without being asked. Genuinely five-star service from start to finish.",
-    service: "Window Cleaning",
-    avatarInitials: "AT",
-  },
-  {
-    name: "Mike Reynolds",
-    location: "Castle Rock, CO",
-    rating: 5,
-    quote: "Those black streaks on our roof are gone completely. ClearPeak's team explained exactly what they were doing and why — no pressure to upsell, just honest, quality work.",
-    service: "Roof Cleaning",
-    avatarInitials: "MR",
-  },
-  {
-    name: "Jessica Nguyen",
-    location: "Denver, CO",
-    rating: 5,
-    quote: "As a property manager, reliability matters most. ClearPeak has handled our commercial cleaning contract for over a year and has never missed a scheduled visit.",
-    service: "Commercial Services",
-    avatarInitials: "JN",
-  },
-  {
-    name: "Tom Wallace",
-    location: "Centennial, CO",
-    rating: 5,
-    quote: "Our deck was gray and weathered — now it looks like the day it was installed. Fast, friendly, and the results speak for themselves.",
-    service: "Deck Cleaning",
-    avatarInitials: "TW",
-  }
+
 ];

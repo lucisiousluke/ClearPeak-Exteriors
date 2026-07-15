@@ -6,14 +6,14 @@ import type { BlogPost } from "~/types";
 
 export const blogPosts: BlogPost[] = [
   {
-    slug: "pressure-washing-vs-soft-washing",
-    title: "Pressure Washing vs. Soft Washing: What's the Difference?",
+    slug: "power-washing-vs-soft-washing",
+    title: "Power Washing vs. Soft Washing: What's the Difference?",
     excerpt: "They're often used interchangeably, but pressure washing and soft washing are very different techniques suited to very different surfaces. Here's how to know which one your home needs.",
     category: "Education",
     author: "ClearPeak Team",
     date: "2026-03-04",
     readTime: "5 min read",
-    heroImage: "https://cdn.sanity.io/images/vgi0saae/production/d0093a8963071291f2b0f6e89d38905c8b143d9e-1600x1200.jpg?w=1600&h=1200&fit=crop&auto=format",
+    heroImage: "https://cdn.sanity.io/images/vgi0saae/production/e005814ead91163b9546a5cb9183bccfae6c878e-1600x1200.jpg?w=1600&h=1200&fit=crop&auto=format",
     content: ["Pressure washing and soft washing are often used interchangeably, but they're fundamentally different techniques designed for different surfaces.", "Pressure washing uses high-PSI water to blast away dirt, grime, and stains from hard, durable surfaces like concrete, brick, and pavers. It's powerful, fast, and ideal for driveways, patios, and sidewalks.", "Soft washing, on the other hand, uses low pressure combined with specialized cleaning solutions to safely clean more delicate surfaces — like vinyl siding, stucco, painted wood, and roofing — without risking damage.", "The rule of thumb: if a surface can chip, crack, or strip under high pressure, it needs soft washing. If it's built to withstand force, pressure washing gets the job done faster and more thoroughly.", "At ClearPeak, we assess every surface individually and use the right method for the job — never a one-size-fits-all approach."],
   },
   {
@@ -79,7 +79,7 @@ export const blogPosts: BlogPost[] = [
     author: "ClearPeak Team",
     date: "2025-11-10",
     readTime: "6 min read",
-    heroImage: "https://cdn.sanity.io/images/vgi0saae/production/5fa0609874908174eed111a38bebe009305d9067-1600x1200.jpg?w=1600&h=1200&fit=crop&auto=format",
+    heroImage: "https://cdn.sanity.io/images/vgi0saae/production/f88188752e40b1faedfd082e06bff22e85014fda-800x600.jpg?w=1600&h=1200&fit=crop&auto=format",
     content: ["Concrete is porous, which means stains and organic growth can penetrate below the surface if left untreated for too long.", "Oil and rust stains require targeted pre-treatment before pressure washing to break down the stain at a molecular level.", "Algae and mildew commonly appear in shaded, damp areas — left untreated, they can make concrete slippery and hazardous.", "Sealing concrete after cleaning helps protect it from future staining and extends the time between deep cleanings."],
   },
   {
