@@ -76,15 +76,39 @@ async function fetchServices() {
   const docs = await client.fetch(
     `*[_type == "service"] | order(_createdAt asc) {
       name, "slug": slug.current, icon, tagline, description, heroImage,
-      startingPrice, customQuote, featured, benefits, process,
-      "faqs": faqs[]->{question, answer}
+      startingPrice, customQuote, featured, benefits, process, idealFor, order,
+      "faqs": faqs[]->{question, answer},
+      "category": category->{title, icon, order}
     }`
   );
   if (!docs.length) return null;
 
-  const usedIcons = Array.from(new Set(docs.map((d) => sanitizeIcon(d.icon, "FiZap"))));
+  // Services group under their category on the homepage; anything without
+  // one falls into "Other Services" so nothing silently disappears if a new
+  // service is added before it's categorized. Sort is category order, then
+  // each service's own order within that category (both default to the
+  // bottom when unset, rather than erroring or reshuffling unpredictably).
+  const categoryName = (s) => s.category?.title || "Other Services";
+  const categoryOrder = (s) => (typeof s.category?.order === "number" ? s.category.order : 9999);
+  const serviceOrder = (s) => (typeof s.order === "number" ? s.order : 9999);
+  const sorted = [...docs].sort((a, b) => {
+    const catDiff = categoryOrder(a) - categoryOrder(b);
+    if (catDiff !== 0) return catDiff;
+    const nameDiff = categoryName(a).localeCompare(categoryName(b));
+    if (nameDiff !== 0) return nameDiff;
+    return serviceOrder(a) - serviceOrder(b);
+  });
 
-  const body = docs
+  const usedIcons = Array.from(
+    new Set(
+      sorted.flatMap((d) => [
+        sanitizeIcon(d.icon, "FiZap"),
+        ...(d.category?.icon ? [sanitizeIcon(d.category.icon, "FiGrid")] : []),
+      ])
+    )
+  );
+
+  const body = sorted
     .map(
       (s) => `  {
     slug: ${esc(s.slug)},
@@ -100,6 +124,9 @@ async function fetchServices() {
     benefits: ${arr(s.benefits)},
     process: ${arr(s.process)},
     faqs: ${JSON.stringify(s.faqs || [])},
+    idealFor: ${arr(s.idealFor)},
+    category: ${esc(categoryName(s))},
+    categoryIcon: ${s.category?.icon ? sanitizeIcon(s.category.icon, "FiGrid") : "undefined"},
   }`
     )
     .join(",\n");

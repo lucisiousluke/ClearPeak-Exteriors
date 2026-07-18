@@ -42,5 +42,5 @@ export const homepage: HomepageContent = {
   { type: "blogPreviewBlock" },
   { type: "faqBlock" }
   ],
-  featuredServiceSlugs: [],
+  featuredServiceSlugs: ["driveway-cleaning", "house-soft-washing", "roof-soft-washing", "exterior-window-cleaning", "patio-and-paver-cleaning", "surface-pressure-washing", "fences", "concrete-surface-cleaning", "deck-restoration-cleaning", "gutter-brightening", "commercial-exterior-cleaning"],
 };

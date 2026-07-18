@@ -14,6 +14,9 @@ export interface Service {
   startingPrice?: string;
   customQuote?: boolean;
   featured?: boolean;
+  idealFor?: string[];
+  category?: string;
+  categoryIcon?: IconType;
 }
 
 export interface City {
