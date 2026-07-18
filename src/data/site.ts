@@ -15,7 +15,7 @@ export const site = {
     zip: "80211",
   },
   social: {
-    facebook: "https://facebook.com/clearpeakexteriors",
+    facebook: "https://www.facebook.com/profile.php?id=61591666452703",
     instagram: "https://instagram.com/clearpeakexteriors",
     google: "https://g.page/clearpeakexteriors",
   },

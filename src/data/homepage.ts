@@ -43,4 +43,5 @@ export const homepage: HomepageContent = {
   { type: "blogPreviewBlock" },
   { type: "faqBlock" }
   ],
+  featuredServiceSlugs: [],
 };

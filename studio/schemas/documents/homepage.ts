@@ -44,6 +44,8 @@ export default {
     {
       name: "featuredServices",
       title: "Featured Services",
+      description:
+        "Controls which services show in the homepage's \"Full-Service Exterior Cleaning\" tiles, and in what order — drag to reorder. Leave empty to show all services in their default order.",
       type: "array",
       of: [{ type: "reference", to: [{ type: "service" }] }],
     },

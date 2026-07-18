@@ -127,6 +127,7 @@ export interface HomepageContent {
   heroBadge: string;
   trustBadges: string[];
   sections: HomepageSection[];
+  featuredServiceSlugs: string[];
 }
 
 export interface GlobalCtaContent {

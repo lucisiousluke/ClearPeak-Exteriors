@@ -37,7 +37,7 @@ const sanitizeIcon = (name, fallback = "FiCircle") => {
 };
 
 const esc = (str = "") => JSON.stringify(str ?? "");
-const arr = (items = []) => `[${items.map(esc).join(", ")}]`;
+const arr = (items) => `[${(items || []).map(esc).join(", ")}]`;
 
 const portableTextToParagraphs = (blocks = []) =>
   blocks
@@ -325,7 +325,9 @@ const ctaLiteral = (cta) =>
   `{ label: ${esc(cta?.label)}, url: ${esc(cta?.url)}, style: ${esc(cta?.style || "primary")} }`;
 
 async function fetchHomepage() {
-  const h = await client.fetch(`*[_id == "homepage"][0]`);
+  const h = await client.fetch(
+    `*[_id == "homepage"][0]{ ..., "featuredServiceSlugs": featuredServices[]->slug.current }`
+  );
   if (!h) return null;
 
   const sections = h.sections || [];
@@ -360,6 +362,7 @@ async function fetchHomepage() {
     `  heroBadge: ${esc(h.heroBadge)},\n` +
     `  trustBadges: ${arr(h.trustBadges)},\n` +
     `  sections: [\n${sections.map(sectionLiteral).join(",\n")}\n  ],\n` +
+    `  featuredServiceSlugs: ${arr(h.featuredServiceSlugs)},\n` +
     `};\n`
   );
 }

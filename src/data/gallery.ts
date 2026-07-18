@@ -15,23 +15,23 @@ export const beforeAfterItems: BeforeAfterItem[] = [
   {
     id: "beforeAfter-ba-2",
     title: "Driveway Restoration",
-    service: "Pressure Washing",
+    service: "Surface Pressure Washing",
     beforeImage: "https://cdn.sanity.io/images/vgi0saae/production/5fa0609874908174eed111a38bebe009305d9067-1600x1200.jpg?w=1600&h=1200&fit=crop&auto=format",
     afterImage: "https://cdn.sanity.io/images/vgi0saae/production/b44330a8c34b1ba688b15c1a7ed9001857475cdb-1600x1200.jpg?w=1600&h=1200&fit=crop&auto=format",
   },
   {
     id: "beforeAfter-ba-3",
     title: "Roof Algae Removal",
-    service: "Roof Cleaning",
+    service: "Roof Soft Washing",
     beforeImage: "https://cdn.sanity.io/images/vgi0saae/production/2a7a863567c5e066189634b3b9a27314efe63a93-1600x1200.jpg?w=1600&h=1200&fit=crop&auto=format",
     afterImage: "https://cdn.sanity.io/images/vgi0saae/production/f0cdd4ec5630212dd1fa5f4f8f22d64d85118f4a-1600x1200.jpg?w=1600&h=1200&fit=crop&auto=format",
   },
   {
     id: "beforeAfter-ba-4",
     title: "Patio Deep Clean",
-    service: "Patio Cleaning",
-    beforeImage: "https://cdn.sanity.io/images/vgi0saae/production/d9c65542c00625bbe87f5e918527582e5a228d87-1600x1200.jpg?w=1600&h=1200&fit=crop&auto=format",
-    afterImage: "https://cdn.sanity.io/images/vgi0saae/production/c994225b8128bfe816b211d6ea185b8095aab21f-1600x1200.jpg?w=1600&h=1200&fit=crop&auto=format",
+    service: "Patio & Paver Cleaning",
+    beforeImage: "https://cdn.sanity.io/images/vgi0saae/production/49555e025bab318e8283332b7ee590702a8f42bc-800x600.jpg?w=1600&h=1200&fit=crop&auto=format",
+    afterImage: "https://cdn.sanity.io/images/vgi0saae/production/608f291a6ff250ab7629ef0142a351a60519a34b-800x600.jpg?w=1600&h=1200&fit=crop&auto=format",
   }
 ];
 
