@@ -51,7 +51,7 @@ const ServiceTemplate: React.FC<PageProps<object, ServicePageContext>> = ({ page
                   Get Free Estimate
                 </Button>
                 {service.startingPrice && (
-                  <Badge variant="coral">Starting at {service.startingPrice}</Badge>
+                  <Badge variant="coral">From {service.startingPrice}</Badge>
                 )}
               </div>
             </div>
