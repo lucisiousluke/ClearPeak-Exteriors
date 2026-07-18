@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Link } from "gatsby";
 import { motion } from "framer-motion";
-import { FiArrowRight } from "react-icons/fi";
+import { FiArrowUpRight } from "react-icons/fi";
 import { Badge } from "~/components/ui";
 import type { Service } from "~/types";
 
@@ -31,7 +31,11 @@ export const FeaturedServiceCard: React.FC<FeaturedServiceCardProps> = ({ servic
       >
         <div className="absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-gradient-brand transition-transform duration-300 group-hover:scale-x-100" />
 
-        <div className="flex items-start gap-5">
+        <span className="absolute right-6 top-6 flex h-8 w-8 items-center justify-center rounded-full bg-ink-50 text-ink-400 opacity-0 transition-all duration-300 group-hover:bg-gradient-brand group-hover:text-on-primary group-hover:opacity-100">
+          <FiArrowUpRight size={14} />
+        </span>
+
+        <div className="flex items-start gap-5 pr-10">
           <span className="flex h-12 w-12 flex-none items-center justify-center rounded-2xl bg-gradient-brand text-on-primary shadow-glow transition-transform duration-300 group-hover:-translate-y-1 group-hover:scale-105">
             <Icon size={22} />
           </span>
@@ -50,12 +54,11 @@ export const FeaturedServiceCard: React.FC<FeaturedServiceCardProps> = ({ servic
           </div>
         </div>
 
-        <div className="flex flex-none items-center gap-4 self-start md:flex-col md:items-end md:gap-2 md:self-center md:text-right">
-          {priceLabel && <span className="text-sm font-semibold text-aqua-600">{priceLabel}</span>}
-          <span className="flex items-center gap-1 font-display text-sm font-bold text-ink-800 transition-colors group-hover:text-aqua-600">
-            Learn More <FiArrowRight size={14} />
-          </span>
-        </div>
+        {priceLabel && (
+          <div className="flex flex-none items-center self-start md:self-center">
+            <span className="text-sm font-semibold text-aqua-600">{priceLabel}</span>
+          </div>
+        )}
       </Link>
     </motion.div>
   );
