@@ -27,7 +27,7 @@ export const FeaturedServiceCard: React.FC<FeaturedServiceCardProps> = ({ servic
     >
       <Link
         to={`/services/${service.slug}`}
-        className="group relative flex flex-col gap-5 overflow-hidden rounded-3xl border border-ink-100 bg-white p-7 shadow-soft transition-shadow duration-300 hover:shadow-lift md:flex-row md:items-center md:justify-between md:gap-8"
+        className="group relative flex flex-col gap-5 overflow-hidden rounded-3xl border border-ink-100 bg-white p-7 shadow-soft transition-shadow duration-300 hover:shadow-lift md:flex-row md:items-center md:gap-8"
       >
         <div className="absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-gradient-brand transition-transform duration-300 group-hover:scale-x-100" />
 
@@ -51,14 +51,9 @@ export const FeaturedServiceCard: React.FC<FeaturedServiceCardProps> = ({ servic
                 ))}
               </div>
             )}
+            {priceLabel && <p className="mt-4 text-sm font-semibold text-aqua-600">{priceLabel}</p>}
           </div>
         </div>
-
-        {priceLabel && (
-          <div className="flex flex-none items-center self-start md:self-center">
-            <span className="text-sm font-semibold text-aqua-600">{priceLabel}</span>
-          </div>
-        )}
       </Link>
     </motion.div>
   );
