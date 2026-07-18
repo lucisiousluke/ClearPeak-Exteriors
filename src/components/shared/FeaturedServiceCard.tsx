@@ -27,19 +27,19 @@ export const FeaturedServiceCard: React.FC<FeaturedServiceCardProps> = ({ servic
     >
       <Link
         to={`/services/${service.slug}`}
-        className="group relative flex flex-col gap-6 overflow-hidden rounded-3xl border border-ink-100 bg-white p-8 shadow-soft transition-shadow duration-300 hover:shadow-lift md:flex-row md:items-center md:justify-between md:gap-10"
+        className="group relative flex flex-col gap-5 overflow-hidden rounded-3xl border border-ink-100 bg-white p-7 shadow-soft transition-shadow duration-300 hover:shadow-lift md:flex-row md:items-center md:justify-between md:gap-8"
       >
         <div className="absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-gradient-brand transition-transform duration-300 group-hover:scale-x-100" />
 
         <div className="flex items-start gap-5">
-          <span className="flex h-14 w-14 flex-none items-center justify-center rounded-2xl bg-gradient-brand text-on-primary shadow-glow transition-transform duration-300 group-hover:-translate-y-1 group-hover:scale-105">
-            <Icon size={26} />
+          <span className="flex h-12 w-12 flex-none items-center justify-center rounded-2xl bg-gradient-brand text-on-primary shadow-glow transition-transform duration-300 group-hover:-translate-y-1 group-hover:scale-105">
+            <Icon size={22} />
           </span>
           <div>
-            <h3 className="font-display text-xl font-bold text-ink-800">{service.name}</h3>
-            <p className="mt-2 max-w-md text-sm leading-relaxed text-ink-500">{service.tagline}</p>
+            <h3 className="font-display text-lg font-bold text-ink-800">{service.name}</h3>
+            <p className="mt-1.5 max-w-md text-sm leading-relaxed text-ink-500">{service.tagline}</p>
             {service.idealFor && service.idealFor.length > 0 && (
-              <div className="mt-4 flex flex-wrap gap-2">
+              <div className="mt-3 flex flex-wrap gap-2">
                 {service.idealFor.map((tag) => (
                   <Badge key={tag} variant="aqua" className="px-3 py-1 text-xs">
                     {tag}

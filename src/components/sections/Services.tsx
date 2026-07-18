@@ -46,13 +46,13 @@ export const Services: React.FC = () => {
       <Container>
         <SectionHeading eyebrow={eyebrow} title={title} description={description} />
 
-        <div className="mt-16">
+        <div className="mt-12">
           {categories.map((category, categoryIndex) => (
-            <div key={category.name} className={categoryIndex > 0 ? "mt-12" : ""}>
-              <div className="mb-6 flex items-center gap-3">
+            <div key={category.name} className={categoryIndex > 0 ? "mt-14" : ""}>
+              <div className="mb-5 flex items-center gap-2.5">
                 {category.icon && (
-                  <span className="flex h-8 w-8 flex-none items-center justify-center rounded-lg bg-aqua-50 text-aqua-600">
-                    <category.icon size={16} />
+                  <span className="flex h-7 w-7 flex-none items-center justify-center rounded-lg bg-aqua-50 text-aqua-600">
+                    <category.icon size={14} />
                   </span>
                 )}
                 <h3 className="font-display text-base font-bold tracking-tight text-ink-700">{category.name}</h3>
@@ -62,7 +62,7 @@ export const Services: React.FC = () => {
               {category.services.length === 1 ? (
                 <FeaturedServiceCard service={category.services[0]} />
               ) : (
-                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
                   {category.services.map((service, index) => (
                     <ServiceCard key={service.slug} service={service} index={index} />
                   ))}
@@ -72,7 +72,7 @@ export const Services: React.FC = () => {
           ))}
         </div>
 
-        <div className="mt-14 flex justify-center">
+        <div className="mt-12 flex justify-center">
           <Button as="a" href="/services" variant="outline" icon={<FiArrowRight />}>
             View All Services
           </Button>

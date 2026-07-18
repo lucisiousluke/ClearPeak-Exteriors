@@ -20,24 +20,24 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service, index = 0 }) 
     >
       <Link
         to={`/services/${service.slug}`}
-        className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-ink-100 bg-white p-7 shadow-soft transition-shadow duration-300 hover:shadow-lift"
+        className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-ink-100 bg-white p-6 shadow-soft transition-shadow duration-300 hover:shadow-lift"
       >
         <div className="absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-gradient-brand transition-transform duration-300 group-hover:scale-x-100" />
         <div className="flex items-start justify-between">
-          <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-brand text-on-primary shadow-glow transition-transform duration-300 group-hover:-translate-y-1 group-hover:scale-105">
-            <Icon size={26} />
+          <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-brand text-on-primary shadow-glow transition-transform duration-300 group-hover:-translate-y-1 group-hover:scale-105">
+            <Icon size={22} />
           </span>
-          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-ink-50 text-ink-400 transition-all duration-300 group-hover:bg-gradient-brand group-hover:text-on-primary">
-            <FiArrowUpRight size={16} />
+          <span className="flex h-8 w-8 items-center justify-center rounded-full bg-ink-50 text-ink-400 opacity-0 transition-all duration-300 group-hover:bg-gradient-brand group-hover:text-on-primary group-hover:opacity-100">
+            <FiArrowUpRight size={14} />
           </span>
         </div>
-        <h3 className="mt-6 font-display text-xl font-bold text-ink-800">{service.name}</h3>
-        <p className="mt-2 flex-1 text-sm leading-relaxed text-ink-500">{service.tagline}</p>
+        <h3 className="mt-5 font-display text-lg font-bold text-ink-800">{service.name}</h3>
+        <p className="mt-1.5 flex-1 text-sm leading-relaxed text-ink-500">{service.tagline}</p>
         {service.customQuote ? (
-          <p className="mt-5 text-sm font-semibold text-aqua-600">Custom Quote</p>
+          <p className="mt-4 text-sm font-semibold text-aqua-600">Custom Quote</p>
         ) : (
           service.startingPrice && (
-            <p className="mt-5 text-sm font-semibold text-aqua-600">From {service.startingPrice}</p>
+            <p className="mt-4 text-sm font-semibold text-aqua-600">From {service.startingPrice}</p>
           )
         )}
       </Link>
