@@ -8,7 +8,6 @@ import {
   FiDroplet,
   FiSmile,
 } from "react-icons/fi";
-
 import type { HomepageContent } from "~/types";
 
 export const homepage: HomepageContent = {

@@ -7,7 +7,6 @@ import {
   FiHeart,
   FiShield,
 } from "react-icons/fi";
-
 export const aboutPage = {
   heroHeadline: "Colorado-Owned.",
   heroHighlight: "Customer-Obsessed.",

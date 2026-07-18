@@ -13,6 +13,7 @@ import {
   FiLayers,
   FiHexagon,
   FiBriefcase,
+  FiHome,
 } from "react-icons/fi";
 import type { Service } from "~/types";
 
@@ -37,7 +38,7 @@ export const services: Service[] = [
     name: "House Soft Washing",
     shortName: "House Soft Washing",
     icon: FiSun,
-    tagline: "Safely remove algae, mold, mildew, and dirt without damaging your siding, stucco, or painted surfaces.",
+    tagline: "Safely remove algae and mildew.",
     description: "Soft washing uses low pressure and eco-friendly cleaning solutions to safely remove mold, algae, and grime from your home's exterior — without damaging paint, siding, or landscaping.",
     heroImage: "https://cdn.sanity.io/images/vgi0saae/production/70f95882970a1639c87f5a6475f1d4189234e95e-800x600.jpg?w=1600&h=1200&fit=crop&auto=format",
     startingPrice: "$249",
@@ -162,7 +163,7 @@ export const services: Service[] = [
     heroImage: "https://cdn.sanity.io/images/vgi0saae/production/6de8356f874e0d2aeed728112499c8612089a067-800x600.jpg?w=1600&h=1200&fit=crop&auto=format",
     startingPrice: "",
     customQuote: true,
-    featured: false,
+    featured: true,
     benefits: ["Flexible scheduling, including nights and weekends", "Storefronts, office buildings, and multi-family properties", "Recurring maintenance programs available", "Fully insured crews with commercial-grade equipment"],
     process: ["On-site walkthrough and custom scope of work", "Flexible scheduling around your business hours", "Full-service cleaning across all exterior surfaces", "Optional recurring maintenance plans"],
     faqs: [{"answer":"Yes — we offer monthly, quarterly, and seasonal maintenance programs tailored to your property's needs.","question":"Do you offer recurring commercial contracts?"}],
@@ -171,7 +172,7 @@ export const services: Service[] = [
     slug: "gutter-brightening",
     name: "Gutter Brightening",
     shortName: "Gutter Brightening",
-    icon: FiZap,
+    icon: FiHome,
     tagline: "Remove those ugly black \"tiger stripes\" from the outside of gutters.",
     description: "Restore the appearance of your gutters by removing stubborn black \"tiger stripes,\" oxidation stains, and years of built-up grime. Our specialized cleaning process helps your home's exterior look cleaner, brighter, and well maintained.",
     heroImage: "https://cdn.sanity.io/images/vgi0saae/production/ca420178d030134b93868e5ea52a7d7e99ffd308-650x867.jpg?rect=0,190,650,488&w=1600&h=1200&fit=crop&auto=format",

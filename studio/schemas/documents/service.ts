@@ -13,7 +13,13 @@ export default {
       options: { source: "name" },
       validation: (Rule: any) => Rule.required(),
     },
-    { name: "icon", title: "Icon Name", type: "string", description: "react-icons/fi icon name, e.g. FiZap" },
+    {
+      name: "icon",
+      title: "Icon Name",
+      type: "string",
+      description:
+        "A Feather icon name (e.g. FiZap) or a Font Awesome 6 icon name (e.g. FaHouse). Browse names at react-icons.github.io/react-icons — use the \"Fi\" set or the \"Fa6\" set.",
+    },
     { name: "tagline", title: "Tagline", type: "string" },
     { name: "description", title: "Description", type: "text", rows: 4 },
     { name: "heroImage", title: "Hero Image", type: "image", options: { hotspot: true } },

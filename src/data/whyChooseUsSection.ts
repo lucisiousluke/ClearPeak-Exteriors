@@ -11,7 +11,6 @@ import {
   FiTarget,
   FiHome,
 } from "react-icons/fi";
-
 export const whyChooseUsSection = {
   eyebrow: "Why ClearPeak",
   title: "Higher Standards, Better Results",

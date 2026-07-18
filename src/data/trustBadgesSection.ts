@@ -8,7 +8,6 @@ import {
   FiThumbsUp,
   FiStar,
 } from "react-icons/fi";
-
 export const trustBadgesSection = {
   badges: [
     { icon: FiShield, label: "Fully Insured" },

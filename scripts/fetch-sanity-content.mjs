@@ -26,14 +26,36 @@ const builder = imageUrlBuilder(client);
 const urlFor = (image) => (image ? builder.image(image).width(1600).height(1200).fit("crop").auto("format").url() : "");
 const urlForSquare = (image) => (image ? builder.image(image).width(800).height(800).fit("crop").auto("format").url() : "");
 
-// Any Feather icon name is accepted (react-icons/fi exports hundreds); we
-// only guard against garbage strings, falling back to a safe default so a
-// bad value in Sanity never breaks the build.
+// Two icon families are supported: Feather ("Fi..." — react-icons/fi) and
+// Font Awesome 6 ("Fa..." — react-icons/fa6). We only guard against garbage
+// strings by shape, falling back to a safe default so a bad value in Sanity
+// never breaks the build.
+//
+// Font Awesome 5 (react-icons/fa) is deliberately NOT supported: fa and fa6
+// both export icons under the same "Fa" name prefix, so a bare name like
+// "FaHouse" can't be traced back to one package or the other by pattern
+// alone — every "Fa" name is treated as fa6.
 const FEATHER_ICON_RE = /^Fi[A-Z][A-Za-z0-9]*$/;
+const FA6_ICON_RE = /^Fa[A-Z][A-Za-z0-9]*$/;
+const iconFamily = (name) => {
+  if (FEATHER_ICON_RE.test(name)) return "fi";
+  if (FA6_ICON_RE.test(name)) return "fa6";
+  return null;
+};
 const sanitizeIcon = (name, fallback = "FiCircle") => {
-  if (name && FEATHER_ICON_RE.test(name)) return name;
+  if (name && iconFamily(name)) return name;
   if (name) console.warn(`Unknown/invalid icon "${name}", falling back to ${fallback}`);
   return fallback;
+};
+// Builds the import statement(s) needed for a set of already-sanitized icon
+// names, splitting across react-icons/fi and react-icons/fa6 as needed.
+const iconImports = (names) => {
+  const fi = names.filter((n) => iconFamily(n) === "fi");
+  const fa6 = names.filter((n) => iconFamily(n) === "fa6");
+  let out = "";
+  if (fi.length) out += `import {\n  ${fi.join(",\n  ")},\n} from "react-icons/fi";\n`;
+  if (fa6.length) out += `import {\n  ${fa6.join(",\n  ")},\n} from "react-icons/fa6";\n`;
+  return out;
 };
 
 const esc = (str = "") => JSON.stringify(str ?? "");
@@ -84,7 +106,7 @@ async function fetchServices() {
 
   return (
     banner("service documents") +
-    `import {\n  ${usedIcons.join(",\n  ")},\n} from "react-icons/fi";\n` +
+    iconImports(usedIcons) +
     `import type { Service } from "~/types";\n\n` +
     `export const services: Service[] = [\n${body}\n];\n\n` +
     `export const getServiceBySlug = (slug: string) => services.find((s) => s.slug === slug);\n`
@@ -351,7 +373,7 @@ async function fetchHomepage() {
 
   return (
     banner("homepage document") +
-    (usedIcons.length ? `import {\n  ${usedIcons.join(",\n  ")},\n} from "react-icons/fi";\n\n` : "") +
+    iconImports(usedIcons) +
     `import type { HomepageContent } from "~/types";\n\n` +
     `export const homepage: HomepageContent = {\n` +
     `  heroEyebrow: ${esc(h.heroEyebrow)},\n` +
@@ -437,7 +459,7 @@ async function fetchWhyChooseUsSection() {
 
   return (
     banner("whyChooseUsSection document") +
-    (usedIcons.length ? `import {\n  ${usedIcons.join(",\n  ")},\n} from "react-icons/fi";\n\n` : "") +
+    iconImports(usedIcons) +
     `export const whyChooseUsSection = {\n` +
     `  eyebrow: ${esc(w.eyebrow)},\n` +
     `  title: ${esc(w.title)},\n` +
@@ -467,7 +489,7 @@ async function fetchTrustBadgesSection() {
 
   return (
     banner("trustBadgesSection document") +
-    (usedIcons.length ? `import {\n  ${usedIcons.join(",\n  ")},\n} from "react-icons/fi";\n\n` : "") +
+    iconImports(usedIcons) +
     `export const trustBadgesSection = {\n` +
     `  badges: [\n${badgesBody}\n  ],\n` +
     `  stats: [\n${statsBody}\n  ],\n` +
@@ -484,7 +506,7 @@ async function fetchAboutPage() {
 
   return (
     banner("aboutPage document") +
-    (usedIcons.length ? `import {\n  ${usedIcons.join(",\n  ")},\n} from "react-icons/fi";\n\n` : "") +
+    iconImports(usedIcons) +
     `export const aboutPage = {\n` +
     `  heroHeadline: ${esc(a.heroHeadline)},\n` +
     `  heroHighlight: ${esc(a.heroHighlight)},\n` +
