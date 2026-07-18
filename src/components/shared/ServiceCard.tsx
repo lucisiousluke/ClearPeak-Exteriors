@@ -33,8 +33,12 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service, index = 0 }) 
         </div>
         <h3 className="mt-6 font-display text-xl font-bold text-ink-800">{service.name}</h3>
         <p className="mt-2 flex-1 text-sm leading-relaxed text-ink-500">{service.tagline}</p>
-        {service.startingPrice && (
-          <p className="mt-5 text-sm font-semibold text-aqua-600">From {service.startingPrice}</p>
+        {service.customQuote ? (
+          <p className="mt-5 text-sm font-semibold text-aqua-600">Custom Quote</p>
+        ) : (
+          service.startingPrice && (
+            <p className="mt-5 text-sm font-semibold text-aqua-600">From {service.startingPrice}</p>
+          )
         )}
       </Link>
     </motion.div>

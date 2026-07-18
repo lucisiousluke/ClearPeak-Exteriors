@@ -12,6 +12,7 @@ export interface Service {
   process: string[];
   faqs: { question: string; answer: string }[];
   startingPrice?: string;
+  customQuote?: boolean;
   featured?: boolean;
 }
 

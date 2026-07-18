@@ -54,7 +54,7 @@ async function fetchServices() {
   const docs = await client.fetch(
     `*[_type == "service"] | order(_createdAt asc) {
       name, "slug": slug.current, icon, tagline, description, heroImage,
-      startingPrice, featured, benefits, process,
+      startingPrice, customQuote, featured, benefits, process,
       "faqs": faqs[]->{question, answer}
     }`
   );
@@ -73,6 +73,7 @@ async function fetchServices() {
     description: ${esc(s.description)},
     heroImage: ${esc(urlFor(s.heroImage))},
     startingPrice: ${esc(s.startingPrice)},
+    customQuote: ${!!s.customQuote},
     featured: ${!!s.featured},
     benefits: ${arr(s.benefits)},
     process: ${arr(s.process)},

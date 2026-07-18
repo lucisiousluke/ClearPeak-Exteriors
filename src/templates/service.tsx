@@ -50,8 +50,10 @@ const ServiceTemplate: React.FC<PageProps<object, ServicePageContext>> = ({ page
                 <Button as="a" href="/contact" variant="secondary" size="sm" icon={<FiArrowRight />}>
                   Get Free Estimate
                 </Button>
-                {service.startingPrice && (
-                  <Badge variant="coral">From {service.startingPrice}</Badge>
+                {service.customQuote ? (
+                  <Badge variant="coral">Custom Quote</Badge>
+                ) : (
+                  service.startingPrice && <Badge variant="coral">From {service.startingPrice}</Badge>
                 )}
               </div>
             </div>
