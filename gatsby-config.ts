@@ -60,6 +60,18 @@ const config: GatsbyConfig = {
         policy: [{ userAgent: "*", allow: "/" }],
       },
     },
+    // Only load Google Analytics in production builds — keeps local
+    // `gatsby develop` sessions from polluting real site analytics.
+    ...(process.env.NODE_ENV === "production"
+      ? [
+          {
+            resolve: "gatsby-plugin-google-gtag",
+            options: {
+              trackingIds: ["G-D2W1Z4Q061"],
+            },
+          },
+        ]
+      : []),
   ],
 };
 
