@@ -75,7 +75,7 @@ export interface GalleryItem {
 export interface ContactFormField {
   name: string;
   label: string;
-  fieldType: "text" | "email" | "tel" | "textarea" | "select";
+  fieldType: "text" | "email" | "tel" | "textarea" | "select" | "multiselect";
   placeholder?: string;
   required?: boolean;
   width: "half" | "full";

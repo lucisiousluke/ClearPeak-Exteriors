@@ -10,30 +10,32 @@ import { contactPage } from "~/data/contactPage";
 import { services } from "~/data/services";
 import { cities } from "~/data/cities";
 
-const encode = (data: Record<string, string>) =>
-  Object.keys(data)
-    .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
-    .join("&");
-
 const ContactPage: React.FC<PageProps> = () => {
   const [submitted, setSubmitted] = React.useState(false);
   const [submitting, setSubmitting] = React.useState(false);
+  const [otherChecked, setOtherChecked] = React.useState<Record<string, boolean>>({});
+  const [otherSelected, setOtherSelected] = React.useState<Record<string, boolean>>({});
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitting(true);
     const form = e.currentTarget;
     const formData = new FormData(form);
-    const data: Record<string, string> = {};
+    // Built with URLSearchParams (not a plain object) so repeated keys —
+    // e.g. multiple checked boxes sharing the same field name — are each
+    // preserved as their own entry instead of the last one overwriting the
+    // rest. Netlify Forms collects same-name fields like this into an array.
+    const params = new URLSearchParams();
+    params.append("form-name", "quote-request");
     formData.forEach((value, key) => {
-      data[key] = String(value);
+      params.append(key, String(value));
     });
 
     try {
       await fetch("/", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: encode({ "form-name": "quote-request", ...data }),
+        body: params.toString(),
       });
       setSubmitted(true);
     } catch {
@@ -142,13 +144,71 @@ const ContactPage: React.FC<PageProps> = () => {
                             placeholder={field.placeholder}
                           />
                         ) : field.fieldType === "select" ? (
-                          <select id={field.name} name={field.name} required={field.required} className={inputClass}>
-                            {dynamicOptions.map((opt) => (
-                              <option key={opt} value={opt}>
-                                {opt}
-                              </option>
-                            ))}
-                          </select>
+                          <div>
+                            <select
+                              id={field.name}
+                              name={field.name}
+                              required={field.required}
+                              className={inputClass}
+                              onChange={(e) =>
+                                setOtherSelected((prev) => ({ ...prev, [field.name]: e.target.value === "Other" }))
+                              }
+                            >
+                              {dynamicOptions.map((opt) => (
+                                <option key={opt} value={opt}>
+                                  {opt}
+                                </option>
+                              ))}
+                              <option value="Other">Other</option>
+                            </select>
+                            {/* Always rendered (see the matching note on the
+                                multiselect "Other" input below) so Netlify's
+                                static form-field scan picks it up. */}
+                            <input
+                              name={`${field.name}Other`}
+                              type="text"
+                              placeholder="Please specify..."
+                              className={`${inputClass} ${otherSelected[field.name] ? "" : "hidden"}`}
+                            />
+                          </div>
+                        ) : field.fieldType === "multiselect" ? (
+                          <div className="mt-2 space-y-3">
+                            <div className="flex flex-wrap gap-2">
+                              {dynamicOptions.map((opt) => (
+                                <label
+                                  key={opt}
+                                  className="flex cursor-pointer items-center gap-2 rounded-xl border border-ink-100 px-3 py-2 text-sm text-ink-600 transition-colors has-[:checked]:border-aqua-400 has-[:checked]:bg-aqua-50 has-[:checked]:text-aqua-700"
+                                >
+                                  <input type="checkbox" name={field.name} value={opt} className="h-4 w-4 accent-aqua-500" />
+                                  {opt}
+                                </label>
+                              ))}
+                              <label className="flex cursor-pointer items-center gap-2 rounded-xl border border-ink-100 px-3 py-2 text-sm text-ink-600 transition-colors has-[:checked]:border-aqua-400 has-[:checked]:bg-aqua-50 has-[:checked]:text-aqua-700">
+                                <input
+                                  type="checkbox"
+                                  name={field.name}
+                                  value="Other"
+                                  checked={!!otherChecked[field.name]}
+                                  onChange={(e) =>
+                                    setOtherChecked((prev) => ({ ...prev, [field.name]: e.target.checked }))
+                                  }
+                                  className="h-4 w-4 accent-aqua-500"
+                                />
+                                Other
+                              </label>
+                            </div>
+                            {/* Always rendered (visibility toggled via CSS, not
+                                mount/unmount) so Netlify's build-time form-field
+                                scanner — which only reads the static HTML, not
+                                post-hydration DOM changes — picks up this field
+                                name even though most visitors never reveal it. */}
+                            <input
+                              name={`${field.name}Other`}
+                              type="text"
+                              placeholder="Tell us what you need..."
+                              className={`${inputClass} mt-0 ${otherChecked[field.name] ? "" : "hidden"}`}
+                            />
+                          </div>
                         ) : (
                           <input
                             id={field.name}

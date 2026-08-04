@@ -39,16 +39,6 @@ export const contactPage = {
     options: [],
   },
   {
-    name: "service",
-    label: "Service Needed",
-    fieldType: "select",
-    placeholder: "",
-    required: false,
-    width: "half",
-    dynamicOptionsSource: "services",
-    options: [],
-  },
-  {
     name: "city",
     label: "City",
     fieldType: "select",
@@ -56,6 +46,16 @@ export const contactPage = {
     required: false,
     width: "half",
     dynamicOptionsSource: "cities",
+    options: [],
+  },
+  {
+    name: "service",
+    label: "Service Needed",
+    fieldType: "multiselect",
+    placeholder: "",
+    required: false,
+    width: "full",
+    dynamicOptionsSource: "services",
     options: [],
   },
   {

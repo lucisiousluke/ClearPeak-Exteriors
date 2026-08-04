@@ -22,7 +22,8 @@ export default {
           { title: "Email", value: "email" },
           { title: "Phone", value: "tel" },
           { title: "Long Text", value: "textarea" },
-          { title: "Dropdown", value: "select" },
+          { title: "Dropdown (pick one)", value: "select" },
+          { title: "Checkboxes (pick multiple, plus an \"Other\" option)", value: "multiselect" },
         ],
       },
       initialValue: "text",
@@ -44,9 +45,9 @@ export default {
     },
     {
       name: "dynamicOptionsSource",
-      title: "Dropdown Options Source",
+      title: "Options Source",
       type: "string",
-      description: "Only used when Field Type is Dropdown.",
+      description: "Only used when Field Type is Dropdown or Checkboxes.",
       options: {
         list: [
           { title: "Custom (use options below)", value: "none" },
@@ -55,14 +56,15 @@ export default {
         ],
       },
       initialValue: "none",
-      hidden: ({ parent }: any) => parent?.fieldType !== "select",
+      hidden: ({ parent }: any) => parent?.fieldType !== "select" && parent?.fieldType !== "multiselect",
     },
     {
       name: "options",
-      title: "Dropdown Options",
+      title: "Options",
       type: "array",
       of: [{ type: "string" }],
-      hidden: ({ parent }: any) => parent?.fieldType !== "select" || parent?.dynamicOptionsSource !== "none",
+      hidden: ({ parent }: any) =>
+        (parent?.fieldType !== "select" && parent?.fieldType !== "multiselect") || parent?.dynamicOptionsSource !== "none",
     },
   ],
   preview: {
