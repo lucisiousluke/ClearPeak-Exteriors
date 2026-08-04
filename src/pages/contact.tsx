@@ -25,8 +25,9 @@ const ContactPage: React.FC<PageProps> = () => {
     // e.g. multiple checked boxes sharing the same field name — are each
     // preserved as their own entry instead of the last one overwriting the
     // rest. Netlify Forms collects same-name fields like this into an array.
+    // form-name is already present via the form's hidden input, so it
+    // doesn't need to be appended separately here.
     const params = new URLSearchParams();
-    params.append("form-name", "quote-request");
     formData.forEach((value, key) => {
       params.append(key, String(value));
     });
@@ -173,20 +174,30 @@ const ContactPage: React.FC<PageProps> = () => {
                           </div>
                         ) : field.fieldType === "multiselect" ? (
                           <div className="mt-2 space-y-3">
+                            {/* Netlify Forms only collects same-named fields as
+                                a list when the name carries the "[]" array
+                                suffix — without it, only the last checked box
+                                survives into the submission and any email
+                                notification. */}
                             <div className="flex flex-wrap gap-2">
                               {dynamicOptions.map((opt) => (
                                 <label
                                   key={opt}
                                   className="flex cursor-pointer items-center gap-2 rounded-xl border border-ink-100 px-3 py-2 text-sm text-ink-600 transition-colors has-[:checked]:border-aqua-400 has-[:checked]:bg-aqua-50 has-[:checked]:text-aqua-700"
                                 >
-                                  <input type="checkbox" name={field.name} value={opt} className="h-4 w-4 accent-aqua-500" />
+                                  <input
+                                    type="checkbox"
+                                    name={`${field.name}[]`}
+                                    value={opt}
+                                    className="h-4 w-4 accent-aqua-500"
+                                  />
                                   {opt}
                                 </label>
                               ))}
                               <label className="flex cursor-pointer items-center gap-2 rounded-xl border border-ink-100 px-3 py-2 text-sm text-ink-600 transition-colors has-[:checked]:border-aqua-400 has-[:checked]:bg-aqua-50 has-[:checked]:text-aqua-700">
                                 <input
                                   type="checkbox"
-                                  name={field.name}
+                                  name={`${field.name}[]`}
                                   value="Other"
                                   checked={!!otherChecked[field.name]}
                                   onChange={(e) =>
