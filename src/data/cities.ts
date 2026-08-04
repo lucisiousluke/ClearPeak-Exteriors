@@ -114,6 +114,17 @@ export const cities: City[] = [
     neighborhoods: ["The Preserve", "Cherry Creek Vista", "DTC"],
     lat: 39.6173,
     lng: -104.9492,
+  },
+  {
+    slug: "castle-pines",
+    name: "Castle Pines",
+    county: "Douglas",
+    blurb: "Upscale living starts with a clean exterior — we help Castle Pines homeowners protect and enhance their home's curb appeal.",
+    heroImage: "https://cdn.sanity.io/images/vgi0saae/production/f8aaa83b062007760cc64ae59c8685f5e8278590-600x400.jpg?rect=34,0,533,400&w=1600&h=1200&fit=crop&auto=format",
+    zipCodes: ["80108"],
+    neighborhoods: [],
+    lat: 39.7392,
+    lng: -104.9903,
   }
 ];
 

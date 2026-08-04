@@ -126,6 +126,7 @@ export interface HomepageContent {
   heroHeadline: string;
   heroHighlight: string;
   heroSubheadline: string;
+  heroImage: string;
   heroPrimaryCta: CtaButton;
   heroSecondaryCta: CtaButton;
   heroBadge: string;

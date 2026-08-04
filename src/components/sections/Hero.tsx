@@ -94,7 +94,7 @@ export const Hero: React.FC = () => {
         >
           <div className="relative aspect-[4/5] w-full overflow-hidden rounded-4xl shadow-lift">
             <Photo
-              src={images.heroHome}
+              src={homepage.heroImage || images.heroHome}
               alt="Beautifully cleaned modern Colorado home exterior"
               wrapperClassName="h-full w-full"
               gradient="brand-3"

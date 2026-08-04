@@ -407,6 +407,7 @@ async function fetchHomepage() {
     `  heroHeadline: ${esc(h.heroHeadline)},\n` +
     `  heroHighlight: ${esc(h.heroHighlight)},\n` +
     `  heroSubheadline: ${esc(h.heroSubheadline)},\n` +
+    `  heroImage: ${esc(urlFor(h.heroImage))},\n` +
     `  heroPrimaryCta: ${ctaLiteral(h.heroPrimaryCta)},\n` +
     `  heroSecondaryCta: ${ctaLiteral(h.heroSecondaryCta)},\n` +
     `  heroBadge: ${esc(h.heroBadge)},\n` +

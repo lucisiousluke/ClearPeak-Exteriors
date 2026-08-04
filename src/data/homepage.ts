@@ -15,6 +15,7 @@ export const homepage: HomepageContent = {
   heroHeadline: "Bring Your Home",
   heroHighlight: "Back to Life.",
   heroSubheadline: "Denver's premium exterior cleaning company specializing in pressure washing, soft washing, window cleaning, and exterior restoration.",
+  heroImage: "https://cdn.sanity.io/images/vgi0saae/production/ffe107793f0e9d70951dc8452b48a7cad0b987a4-800x600.jpg?w=1600&h=1200&fit=crop&auto=format",
   heroPrimaryCta: { label: "Get Free Estimate", url: "/contact", style: "secondary" },
   heroSecondaryCta: { label: "View Our Work", url: "/gallery", style: "white" },
   heroBadge: "Same-Week Availability",
