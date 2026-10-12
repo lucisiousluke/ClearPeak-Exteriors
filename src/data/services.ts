@@ -47,7 +47,7 @@ export const services: Service[] = [
     icon: FiTriangle,
     tagline: "Safely eliminate algae, moss, and black streaks while helping protect the life of your roof.",
     description: "Those black streaks on your roof are algae, not dirt — and left untreated, they degrade shingles over time. Our low-pressure roof cleaning eliminates algae and moss safely.",
-    heroImage: "https://cdn.sanity.io/images/vgi0saae/production/2a7a863567c5e066189634b3b9a27314efe63a93-1600x1200.jpg?w=1600&h=1200&fit=crop&auto=format",
+    heroImage: "https://cdn.sanity.io/images/vgi0saae/production/15c3d296bbbcc1176bf9a498b037b0c16df20a54-600x400.jpg?rect=34,0,533,400&w=1600&h=1200&fit=crop&auto=format",
     startingPrice: "$349",
     customQuote: false,
     featured: false,

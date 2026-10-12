@@ -23,8 +23,8 @@ export const beforeAfterItems: BeforeAfterItem[] = [
     id: "beforeAfter-ba-3",
     title: "Roof Algae Removal",
     service: "Roof Soft Washing",
-    beforeImage: "https://cdn.sanity.io/images/vgi0saae/production/2a7a863567c5e066189634b3b9a27314efe63a93-1600x1200.jpg?w=1600&h=1200&fit=crop&auto=format",
-    afterImage: "https://cdn.sanity.io/images/vgi0saae/production/f0cdd4ec5630212dd1fa5f4f8f22d64d85118f4a-1600x1200.jpg?w=1600&h=1200&fit=crop&auto=format",
+    beforeImage: "https://cdn.sanity.io/images/vgi0saae/production/529f213bf9a82b1e199aeb073a28fae81436d397-600x399.jpg?rect=34,0,532,399&w=1600&h=1200&fit=crop&auto=format",
+    afterImage: "https://cdn.sanity.io/images/vgi0saae/production/3cdbd8605dd3859dce9fddd2090a2db3b9846a0c-600x399.jpg?rect=34,0,532,399&w=1600&h=1200&fit=crop&auto=format",
   },
   {
     id: "beforeAfter-ba-4",
@@ -49,16 +49,10 @@ export const galleryItems: GalleryItem[] = [
     image: "https://cdn.sanity.io/images/vgi0saae/production/1c87e8698a2a9f1d8ccc0d16716bda15fba16770-800x600.jpg?w=1600&h=1200&fit=crop&auto=format",
   },
   {
-    id: "galleryItem-g-3",
-    title: "Sparkling Window Finish",
-    category: "Windows",
-    image: "https://cdn.sanity.io/images/vgi0saae/production/3b45afcfe708b37ed5d3b85629f6c461759b985d-800x600.jpg?w=1600&h=1200&fit=crop&auto=format",
-  },
-  {
     id: "galleryItem-g-4",
     title: "Roof Cleaning",
     category: "Roof",
-    image: "https://cdn.sanity.io/images/vgi0saae/production/2a7a863567c5e066189634b3b9a27314efe63a93-1600x1200.jpg?w=1600&h=1200&fit=crop&auto=format",
+    image: "https://cdn.sanity.io/images/vgi0saae/production/15c3d296bbbcc1176bf9a498b037b0c16df20a54-600x400.jpg?rect=34,0,533,400&w=1600&h=1200&fit=crop&auto=format",
   },
   {
     id: "galleryItem-g-5",

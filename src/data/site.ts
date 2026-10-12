@@ -5,11 +5,11 @@
 export const site = {
   name: "ClearPeak Exterior",
   tagline: "Denver's Premium Exterior Cleaning Company",
-  phone: "(303) 396-9904",
-  phoneHref: "tel:+13033969904",
+  phone: "(720) 410-6720",
+  phoneHref: "tel:+17204106720",
   email: "luke.hinrichs@gmail.com",
   address: {
-    street: "4200 W 38th Ave, Suite 210",
+    street: "",
     city: "Denver",
     state: "CO",
     zip: "80211",
@@ -17,7 +17,7 @@ export const site = {
   social: {
     facebook: "https://www.facebook.com/profile.php?id=61591666452703",
     instagram: "https://instagram.com/clearpeakexteriors",
-    google: "https://g.page/clearpeakexteriors",
+    google: "https://maps.app.goo.gl/nXLpAaFsdZ2AauDp7",
   },
   hours: "Mon–Sat: 7:00am – 9:00pm",
   quoteFormUrl: "/contact",

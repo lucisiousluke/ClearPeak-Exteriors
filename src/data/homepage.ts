@@ -23,7 +23,6 @@ export const homepage: HomepageContent = {
   sections: [
   { type: "trustBadgesBlock" },
   { type: "servicesBlock" },
-  { type: "beforeAfterBlock" },
   { type: "galleryBlock" },
   { type: "whyChooseUsBlock" },
   { type: "reviewsBlock" },
