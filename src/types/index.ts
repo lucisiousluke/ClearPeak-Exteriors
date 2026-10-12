@@ -99,7 +99,6 @@ export type MarkerBlockType =
   | "trustBadgesBlock"
   | "servicesBlock"
   | "beforeAfterBlock"
-  | "galleryBlock"
   | "whyChooseUsBlock"
   | "reviewsBlock"
   | "serviceAreasBlock"
@@ -119,7 +118,18 @@ export interface ProcessBlock {
   steps: IconCardItem[];
 }
 
-export type PageSection = MarkerBlock | ProcessBlock;
+// Every field optional — unset falls back to the page's default.
+export interface GalleryBlock {
+  type: "galleryBlock";
+  showHeading?: boolean;
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+  showFilters?: boolean;
+  limit?: number;
+}
+
+export type PageSection = MarkerBlock | ProcessBlock | GalleryBlock;
 export type HomepageSection = PageSection;
 
 export interface HomepageContent {

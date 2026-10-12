@@ -25,7 +25,18 @@ const renderSection = (section: PageSection, key: string, compactGallery: boolea
     case "beforeAfterBlock":
       return <BeforeAfter key={key} />;
     case "galleryBlock":
-      return <Gallery key={key} compact={compactGallery} />;
+      return (
+        <Gallery
+          key={key}
+          compact={compactGallery}
+          showHeading={section.showHeading}
+          eyebrow={section.eyebrow}
+          title={section.title}
+          description={section.description}
+          showFilters={section.showFilters}
+          limit={section.limit}
+        />
+      );
     case "whyChooseUsBlock":
       return <WhyChooseUs key={key} />;
     case "reviewsBlock":

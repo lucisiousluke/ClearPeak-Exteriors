@@ -50,11 +50,73 @@ export const beforeAfterBlock = marker(
   "Shows all Before & After documents. Heading text comes from Section Headings → Before/After Section — nothing to edit here."
 );
 
-export const galleryBlock = marker(
-  "galleryBlock",
-  "Gallery Preview",
-  "Shows a preview of Gallery Item documents. Heading text comes from Section Headings → Gallery Section — nothing to edit here."
-);
+// Configurable: every field is optional. Left blank, each one falls back to
+// the page's default — the Homepage shows a 6-photo preview with no heading
+// or filters, the Gallery page shows everything.
+export const galleryBlock = {
+  name: "galleryBlock",
+  title: "Project Gallery",
+  type: "object",
+  description: "Photos come from Gallery Item documents.",
+  fieldsets: [{ name: "heading", title: "Heading", options: { collapsible: true, collapsed: false } }],
+  fields: [
+    {
+      name: "showHeading",
+      title: "Show Heading",
+      type: "boolean",
+      initialValue: true,
+      fieldset: "heading",
+    },
+    {
+      name: "eyebrow",
+      title: "Eyebrow Badge",
+      type: "string",
+      description: "Leave blank to use Section Headings → Gallery Section.",
+      fieldset: "heading",
+      hidden: ({ parent }: { parent?: { showHeading?: boolean } }) => parent?.showHeading === false,
+    },
+    {
+      name: "title",
+      title: "Title",
+      type: "string",
+      description: "Leave blank to use Section Headings → Gallery Section.",
+      fieldset: "heading",
+      hidden: ({ parent }: { parent?: { showHeading?: boolean } }) => parent?.showHeading === false,
+    },
+    {
+      name: "description",
+      title: "Description",
+      type: "text",
+      rows: 2,
+      description: "Leave blank to use Section Headings → Gallery Section.",
+      fieldset: "heading",
+      hidden: ({ parent }: { parent?: { showHeading?: boolean } }) => parent?.showHeading === false,
+    },
+    {
+      name: "showFilters",
+      title: "Show Category Filters",
+      type: "boolean",
+      initialValue: true,
+      description: "The row of buttons (All, House Washing, Concrete…) above the photos.",
+    },
+    {
+      name: "limit",
+      title: "Number of Photos",
+      type: "number",
+      description: "Leave blank to show every photo.",
+      validation: (Rule: any) => Rule.min(1).integer(),
+    },
+  ],
+  preview: {
+    select: { title: "title", limit: "limit" },
+    prepare({ title, limit }: { title?: string; limit?: number }) {
+      return {
+        title: title ? `Project Gallery: ${title}` : "Project Gallery",
+        subtitle: limit ? `${limit} photos` : undefined,
+      };
+    },
+  },
+};
 
 export const whyChooseUsBlock = marker(
   "whyChooseUsBlock",

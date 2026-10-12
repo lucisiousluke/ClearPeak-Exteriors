@@ -1,4 +1,5 @@
 import * as React from "react";
+import clsx from "clsx";
 import { motion } from "framer-motion";
 import { FiZoomIn } from "react-icons/fi";
 import { Container, Section, SectionHeading, Photo } from "~/components/ui";
@@ -9,10 +10,26 @@ import { siteContent } from "~/data/siteContent";
 const categories = ["All", ...Array.from(new Set(galleryItems.map((g) => g.category)))];
 
 interface GalleryProps {
+  // Sets the defaults for anything not passed explicitly: compact is the
+  // Homepage preview (6 photos, no heading/filters), otherwise show it all.
   compact?: boolean;
+  showHeading?: boolean;
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+  showFilters?: boolean;
+  limit?: number;
 }
 
-export const Gallery: React.FC<GalleryProps> = ({ compact = false }) => {
+export const Gallery: React.FC<GalleryProps> = ({
+  compact = false,
+  showHeading = !compact,
+  eyebrow,
+  title,
+  description,
+  showFilters = !compact,
+  limit = compact ? 6 : undefined,
+}) => {
   const [filter, setFilter] = React.useState("All");
   const [activeIndex, setActiveIndex] = React.useState<number | null>(null);
 
@@ -21,21 +38,21 @@ export const Gallery: React.FC<GalleryProps> = ({ compact = false }) => {
     [filter]
   );
 
-  const visible = compact ? filtered.slice(0, 6) : filtered;
+  const visible = limit ? filtered.slice(0, limit) : filtered;
 
   return (
     <Section background="soft">
       <Container>
-        {!compact && (
+        {showHeading && (
           <SectionHeading
-            eyebrow={siteContent.gallerySection.eyebrow}
-            title={siteContent.gallerySection.title}
-            description={siteContent.gallerySection.description}
+            eyebrow={eyebrow || siteContent.gallerySection.eyebrow}
+            title={title || siteContent.gallerySection.title}
+            description={description || siteContent.gallerySection.description}
           />
         )}
 
-        {!compact && (
-          <div className="mt-10 flex flex-wrap justify-center gap-3">
+        {showFilters && (
+          <div className={clsx("flex flex-wrap justify-center gap-3", showHeading && "mt-10")}>
             {categories.map((cat) => (
               <button
                 key={cat}
@@ -52,7 +69,7 @@ export const Gallery: React.FC<GalleryProps> = ({ compact = false }) => {
           </div>
         )}
 
-        <div className="mt-12 columns-1 gap-5 sm:columns-2 lg:columns-3">
+        <div className={clsx("columns-1 gap-5 sm:columns-2 lg:columns-3", (showHeading || showFilters) && "mt-12")}>
           {visible.map((item, i) => {
             const globalIndex = galleryItems.findIndex((g) => g.id === item.id);
             return (

@@ -387,6 +387,18 @@ const sectionLiteral = (s) => {
     steps: [\n${steps.map((st) => `      ${iconCardLiteral(st)}`).join(",\n")}\n    ],
   }`;
   }
+  if (s._type === "galleryBlock") {
+    // Only emit fields that were actually set, so unset ones fall back to
+    // the page's default instead of being forced to false/"".
+    const props = [`type: "galleryBlock"`];
+    if (typeof s.showHeading === "boolean") props.push(`showHeading: ${s.showHeading}`);
+    if (s.eyebrow) props.push(`eyebrow: ${esc(s.eyebrow)}`);
+    if (s.title) props.push(`title: ${esc(s.title)}`);
+    if (s.description) props.push(`description: ${esc(s.description)}`);
+    if (typeof s.showFilters === "boolean") props.push(`showFilters: ${s.showFilters}`);
+    if (typeof s.limit === "number" && s.limit > 0) props.push(`limit: ${Math.floor(s.limit)}`);
+    return `  { ${props.join(", ")} }`;
+  }
   return `  { type: ${esc(s._type)} }`;
 };
 const sectionIcons = (sections) =>

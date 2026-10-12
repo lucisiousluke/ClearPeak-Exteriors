@@ -6,7 +6,6 @@ import type { PageSection } from "~/types";
 
 export const galleryPage: { sections: PageSection[] } = {
   sections: [
-  { type: "beforeAfterBlock" },
   { type: "galleryBlock" }
   ],
 };
