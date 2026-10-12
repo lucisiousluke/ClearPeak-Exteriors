@@ -3,10 +3,10 @@ import type { HeadFC, PageProps } from "gatsby";
 import Layout from "~/components/layout/Layout";
 import SEO from "~/components/shared/SEO";
 import { Container, Section, SectionHeading } from "~/components/ui";
-import BeforeAfter from "~/components/sections/BeforeAfter";
-import Gallery from "~/components/sections/Gallery";
+import PageSections from "~/components/sections/PageSections";
 import FinalCTA from "~/components/sections/FinalCTA";
 import { siteContent } from "~/data/siteContent";
+import { galleryPage } from "~/data/galleryPage";
 
 const GalleryPage: React.FC<PageProps> = () => {
   return (
@@ -20,8 +20,7 @@ const GalleryPage: React.FC<PageProps> = () => {
           />
         </Container>
       </Section>
-      <BeforeAfter />
-      <Gallery />
+      <PageSections sections={galleryPage.sections} />
       <FinalCTA />
     </Layout>
   );

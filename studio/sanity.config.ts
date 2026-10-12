@@ -11,6 +11,7 @@ const singletonTypes = new Set([
   "footer",
   "globalCta",
   "contactPage",
+  "galleryPage",
   "whyChooseUsSection",
   "trustBadgesSection",
   "aboutPage",
@@ -38,6 +39,9 @@ export default defineConfig({
             S.listItem()
               .title("Contact Page")
               .child(S.document().schemaType("contactPage").documentId("contactPage")),
+            S.listItem()
+              .title("Gallery Page")
+              .child(S.document().schemaType("galleryPage").documentId("galleryPage")),
             S.divider(),
             // Content used on more than one page lives here, grouped together
             // so it's clear why these aren't nested under Homepage.

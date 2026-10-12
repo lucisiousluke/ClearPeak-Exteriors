@@ -10,6 +10,10 @@ export const BeforeAfter: React.FC = () => {
   const item = beforeAfterItems[active];
   const { eyebrow, title, description } = siteContent.beforeAfterSection;
 
+  // Nothing to show (no featured Before & After documents) — render nothing
+  // rather than crashing on an undefined item.
+  if (!item) return null;
+
   return (
     <Section background="white">
       <Container>

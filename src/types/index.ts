@@ -119,7 +119,8 @@ export interface ProcessBlock {
   steps: IconCardItem[];
 }
 
-export type HomepageSection = MarkerBlock | ProcessBlock;
+export type PageSection = MarkerBlock | ProcessBlock;
+export type HomepageSection = PageSection;
 
 export interface HomepageContent {
   heroEyebrow: string;

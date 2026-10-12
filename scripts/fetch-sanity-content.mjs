@@ -374,6 +374,24 @@ async function fetchContactPage() {
 const ctaLiteral = (cta) =>
   `{ label: ${esc(cta?.label)}, url: ${esc(cta?.url)}, style: ${esc(cta?.style || "primary")} }`;
 
+// Shared by every document with a "sections" array of section blocks
+// (Homepage, Gallery Page) — see studio/schemas/objects/sectionBlocks.ts.
+const sectionLiteral = (s) => {
+  if (s._type === "processBlock") {
+    const steps = s.steps || [];
+    return `  {
+    type: "processBlock",
+    eyebrow: ${esc(s.eyebrow)},
+    title: ${esc(s.title)},
+    description: ${esc(s.description)},
+    steps: [\n${steps.map((st) => `      ${iconCardLiteral(st)}`).join(",\n")}\n    ],
+  }`;
+  }
+  return `  { type: ${esc(s._type)} }`;
+};
+const sectionIcons = (sections) =>
+  Array.from(new Set(sections.flatMap((s) => s.steps || []).map((st) => sanitizeIcon(st.icon))));
+
 async function fetchHomepage() {
   const h = await client.fetch(
     `*[_id == "homepage"][0]{ ..., "featuredServiceSlugs": featuredServices[]->slug.current }`
@@ -381,22 +399,7 @@ async function fetchHomepage() {
   if (!h) return null;
 
   const sections = h.sections || [];
-  const allSteps = sections.flatMap((s) => s.steps || []);
-  const usedIcons = Array.from(new Set(allSteps.map((s) => sanitizeIcon(s.icon))));
-
-  const sectionLiteral = (s) => {
-    if (s._type === "processBlock") {
-      const steps = s.steps || [];
-      return `  {
-    type: "processBlock",
-    eyebrow: ${esc(s.eyebrow)},
-    title: ${esc(s.title)},
-    description: ${esc(s.description)},
-    steps: [\n${steps.map((st) => `      ${iconCardLiteral(st)}`).join(",\n")}\n    ],
-  }`;
-    }
-    return `  { type: ${esc(s._type)} }`;
-  };
+  const usedIcons = sectionIcons(sections);
 
   return (
     banner("homepage document") +
@@ -414,6 +417,24 @@ async function fetchHomepage() {
     `  trustBadges: ${arr(h.trustBadges)},\n` +
     `  sections: [\n${sections.map(sectionLiteral).join(",\n")}\n  ],\n` +
     `  featuredServiceSlugs: ${arr(h.featuredServiceSlugs)},\n` +
+    `};\n`
+  );
+}
+
+async function fetchGalleryPage() {
+  const g = await client.fetch(`*[_id == "galleryPage"][0]`);
+  // No document yet — leave the committed default (Before/After + Gallery)
+  // in place rather than rendering an empty page.
+  if (!g) return null;
+
+  const sections = g.sections || [];
+
+  return (
+    banner("galleryPage document") +
+    iconImports(sectionIcons(sections)) +
+    `import type { PageSection } from "~/types";\n\n` +
+    `export const galleryPage: { sections: PageSection[] } = {\n` +
+    `  sections: [\n${sections.map(sectionLiteral).join(",\n")}\n  ],\n` +
     `};\n`
   );
 }
@@ -682,6 +703,7 @@ async function main() {
     ["site.ts", fetchSiteSettings],
     ["contactPage.ts", fetchContactPage],
     ["homepage.ts", fetchHomepage],
+    ["galleryPage.ts", fetchGalleryPage],
     ["globalCta.ts", fetchGlobalCta],
     ["navigation.ts", fetchNavigation],
     ["footer.ts", fetchFooter],

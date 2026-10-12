@@ -25,6 +25,7 @@ import teamMember from "./documents/teamMember";
 import promotion from "./documents/promotion";
 import globalCta from "./documents/globalCta";
 import contactPage from "./documents/contactPage";
+import galleryPage from "./documents/galleryPage";
 import whyChooseUsSection from "./documents/whyChooseUsSection";
 import trustBadgesSection from "./documents/trustBadgesSection";
 import aboutPage from "./documents/aboutPage";
@@ -60,6 +61,7 @@ export const schemaTypes = [
   promotion,
   globalCta,
   contactPage,
+  galleryPage,
   whyChooseUsSection,
   trustBadgesSection,
   aboutPage,

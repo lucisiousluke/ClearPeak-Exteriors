@@ -1,4 +1,4 @@
-// Homepage section blocks. Most of these are content-less "markers" — the
+// Page section blocks (used by the Homepage and Gallery Page). Most of these are content-less "markers" — the
 // actual content lives in a shared document (Why Choose Us, Trust Badges &
 // Stats, Global CTA) or a shared "Section Headings" field plus a collection
 // (Services, Testimonials, Gallery, etc.) — the block just says "render this
