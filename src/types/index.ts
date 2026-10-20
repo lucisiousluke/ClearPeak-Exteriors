@@ -1,4 +1,5 @@
 import type { IconType } from "react-icons";
+import type { PortableTextBlock } from "@portabletext/react";
 
 export interface Service {
   slug: string;
@@ -54,8 +55,24 @@ export interface BlogPost {
   date: string;
   readTime: string;
   heroImage: string;
-  content: string[];
+  // Portable Text from Sanity — see src/components/shared/PortableTextBody.tsx.
+  body: BlogBodyItem[];
 }
+
+export interface BlogImageBlock {
+  _type: "image";
+  _key: string;
+  url: string;
+  alt: string;
+}
+
+export interface BlogTableBlock {
+  _type: "table";
+  _key: string;
+  rows: string[][];
+}
+
+export type BlogBodyItem = PortableTextBlock | BlogImageBlock | BlogTableBlock;
 
 export interface BeforeAfterItem {
   id: string;

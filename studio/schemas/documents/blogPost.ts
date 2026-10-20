@@ -23,7 +23,26 @@ export default {
       name: "body",
       title: "Body",
       type: "array",
-      of: [{ type: "block" }, { type: "image", options: { hotspot: true } }],
+      of: [
+        { type: "block" },
+        {
+          type: "image",
+          options: { hotspot: true },
+          fields: [
+            {
+              name: "alt",
+              title: "Alt Text",
+              type: "string",
+              description: "Describes the photo for screen readers and Google, e.g. \"soft washed stucco home in Littleton, CO\".",
+            },
+          ],
+        },
+        {
+          type: "table",
+          title: "Table",
+          description: "The first row is shown as the table's header.",
+        },
+      ],
     },
     { name: "seo", title: "SEO", type: "seo" },
   ],

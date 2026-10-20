@@ -43,15 +43,6 @@ const slugify = (str: string) =>
 
 const randKey = () => Math.random().toString(36).slice(2, 10);
 
-const toPortableText = (paragraphs: string[]) =>
-  paragraphs.map((text) => ({
-    _type: "block",
-    _key: randKey(),
-    style: "normal",
-    markDefs: [],
-    children: [{ _type: "span", _key: randKey(), text, marks: [] }],
-  }));
-
 const imageAssetCache = new Map<string, { _type: "reference"; _ref: string }>();
 
 async function uploadImage(url: string, filename: string) {
@@ -190,7 +181,9 @@ async function run() {
       author: { _type: "reference", _ref: "author-clearpeak-team" },
       publishedAt: new Date(p.date).toISOString(),
       readTime: p.readTime,
-      body: toPortableText(p.content),
+      // Text blocks are already Portable Text; images/tables in the local
+      // data are reshaped for the site and can't be written back as-is.
+      body: p.body.filter((b) => b._type === "block"),
     });
     console.log(`  ✓ blogPost: ${p.title}`);
   }

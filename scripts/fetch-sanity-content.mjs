@@ -61,10 +61,26 @@ const iconImports = (names) => {
 const esc = (str = "") => JSON.stringify(str ?? "");
 const arr = (items) => `[${(items || []).map(esc).join(", ")}]`;
 
-const portableTextToParagraphs = (blocks = []) =>
+// Blog body is kept as Portable Text (headings, lists, bold, links, etc.)
+// and rendered on the site by PortableTextBody. Only the non-text members
+// are reshaped: images become a plain URL, tables become rows of strings.
+const portableTextForSite = (blocks = []) =>
   blocks
-    .filter((b) => b._type === "block")
-    .map((b) => (b.children || []).map((c) => c.text).join(""))
+    .map((b) => {
+      if (b._type === "image") {
+        if (!b.asset) return null;
+        return {
+          _type: "image",
+          _key: b._key,
+          url: builder.image(b).width(1600).fit("max").auto("format").url(),
+          alt: b.alt || "",
+        };
+      }
+      if (b._type === "table") {
+        return { _type: "table", _key: b._key, rows: (b.rows || []).map((r) => r.cells || []) };
+      }
+      return b;
+    })
     .filter(Boolean);
 
 const banner = (source) =>
@@ -247,7 +263,7 @@ async function fetchBlogPosts() {
     date: ${esc(p.publishedAt ? p.publishedAt.slice(0, 10) : "")},
     readTime: ${esc(p.readTime)},
     heroImage: ${esc(urlFor(p.heroImage))},
-    content: ${arr(portableTextToParagraphs(p.body))},
+    body: ${JSON.stringify(portableTextForSite(p.body))},
   }`
     )
     .join(",\n");

@@ -2,6 +2,7 @@ import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
 import { visionTool } from "@sanity/vision";
 import { colorInput } from "@sanity/color-input";
+import { table } from "@sanity/table";
 import { schemaTypes } from "./schemas";
 
 const singletonTypes = new Set([
@@ -84,6 +85,7 @@ export default defineConfig({
     }),
     visionTool(),
     colorInput(),
+    table(),
   ],
   schema: {
     types: schemaTypes,

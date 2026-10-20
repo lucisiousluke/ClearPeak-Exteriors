@@ -4,6 +4,7 @@ import type { HeadFC, PageProps } from "gatsby";
 import { FiChevronRight, FiClock, FiUser, FiArrowRight } from "react-icons/fi";
 import Layout from "~/components/layout/Layout";
 import SEO from "~/components/shared/SEO";
+import PortableTextBody from "~/components/shared/PortableTextBody";
 import { Container, Section, SectionHeading, Badge, Photo, Button } from "~/components/ui";
 import FinalCTA from "~/components/sections/FinalCTA";
 import { getBlogPostBySlug, blogPosts } from "~/data/blogPosts";
@@ -54,12 +55,8 @@ const BlogPostTemplate: React.FC<PageProps<object, BlogPostContext>> = ({ pageCo
 
       <Section background="white">
         <Container narrow>
-          <article className="prose prose-lg max-w-none">
-            {post.content.map((paragraph, i) => (
-              <p key={i} className="mb-6 text-lg leading-relaxed text-ink-600">
-                {paragraph}
-              </p>
-            ))}
+          <article>
+            <PortableTextBody value={post.body} />
           </article>
         </Container>
       </Section>
