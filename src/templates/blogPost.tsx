@@ -8,6 +8,7 @@ import PortableTextBody from "~/components/shared/PortableTextBody";
 import { Container, Section, SectionHeading, Badge, Photo, Button } from "~/components/ui";
 import FinalCTA from "~/components/sections/FinalCTA";
 import { getBlogPostBySlug, blogPosts } from "~/data/blogPosts";
+import { useSiteUrl } from "~/hooks/useSiteUrl";
 
 interface BlogPostContext {
   slug: string;
@@ -49,7 +50,7 @@ const BlogPostTemplate: React.FC<PageProps<object, BlogPostContext>> = ({ pageCo
 
       <Container narrow className="-mt-6 md:-mt-10">
         <div className="aspect-[16/9] overflow-hidden rounded-4xl shadow-lift">
-          <Photo src={post.heroImage} alt={post.title} wrapperClassName="h-full w-full" />
+          <Photo src={post.heroImage} alt={post.heroImageAlt || post.title} wrapperClassName="h-full w-full" />
         </div>
       </Container>
 
@@ -99,21 +100,54 @@ const BlogPostTemplate: React.FC<PageProps<object, BlogPostContext>> = ({ pageCo
 
 export default BlogPostTemplate;
 
+// Company-voice bylines ("ClearPeak Team") are an Organization in schema.org
+// terms; anything else is treated as a named person.
+const isOrganizationAuthor = (name: string) => /clearpeak|team/i.test(name);
+
 export const Head: HeadFC<object, BlogPostContext> = ({ pageContext }) => {
   const post = getBlogPostBySlug(pageContext.slug)!;
+  const siteUrl = useSiteUrl();
+  const pathname = `/blog/${post.slug}`;
+  const url = `${siteUrl}${pathname}`;
+  const publisher = { "@type": "Organization", name: "ClearPeak Exterior", url: siteUrl };
+
   return (
     <SEO
       title={post.title}
       description={post.excerpt}
-      pathname={`/blog/${post.slug}`}
-      structuredData={{
-        "@context": "https://schema.org",
-        "@type": "Article",
-        headline: post.title,
-        description: post.excerpt,
-        author: { "@type": "Organization", name: post.author },
-        datePublished: post.date,
-      }}
+      pathname={pathname}
+      image={post.heroImage}
+      imageAlt={post.heroImageAlt || post.title}
+      type="article"
+      publishedTime={post.publishedAt || undefined}
+      modifiedTime={post.updatedAt || undefined}
+      structuredData={[
+        {
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          headline: post.title,
+          description: post.excerpt,
+          ...(post.heroImage ? { image: [post.heroImage] } : {}),
+          ...(post.publishedAt ? { datePublished: post.publishedAt } : {}),
+          ...(post.updatedAt ? { dateModified: post.updatedAt } : {}),
+          author: post.author
+            ? { "@type": isOrganizationAuthor(post.author) ? "Organization" : "Person", name: post.author }
+            : publisher,
+          publisher,
+          mainEntityOfPage: { "@type": "WebPage", "@id": url },
+          url,
+          ...(post.category ? { articleSection: post.category } : {}),
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: siteUrl },
+            { "@type": "ListItem", position: 2, name: "Blog", item: `${siteUrl}/blog` },
+            { "@type": "ListItem", position: 3, name: post.title, item: url },
+          ],
+        },
+      ]}
     />
   );
 };

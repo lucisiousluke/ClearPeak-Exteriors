@@ -24,6 +24,8 @@ const client = createClient({
 
 const builder = imageUrlBuilder(client);
 const urlFor = (image) => (image ? builder.image(image).width(1600).height(1200).fit("crop").auto("format").url() : "");
+// 1200×630 is the size Facebook/LinkedIn/iMessage previews expect.
+const urlForSocial = (image) => (image?.asset ? builder.image(image).width(1200).height(630).fit("crop").auto("format").url() : "");
 const urlForSquare = (image) => (image ? builder.image(image).width(800).height(800).fit("crop").auto("format").url() : "");
 
 // Two icon families are supported: Feather ("Fi..." — react-icons/fi) and
@@ -245,9 +247,9 @@ async function fetchFaqs() {
 async function fetchBlogPosts() {
   const docs = await client.fetch(
     `*[_type == "blogPost"] | order(publishedAt desc) {
-      title, "slug": slug.current, excerpt, heroImage,
+      title, "slug": slug.current, excerpt, heroImage, "heroImageAlt": heroImage.alt,
       "category": category->title, "author": author->name,
-      publishedAt, readTime, body
+      publishedAt, _updatedAt, readTime, body
     }`
   );
   if (!docs.length) return null;
@@ -261,8 +263,11 @@ async function fetchBlogPosts() {
     category: ${esc(p.category)},
     author: ${esc(p.author)},
     date: ${esc(p.publishedAt ? p.publishedAt.slice(0, 10) : "")},
+    publishedAt: ${esc(p.publishedAt || "")},
+    updatedAt: ${esc(p._updatedAt || "")},
     readTime: ${esc(p.readTime)},
     heroImage: ${esc(urlFor(p.heroImage))},
+    heroImageAlt: ${esc(p.heroImageAlt)},
     body: ${JSON.stringify(portableTextForSite(p.body))},
   }`
     )
@@ -464,6 +469,58 @@ async function fetchGalleryPage() {
     `export const galleryPage: { sections: PageSection[] } = {\n` +
     `  sections: [\n${sections.map(sectionLiteral).join(",\n")}\n  ],\n` +
     `};\n`
+  );
+}
+
+// Collects every SEO field in the CMS into one lookup keyed by page path,
+// which the SEO component reads automatically — pages don't need to know
+// whether an override exists. Paths must match the routes in gatsby-node.ts.
+async function fetchSeo() {
+  const d = await client.fetch(`{
+    "defaults": *[_id == "siteSettings"][0].defaultSeo,
+    "homepage": *[_id == "homepage"][0]{ seo, heroImage },
+    "about": *[_id == "aboutPage"][0]{ seo, heroImage },
+    "services": *[_type == "service" && defined(slug.current)]{ "slug": slug.current, seo, heroImage },
+    "areas": *[_type == "serviceArea" && defined(slug.current)]{ "slug": slug.current, seo, heroImage },
+    "posts": *[_type == "blogPost" && defined(slug.current)]{ "slug": slug.current, seo, heroImage, "heroImageAlt": heroImage.alt }
+  }`);
+
+  // Only keep fields that are actually set, so blanks fall through to the
+  // page's own title/description instead of overriding them with "".
+  const entry = (seo, fallbackImage, fallbackAlt) => {
+    const e = {};
+    if (seo?.metaTitle) e.metaTitle = seo.metaTitle.trim();
+    if (seo?.metaDescription) e.metaDescription = seo.metaDescription.trim();
+    const image = urlForSocial(seo?.ogImage) || urlForSocial(fallbackImage);
+    if (image) e.ogImage = image;
+    const alt = (seo?.ogImage?.asset && seo.ogImage.alt) || fallbackAlt;
+    if (alt) e.ogImageAlt = alt;
+    if (seo?.noIndex) e.noIndex = true;
+    return e;
+  };
+
+  const pages = {};
+  const add = (path, doc, fallbackAlt) => {
+    if (!doc) return;
+    const e = entry(doc.seo, doc.heroImage, fallbackAlt);
+    if (Object.keys(e).length) pages[path] = e;
+  };
+  add("/", d.homepage);
+  add("/about", d.about);
+  (d.services || []).forEach((s) => add(`/services/${s.slug}`, s));
+  (d.areas || []).forEach((a) => add(`/service-areas/${a.slug}`, a));
+  (d.posts || []).forEach((p) => add(`/blog/${p.slug}`, p, p.heroImageAlt));
+
+  // Sitewide fallback share image: Site Settings → Default SEO, otherwise
+  // the homepage hero, so a shared link never shows a broken image.
+  const defaults = entry(d.defaults, d.homepage?.heroImage);
+  delete defaults.noIndex;
+
+  return (
+    banner("siteSettings.defaultSeo + seo fields on homepage, aboutPage, service, serviceArea, blogPost") +
+    `import type { SeoEntry } from "../types";\n\n` +
+    `export const defaultSeo: SeoEntry = ${JSON.stringify(defaults, null, 2)};\n\n` +
+    `export const pageSeo: Record<string, SeoEntry> = ${JSON.stringify(pages, null, 2)};\n`
   );
 }
 
@@ -741,6 +798,7 @@ async function main() {
     ["siteContent.ts", fetchSiteContent],
     ["promotions.ts", fetchPromotions],
     ["brandColors.ts", fetchBrandColors],
+    ["seo.ts", fetchSeo],
   ];
 
   let written = 0;

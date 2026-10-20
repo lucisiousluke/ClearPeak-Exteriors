@@ -55,6 +55,10 @@ export interface BlogPost {
   date: string;
   readTime: string;
   heroImage: string;
+  heroImageAlt: string;
+  // Full ISO timestamps, for structured data / Open Graph.
+  publishedAt: string;
+  updatedAt: string;
   // Portable Text from Sanity — see src/components/shared/PortableTextBody.tsx.
   body: BlogBodyItem[];
 }
@@ -188,4 +192,13 @@ export interface BrandColors {
   onPrimaryRgb: string;
   onAccent: string;
   onAccentRgb: string;
+}
+
+// Per-page SEO overrides from the CMS — see src/data/seo.ts.
+export interface SeoEntry {
+  metaTitle?: string;
+  metaDescription?: string;
+  ogImage?: string;
+  ogImageAlt?: string;
+  noIndex?: boolean;
 }

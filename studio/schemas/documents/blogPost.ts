@@ -13,8 +13,30 @@ export default {
       options: { source: "title" },
       validation: (Rule: any) => Rule.required(),
     },
-    { name: "excerpt", title: "Excerpt", type: "text", rows: 3 },
-    { name: "heroImage", title: "Hero Image", type: "image", options: { hotspot: true } },
+    {
+      name: "excerpt",
+      title: "Excerpt",
+      type: "text",
+      rows: 3,
+      description:
+        "Short summary shown on the blog listing page. Also used as the Google description unless SEO → Meta Description is filled in.",
+      validation: (Rule: any) => Rule.required().warning("Add an excerpt — it's used on the blog page and in Google results."),
+    },
+    {
+      name: "heroImage",
+      title: "Hero Image",
+      type: "image",
+      options: { hotspot: true },
+      fields: [
+        {
+          name: "alt",
+          title: "Alt Text",
+          type: "string",
+          description: "Describes the photo for screen readers and Google, e.g. \"technician soft washing a stucco home in Arvada\".",
+          validation: (Rule: any) => Rule.required().warning("Alt text helps this image show up in Google Images."),
+        },
+      ],
+    },
     { name: "category", title: "Category", type: "reference", to: [{ type: "category" }] },
     { name: "author", title: "Author", type: "reference", to: [{ type: "author" }] },
     { name: "publishedAt", title: "Published Date", type: "datetime" },
@@ -44,6 +66,11 @@ export default {
         },
       ],
     },
-    { name: "seo", title: "SEO", type: "seo" },
+    {
+      name: "seo",
+      title: "SEO",
+      type: "seo",
+      description: "Optional — controls how this post appears in Google and when shared. Blank fields fall back to the title, excerpt and hero image.",
+    },
   ],
 };

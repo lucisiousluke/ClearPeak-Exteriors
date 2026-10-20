@@ -1,4 +1,5 @@
 import type { GatsbyConfig } from "gatsby";
+import { pageSeo } from "./src/data/seo";
 
 const siteUrl = process.env.URL || process.env.DEPLOY_URL || "https://clearpeakexterior.com";
 
@@ -49,7 +50,14 @@ const config: GatsbyConfig = {
     {
       resolve: "gatsby-plugin-sitemap",
       options: {
-        excludes: ["/404", "/404.html"],
+        // Pages marked "Hide from search engines" in the CMS stay out too.
+        excludes: [
+          "/404",
+          "/404.html",
+          ...Object.entries(pageSeo)
+            .filter(([, seo]) => seo.noIndex)
+            .map(([path]) => path),
+        ],
       },
     },
     {
