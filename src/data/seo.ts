@@ -59,10 +59,10 @@ export const pageSeo: Record<string, SeoEntry> = {
     "ogImage": "https://cdn.sanity.io/images/vgi0saae/production/0940ab0326deae85f50e397f1ce29df5aa53250a-1600x1200.jpg?rect=0,180,1600,840&w=1200&h=630&fit=crop&auto=format"
   },
   "/service-areas/castle-rock": {
-    "ogImage": "https://cdn.sanity.io/images/vgi0saae/production/4f0fad27ca0bcd80fc34c1946e9c5f07cfd76c0e-1600x1200.jpg?rect=0,180,1600,840&w=1200&h=630&fit=crop&auto=format"
+    "ogImage": "https://cdn.sanity.io/images/vgi0saae/production/8605dfc7dc13dfe5427e120282f1453e1173cd52-1000x667.jpg?rect=0,72,1000,525&w=1200&h=630&fit=crop&auto=format"
   },
   "/service-areas/centennial": {
-    "ogImage": "https://cdn.sanity.io/images/vgi0saae/production/e7ef1c501e3aa5785d65102cecacaded4d3559fa-1600x1200.jpg?rect=0,180,1600,840&w=1200&h=630&fit=crop&auto=format"
+    "ogImage": "https://cdn.sanity.io/images/vgi0saae/production/c44e1e2457cef92385bd4c53029399392937770e-1000x662.jpg?rect=0,69,1000,525&w=1200&h=630&fit=crop&auto=format"
   },
   "/service-areas/denver": {
     "ogImage": "https://cdn.sanity.io/images/vgi0saae/production/ba1977773c0025e50329f92206df2fdd313cea83-1600x1200.jpg?rect=0,180,1600,840&w=1200&h=630&fit=crop&auto=format"
@@ -71,19 +71,19 @@ export const pageSeo: Record<string, SeoEntry> = {
     "ogImage": "https://cdn.sanity.io/images/vgi0saae/production/dccebf5e00f59b2baede21c7d4036790ad216e34-1600x1200.jpg?rect=0,180,1600,840&w=1200&h=630&fit=crop&auto=format"
   },
   "/service-areas/greenwood-village": {
-    "ogImage": "https://cdn.sanity.io/images/vgi0saae/production/5bbbaf1f6c414cc1c955de318ced8c1562d7f6ae-1600x1200.jpg?rect=0,180,1600,840&w=1200&h=630&fit=crop&auto=format"
+    "ogImage": "https://cdn.sanity.io/images/vgi0saae/production/d750a07f43a5174e8e12b0881a2390bbc5760351-1000x664.jpg?rect=0,70,1000,525&w=1200&h=630&fit=crop&auto=format"
   },
   "/service-areas/highlands-ranch": {
-    "ogImage": "https://cdn.sanity.io/images/vgi0saae/production/f0cdd4ec5630212dd1fa5f4f8f22d64d85118f4a-1600x1200.jpg?rect=0,180,1600,840&w=1200&h=630&fit=crop&auto=format"
+    "ogImage": "https://cdn.sanity.io/images/vgi0saae/production/320055446a59a4cce26e6d909f7a00b3a71d2bd7-1000x667.jpg?rect=0,72,1000,525&w=1200&h=630&fit=crop&auto=format"
   },
   "/service-areas/lakewood": {
-    "ogImage": "https://cdn.sanity.io/images/vgi0saae/production/964cefda52391e51602421774b3a48d3b2345d0e-1600x1200.jpg?rect=0,180,1600,840&w=1200&h=630&fit=crop&auto=format"
+    "ogImage": "https://cdn.sanity.io/images/vgi0saae/production/e8b11bb4c90e9f9a91ad76d8a3b1b1a088f77646-1000x878.jpg?rect=0,177,1000,525&w=1200&h=630&fit=crop&auto=format"
   },
   "/service-areas/littleton": {
     "ogImage": "https://cdn.sanity.io/images/vgi0saae/production/9131d22401ee30dbf46129c9edcd237015e60aef-1600x1200.jpg?rect=0,180,1600,840&w=1200&h=630&fit=crop&auto=format"
   },
   "/service-areas/parker": {
-    "ogImage": "https://cdn.sanity.io/images/vgi0saae/production/d9c65542c00625bbe87f5e918527582e5a228d87-1600x1200.jpg?rect=0,180,1600,840&w=1200&h=630&fit=crop&auto=format"
+    "ogImage": "https://cdn.sanity.io/images/vgi0saae/production/440e29a10b5a064311f860b0d867f0f2fb5fe441-1000x923.jpg?rect=0,200,1000,525&w=1200&h=630&fit=crop&auto=format"
   },
   "/blog/best-time-to-wash-your-home-in-colorado": {
     "metaTitle": "Best Time of Year to Wash Your House in Colorado",

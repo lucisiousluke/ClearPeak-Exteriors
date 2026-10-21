@@ -1,4 +1,5 @@
 import * as React from "react";
+import clsx from "clsx";
 import { Link } from "gatsby";
 import type { HeadFC, PageProps } from "gatsby";
 import { motion } from "framer-motion";
@@ -25,10 +26,19 @@ const CityTemplate: React.FC<PageProps<object, CityPageContext>> = ({ pageContex
   const city = getCityBySlug(pageContext.slug)!;
   const otherCities = cities.filter((c) => c.slug !== city.slug).slice(0, 6);
 
+  // Built from whichever fields are filled in, so a city with no county or
+  // neighborhoods still reads as a complete sentence.
+  const servesAnswer =
+    `Yes — ClearPeak Exterior proudly serves ${city.name}` +
+    (city.county ? ` and the surrounding ${city.county} area` : "") +
+    (city.neighborhoods.length ? `, including ${city.neighborhoods.slice(0, 3).join(", ")}` : "") +
+    ".";
+  const hasAreaDetails = city.neighborhoods.length > 0 || city.zipCodes.length > 0;
+
   const cityFaqs = [
     {
       question: `Do you offer exterior cleaning in ${city.name}, CO?`,
-      answer: `Yes — ClearPeak Exterior proudly serves ${city.name} and the surrounding ${city.county} area, including ${city.neighborhoods.slice(0, 3).join(", ")}.`,
+      answer: servesAnswer,
     },
     ...faqs.slice(0, 4),
   ];
@@ -52,9 +62,11 @@ const CityTemplate: React.FC<PageProps<object, CityPageContext>> = ({ pageContex
 
           <div className="grid items-center gap-14 lg:grid-cols-2">
             <div>
-              <span className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-ink-700 shadow-soft">
-                <FiMapPin className="text-aqua-500" /> {city.county}
-              </span>
+              {city.county && (
+                <span className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-ink-700 shadow-soft">
+                  <FiMapPin className="text-aqua-500" /> {city.county}
+                </span>
+              )}
               <h1 className="mt-6 font-display text-display-md font-bold text-ink-800 md:text-display-lg">
                 Exterior Cleaning in <span className="text-gradient-brand">{city.name}, CO</span>
               </h1>
@@ -89,25 +101,29 @@ const CityTemplate: React.FC<PageProps<object, CityPageContext>> = ({ pageContex
 
       <Section background="white">
         <Container>
-          <div className="grid gap-14 lg:grid-cols-2">
-            <div>
-              <SectionHeading
-                eyebrow="Neighborhoods"
-                title={`Areas We Serve in ${city.name}`}
-                align="left"
-                className="mx-0"
-              />
-              <div className="mt-8 flex flex-wrap gap-3">
-                {city.neighborhoods.map((n) => (
-                  <span key={n} className="rounded-full bg-soft px-4 py-2 text-sm font-semibold text-ink-700">
-                    {n}
-                  </span>
-                ))}
+          <div className={clsx("grid gap-14", hasAreaDetails && "lg:grid-cols-2")}>
+            {hasAreaDetails && (
+              <div>
+                <SectionHeading
+                  eyebrow="Neighborhoods"
+                  title={`Areas We Serve in ${city.name}`}
+                  align="left"
+                  className="mx-0"
+                />
+                {city.neighborhoods.length > 0 && (
+                  <div className="mt-8 flex flex-wrap gap-3">
+                    {city.neighborhoods.map((n) => (
+                      <span key={n} className="rounded-full bg-soft px-4 py-2 text-sm font-semibold text-ink-700">
+                        {n}
+                      </span>
+                    ))}
+                  </div>
+                )}
+                {city.zipCodes.length > 0 && (
+                  <p className="mt-6 text-sm text-ink-400">Zip codes served: {city.zipCodes.join(", ")}</p>
+                )}
               </div>
-              <p className="mt-6 text-sm text-ink-400">
-                Zip codes served: {city.zipCodes.join(", ")}
-              </p>
-            </div>
+            )}
             <div>
               <SectionHeading eyebrow="Local Promise" title="Why Homeowners Choose Us" align="left" className="mx-0" />
               <ul className="mt-8 space-y-4">
@@ -185,11 +201,18 @@ export const Head: HeadFC<object, CityPageContext> = ({ pageContext }) => {
         name: `Exterior Cleaning in ${city.name}, CO`,
         serviceType: "Exterior Cleaning",
         url: `${siteUrl}/service-areas/${city.slug}`,
-        provider: { "@type": "HomeAndConstructionBusiness", "@id": `${siteUrl}/#business`, name: site.name, url: siteUrl },
+        provider: {
+          "@type": "HomeAndConstructionBusiness",
+          "@id": `${siteUrl}/#business`,
+          name: site.name,
+          url: siteUrl,
+        },
         areaServed: {
           "@type": "City",
           name: `${city.name}, CO`,
-          geo: { "@type": "GeoCoordinates", latitude: city.lat, longitude: city.lng },
+          ...(city.lat != null && city.lng != null
+            ? { geo: { "@type": "GeoCoordinates", latitude: city.lat, longitude: city.lng } }
+            : {}),
         },
       }}
     />
