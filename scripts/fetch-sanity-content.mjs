@@ -66,10 +66,35 @@ const arr = (items) => `[${(items || []).map(esc).join(", ")}]`;
 // Blog body is kept as Portable Text (headings, lists, bold, links, etc.)
 // and rendered on the site by PortableTextBody. Only the non-text members
 // are reshaped: images become a plain URL, tables become rows of strings.
+// Copying from a local preview (e.g. VS Code's Markdown preview) turns
+// "/services/x" into "https://file+.vscode-resource.vscode-cdn.net/services/x",
+// and pasting a full site URL works but hard-codes the domain. Both become
+// plain site-relative paths; real external links are left alone.
+const LOCAL_PREVIEW_HOST_RE = /vscode|localhost|127\.0\.0\.1/i;
+const SITE_HOST_RE = /^(www\.)?clearpeakexterior\.com$/i;
+let rewrittenLinks = 0;
+const normalizeHref = (href) => {
+  if (typeof href !== "string") return href;
+  let url;
+  try {
+    url = new URL(href.trim());
+  } catch {
+    return href; // already relative (or not a URL at all)
+  }
+  if (url.protocol === "file:" || LOCAL_PREVIEW_HOST_RE.test(url.host) || SITE_HOST_RE.test(url.host)) {
+    if (!SITE_HOST_RE.test(url.host)) rewrittenLinks++;
+    return `${url.pathname}${url.search}${url.hash}` || "/";
+  }
+  return href;
+};
+
 // GROQ returns null (not undefined) for empty fields, so guard explicitly.
 const portableTextForSite = (blocks) =>
   (blocks || [])
     .map((b) => {
+      if (b._type === "block" && b.markDefs?.length) {
+        return { ...b, markDefs: b.markDefs.map((m) => (m.href ? { ...m, href: normalizeHref(m.href) } : m)) };
+      }
       if (b._type === "image") {
         if (!b.asset) return null;
         return {
@@ -167,19 +192,28 @@ async function fetchCities() {
   );
   if (!docs.length) return null;
 
+  // "Douglas" → "Douglas County", so sentences built from it read naturally.
+  const countyLabel = (county) => {
+    const c = (county || "").trim();
+    return c && !/county/i.test(c) ? `${c} County` : c;
+  };
+  // Missing coordinates stay null (and are left out of structured data)
+  // instead of silently becoming downtown Denver.
+  const coord = (n) => (typeof n === "number" ? n : "null");
+
   const body = docs
     .map(
       (c) => `  {
     slug: ${esc(c.slug)},
     name: ${esc(c.name)},
-    county: ${esc(c.county)},
+    county: ${esc(countyLabel(c.county))},
     blurb: ${esc(c.blurb)},
     heroImage: ${esc(urlFor(c.heroImage))},
     zipCodes: ${arr(c.zipCodes)},
     neighborhoods: ${arr(c.neighborhoods)},
     localContent: ${JSON.stringify(portableTextForSite(c.localContent))},
-    lat: ${c.geo?.lat ?? 39.7392},
-    lng: ${c.geo?.lng ?? -104.9903},
+    lat: ${coord(c.geo?.lat)},
+    lng: ${coord(c.geo?.lng)},
   }`
     )
     .join(",\n");
@@ -784,8 +818,8 @@ async function fetchBrandColors() {
   );
 }
 
-// Navigation and footer links are free-text URLs in the CMS, so a typo or a
-// renamed service silently becomes a 404 on every page. Warn about any
+// Navigation, footer and in-text links are free-text URLs in the CMS, so a
+// typo or a renamed service silently becomes a 404. Warn about any
 // internal link that doesn't match a real page or a netlify.toml redirect.
 async function checkInternalLinks() {
   const d = await client.fetch(`{
@@ -797,6 +831,10 @@ async function checkInternalLinks() {
       *[_id == "navigation"][0].headerCta.url,
       ...*[_id == "footer"][0].columns[source != "services"].links[].url,
       ...*[_id == "footer"][0].legalLinks[].url
+    ],
+    "bodyLinks": [
+      ...*[_type == "blogPost"].body[].markDefs[].href,
+      ...*[_type == "serviceArea"].localContent[].markDefs[].href
     ]
   }`);
 
@@ -813,25 +851,29 @@ async function checkInternalLinks() {
     ...(d.areas || []).map((s) => `/service-areas/${s}`),
     ...(d.posts || []).map((s) => `/blog/${s}`),
   ]);
-  const bad = [
-    ...new Set(
-      (d.links || [])
-        .filter((u) => typeof u === "string" && u.startsWith("/"))
-        .map((u) => u.split(/[?#]/)[0].replace(/(.)\/$/, "$1"))
-        .filter((u) => !valid.has(u))
-    ),
-  ];
-  const redirected = bad.filter((u) => redirects.includes(u));
-  const broken = bad.filter((u) => !redirects.includes(u));
+  const report = (urls, where) => {
+    const bad = [
+      ...new Set(
+        (urls || [])
+          .filter((u) => typeof u === "string" && u.startsWith("/"))
+          .map((u) => u.split(/[?#]/)[0].replace(/(.)\/$/, "$1"))
+          .filter((u) => !valid.has(u))
+      ),
+    ];
+    const redirected = bad.filter((u) => redirects.includes(u));
+    const broken = bad.filter((u) => !redirects.includes(u));
 
-  if (broken.length) {
-    console.warn(`\n⚠ ${broken.length} Navigation/Footer link(s) point to pages that don't exist — fix them in the Studio:`);
-    broken.forEach((u) => console.warn(`   ${u}`));
-  }
-  if (redirected.length) {
-    console.warn(`\n⚠ ${redirected.length} Navigation/Footer link(s) only work via a redirect — update them in the Studio to the final URL:`);
-    redirected.forEach((u) => console.warn(`   ${u}`));
-  }
+    if (broken.length) {
+      console.warn(`\n⚠ ${broken.length} ${where} link(s) point to pages that don't exist — fix them in the Studio:`);
+      broken.forEach((u) => console.warn(`   ${u}`));
+    }
+    if (redirected.length) {
+      console.warn(`\n⚠ ${redirected.length} ${where} link(s) only work via a redirect — update them in the Studio to the final URL:`);
+      redirected.forEach((u) => console.warn(`   ${u}`));
+    }
+  };
+  report(d.links, "Navigation/Footer");
+  report((d.bodyLinks || []).map(normalizeHref), "Blog post / city page");
 }
 
 async function main() {
@@ -871,6 +913,12 @@ async function main() {
   }
 
   console.log(`\nDone. ${written}/${jobs.length} data files refreshed from Sanity.`);
+  if (rewrittenLinks) {
+    console.warn(
+      `\n⚠ Fixed ${rewrittenLinks} link(s) in blog posts / city pages that were pasted with a local preview address ` +
+        `(e.g. vscode-resource). The site uses the corrected links; fix them in the Studio when convenient.`
+    );
+  }
   await checkInternalLinks();
 }
 

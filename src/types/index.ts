@@ -30,8 +30,9 @@ export interface City {
   neighborhoods: string[];
   // Optional per-city write-up (Portable Text) — see PortableTextBody.
   localContent: BlogBodyItem[];
-  lat: number;
-  lng: number;
+  // null when no coordinates are set in the CMS.
+  lat: number | null;
+  lng: number | null;
 }
 
 export interface Testimonial {

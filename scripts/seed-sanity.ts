@@ -147,7 +147,7 @@ async function run() {
       heroImage: await imageField(c.heroImage, `${c.slug}-hero.jpg`),
       zipCodes: c.zipCodes,
       neighborhoods: c.neighborhoods,
-      geo: { _type: "geopoint", lat: c.lat, lng: c.lng },
+      ...(c.lat != null && c.lng != null ? { geo: { _type: "geopoint", lat: c.lat, lng: c.lng } } : {}),
     });
     console.log(`  ✓ serviceArea: ${c.name}`);
   }
