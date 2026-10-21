@@ -7,7 +7,7 @@ const config: GatsbyConfig = {
   siteMetadata: {
     title: "ClearPeak Exterior | Denver's Premium Exterior Cleaning Company",
     description:
-      "Denver Metro's premium exterior cleaning company. Pressure washing, soft washing, window cleaning, roof & concrete cleaning. Fully insured, locally owned, five-star rated.",
+      "Denver Metro's premium exterior cleaning company. House & roof soft washing, pressure washing, concrete, deck and gutter cleaning. Fully insured, locally owned.",
     siteUrl,
     author: "ClearPeak Exterior",
     phone: "(720) 555-0182",

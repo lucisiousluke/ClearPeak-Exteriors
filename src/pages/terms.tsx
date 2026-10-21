@@ -32,8 +32,8 @@ const TermsPage: React.FC<PageProps> = () => {
             <section>
               <h2 className="font-display text-xl font-bold text-ink-800">Our Services</h2>
               <p className="mt-3 leading-relaxed">
-                {site.name} provides exterior cleaning services, including pressure washing, soft washing,
-                window cleaning, roof cleaning, concrete cleaning, and commercial services, in the Denver
+                {site.name} provides exterior cleaning services, including house and roof soft washing,
+                pressure washing, concrete and paver cleaning, deck, fence and gutter cleaning, and commercial services, in the Denver
                 Metro area. Specific service details, availability, and pricing are confirmed at the time of
                 your quote and may vary based on property size, condition, and location.
               </p>

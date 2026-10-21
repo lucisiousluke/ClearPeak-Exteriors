@@ -12,9 +12,9 @@ import type { HomepageContent } from "~/types";
 
 export const homepage: HomepageContent = {
   heroEyebrow: "Now Booking — Denver Metro",
-  heroHeadline: "Bring Your Home",
-  heroHighlight: "Back to Life.",
-  heroSubheadline: "Denver's premium exterior cleaning company specializing in pressure washing, soft washing, window cleaning, and exterior restoration.",
+  heroHeadline: "Professional Pressure Washing",
+  heroHighlight: "& Exterior Cleaning in Denver, CO",
+  heroSubheadline: "Keep your home looking its best with professional pressure washing and soft washing throughout the Denver metro area. From driveways to house siding, we help restore your property's curb appeal.",
   heroImage: "https://cdn.sanity.io/images/vgi0saae/production/ffe107793f0e9d70951dc8452b48a7cad0b987a4-800x600.jpg?w=1600&h=1200&fit=crop&auto=format",
   heroPrimaryCta: { label: "Get Free Estimate", url: "/contact", style: "secondary" },
   heroSecondaryCta: { label: "View Our Work", url: "/gallery", style: "white" },

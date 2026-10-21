@@ -24,3 +24,31 @@
   from = "/home"
   to = "/"
   status = 301
+
+# Old/guessed service URLs (previously linked from the footer) → the real
+# service pages, so they never 404.
+[[redirects]]
+  from = "/services/pressure-washing"
+  to = "/services/surface-pressure-washing"
+  status = 301
+
+[[redirects]]
+  from = "/services/roof-cleaning"
+  to = "/services/roof-soft-washing"
+  status = 301
+
+[[redirects]]
+  from = "/services/concrete-cleaning"
+  to = "/services/concrete-surface-cleaning"
+  status = 301
+
+[[redirects]]
+  from = "/services/commercial-services"
+  to = "/services/commercial-exterior-cleaning"
+  status = 301
+
+# No window cleaning service — send to the services overview.
+[[redirects]]
+  from = "/services/window-cleaning"
+  to = "/services"
+  status = 301

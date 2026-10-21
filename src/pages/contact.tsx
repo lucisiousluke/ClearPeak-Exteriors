@@ -251,7 +251,7 @@ export default ContactPage;
 
 export const Head: HeadFC = () => (
   <SEO
-    title="Contact Us"
+    title="Free Estimate | Contact ClearPeak Exterior"
     description="Get a free, no-obligation exterior cleaning estimate from ClearPeak Exterior. We respond within one business hour."
     pathname="/contact"
   />

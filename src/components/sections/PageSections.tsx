@@ -16,14 +16,19 @@ import type { PageSection } from "~/types";
 // renders it. Order and presence are entirely controlled by that array
 // (editable in the Studio) — this file just knows HOW to render each block,
 // not in what order or how many.
-const renderSection = (section: PageSection, key: string, compactGallery: boolean): React.ReactNode => {
+const renderSection = (
+  section: PageSection,
+  key: string,
+  compactGallery: boolean,
+  headingAs: "h1" | "h2"
+): React.ReactNode => {
   switch (section.type) {
     case "trustBadgesBlock":
       return <TrustBadges key={key} />;
     case "servicesBlock":
       return <Services key={key} />;
     case "beforeAfterBlock":
-      return <BeforeAfter key={key} />;
+      return <BeforeAfter key={key} headingAs={headingAs} />;
     case "galleryBlock":
       return (
         <Gallery
@@ -35,6 +40,7 @@ const renderSection = (section: PageSection, key: string, compactGallery: boolea
           description={section.description}
           showFilters={section.showFilters}
           limit={section.limit}
+          headingAs={headingAs}
         />
       );
     case "whyChooseUsBlock":
@@ -69,10 +75,23 @@ interface PageSectionsProps {
   // Homepage shows a 6-item gallery preview; the Gallery page shows the
   // full filterable grid.
   compactGallery?: boolean;
+  // For pages with no heading of their own (e.g. Gallery): the first
+  // section's heading becomes the page's H1.
+  firstHeadingAsH1?: boolean;
 }
 
-export const PageSections: React.FC<PageSectionsProps> = ({ sections, compactGallery = false }) => (
-  <>{sections.map((section, i) => renderSection(section, `${section.type}-${i}`, compactGallery))}</>
-);
+const hasH1Heading = (s: PageSection) =>
+  s.type === "beforeAfterBlock" || (s.type === "galleryBlock" && s.showHeading !== false);
+
+export const PageSections: React.FC<PageSectionsProps> = ({ sections, compactGallery = false, firstHeadingAsH1 = false }) => {
+  const h1Index = firstHeadingAsH1 ? sections.findIndex(hasH1Heading) : -1;
+  return (
+    <>
+      {sections.map((section, i) =>
+        renderSection(section, `${section.type}-${i}`, compactGallery, i === h1Index ? "h1" : "h2")
+      )}
+    </>
+  );
+};
 
 export default PageSections;

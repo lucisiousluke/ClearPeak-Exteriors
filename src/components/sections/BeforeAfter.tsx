@@ -5,7 +5,7 @@ import { BeforeAfterSlider } from "~/components/shared/BeforeAfterSlider";
 import { beforeAfterItems } from "~/data/gallery";
 import { siteContent } from "~/data/siteContent";
 
-export const BeforeAfter: React.FC = () => {
+export const BeforeAfter: React.FC<{ headingAs?: "h1" | "h2" }> = ({ headingAs }) => {
   const [active, setActive] = React.useState(0);
   const item = beforeAfterItems[active];
   const { eyebrow, title, description } = siteContent.beforeAfterSection;
@@ -17,7 +17,7 @@ export const BeforeAfter: React.FC = () => {
   return (
     <Section background="white">
       <Container>
-        <SectionHeading eyebrow={eyebrow} title={title} description={description} />
+        <SectionHeading as={headingAs} eyebrow={eyebrow} title={title} description={description} />
 
         <div className="mt-14 grid gap-10 lg:grid-cols-[1fr_320px]">
           <motion.div

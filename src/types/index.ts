@@ -28,6 +28,8 @@ export interface City {
   heroImage: string;
   zipCodes: string[];
   neighborhoods: string[];
+  // Optional per-city write-up (Portable Text) — see PortableTextBody.
+  localContent: BlogBodyItem[];
   lat: number;
   lng: number;
 }

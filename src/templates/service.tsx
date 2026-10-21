@@ -10,6 +10,9 @@ import { ServiceCard } from "~/components/shared/ServiceCard";
 import FAQ from "~/components/sections/FAQ";
 import FinalCTA from "~/components/sections/FinalCTA";
 import { services, getServiceBySlug } from "~/data/services";
+import { cities } from "~/data/cities";
+import { site } from "~/data/site";
+import { useSiteUrl } from "~/hooks/useSiteUrl";
 
 interface ServicePageContext {
   slug: string;
@@ -124,6 +127,7 @@ export default ServiceTemplate;
 
 export const Head: HeadFC<object, ServicePageContext> = ({ pageContext }) => {
   const service = getServiceBySlug(pageContext.slug)!;
+  const siteUrl = useSiteUrl();
   return (
     <SEO
       title={`${service.name} in Denver, CO`}
@@ -133,11 +137,9 @@ export const Head: HeadFC<object, ServicePageContext> = ({ pageContext }) => {
         "@context": "https://schema.org",
         "@type": "Service",
         serviceType: service.name,
-        provider: {
-          "@type": "LocalBusiness",
-          name: "ClearPeak Exterior",
-        },
-        areaServed: "Denver Metro Area, CO",
+        url: `${siteUrl}/services/${service.slug}`,
+        provider: { "@type": "HomeAndConstructionBusiness", "@id": `${siteUrl}/#business`, name: site.name, url: siteUrl },
+        areaServed: cities.map((c) => ({ "@type": "City", name: `${c.name}, CO` })),
         description: service.description,
       }}
     />
