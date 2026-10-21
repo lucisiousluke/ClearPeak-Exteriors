@@ -4,6 +4,7 @@ import { FiPhone, FiMail, FiMapPin, FiInstagram, FiFacebook } from "react-icons/
 import { Container } from "~/components/ui";
 import { site } from "~/data/site";
 import { footerDescription, footerColumns, legalLinks } from "~/data/footer";
+import { services } from "~/data/services";
 import logo from "~/images/clearpeak-logo-compact-white.svg";
 
 export const Footer: React.FC = () => {
@@ -40,7 +41,10 @@ export const Footer: React.FC = () => {
             <div key={column.heading}>
               <h4 className="font-display font-semibold text-white/90">{column.heading}</h4>
               <ul className="mt-4 space-y-3 text-sm text-white/60">
-                {column.links.map((l) => (
+                {(column.auto === "services"
+                  ? services.map((s) => ({ label: s.name, href: `/services/${s.slug}` }))
+                  : column.links
+                ).map((l) => (
                   <li key={l.href}>
                     <Link to={l.href} className="transition-colors hover:text-aqua-400">
                       {l.label}
@@ -69,7 +73,9 @@ export const Footer: React.FC = () => {
               <li className="flex items-start gap-2">
                 <FiMapPin className="mt-0.5 flex-none" />
                 <span>
-                  {site.address.street}, {site.address.city}, {site.address.state} {site.address.zip}
+                  {[site.address.street, site.address.city, [site.address.state, site.address.zip].filter(Boolean).join(" ")]
+                    .filter(Boolean)
+                    .join(", ")}
                 </span>
               </li>
             </ul>
