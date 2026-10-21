@@ -204,3 +204,10 @@ export interface SeoEntry {
   ogImageAlt?: string;
   noIndex?: boolean;
 }
+
+export interface FooterColumn {
+  heading: string;
+  // "services" = list every service automatically (links is ignored).
+  auto?: "services";
+  links: { label: string; href: string }[];
+}

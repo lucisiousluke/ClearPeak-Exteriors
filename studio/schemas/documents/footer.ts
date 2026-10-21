@@ -15,9 +15,25 @@ export default {
           fields: [
             { name: "heading", title: "Heading", type: "string" },
             {
-              name: "links",
+              name: "source",
               title: "Links",
+              type: "string",
+              description:
+                "\"All services\" lists every Service document automatically (same as the Services menu at the top), so it stays correct when you add, rename or remove a service.",
+              options: {
+                list: [
+                  { title: "Manual links", value: "manual" },
+                  { title: "All services (automatic)", value: "services" },
+                ],
+                layout: "radio",
+              },
+              initialValue: "manual",
+            },
+            {
+              name: "links",
+              title: "Manual Links",
               type: "array",
+              hidden: ({ parent }: { parent?: { source?: string } }) => parent?.source === "services",
               of: [
                 {
                   type: "object",
@@ -30,6 +46,12 @@ export default {
               ],
             },
           ],
+          preview: {
+            select: { title: "heading", source: "source" },
+            prepare({ title, source }: { title?: string; source?: string }) {
+              return { title: title || "Column", subtitle: source === "services" ? "All services (automatic)" : "Manual links" };
+            },
+          },
         },
       ],
     },

@@ -2,18 +2,19 @@
 // Do not edit directly — edit content in the Sanity Studio instead, then re-run
 // `npm run sync:sanity` (or just `npm run develop` / `npm run build`).
 
-export const footerDescription = "Denver Metro's premium exterior cleaning company — pressure washing, soft washing, window cleaning, and more.";
+import type { FooterColumn } from "~/types";
 
-export const footerColumns = [
+export const footerDescription = "Denver Metro's premium exterior cleaning company — pressure washing, soft washing, Roof Cleaning, and more.";
+
+export const footerColumns: FooterColumn[] = [
   {
     heading: "Services",
     links: [
-      { label: "Pressure Washing", href: "/services/pressure-washing" },
+      { label: "Pressure Washing", href: "/services/surface-pressure-washing" },
       { label: "House Soft Washing", href: "/services/house-soft-washing" },
-      { label: "Window Cleaning", href: "/services/window-cleaning" },
-      { label: "Roof Cleaning", href: "/services/roof-cleaning" },
-      { label: "Concrete Cleaning", href: "/services/concrete-cleaning" },
-      { label: "Commercial Services", href: "/services/commercial-services" }
+      { label: "Roof Cleaning", href: "/services/roof-soft-washing" },
+      { label: "Concrete Cleaning", href: "/services/concrete-surface-cleaning" },
+      { label: "Commercial Services", href: "/services/commercial-exterior-cleaning" }
     ],
   },
   {

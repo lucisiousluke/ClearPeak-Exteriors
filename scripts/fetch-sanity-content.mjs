@@ -562,9 +562,13 @@ async function fetchFooter() {
   const f = await client.fetch(`*[_id == "footer"][0]`);
   if (!f) return null;
 
+  // An "All services" column is filled in on the site from services.ts, so
+  // its leftover manual links (hidden in the Studio) are ignored.
   const columns = (f.columns || [])
-    .map(
-      (c) => `  {
+    .map((c) =>
+      c.source === "services"
+        ? `  {\n    heading: ${esc(c.heading)},\n    auto: "services",\n    links: [],\n  }`
+        : `  {
     heading: ${esc(c.heading)},
     links: [\n${(c.links || []).map((l) => `      { label: ${esc(l.label)}, href: ${esc(l.url)} }`).join(",\n")}\n    ],
   }`
@@ -577,8 +581,9 @@ async function fetchFooter() {
 
   return (
     banner("footer document") +
+    `import type { FooterColumn } from "~/types";\n\n` +
     `export const footerDescription = ${esc(f.description)};\n\n` +
-    `export const footerColumns = [\n${columns}\n];\n\n` +
+    `export const footerColumns: FooterColumn[] = [\n${columns}\n];\n\n` +
     `export const legalLinks = [\n${legalLinks}\n];\n`
   );
 }
@@ -790,7 +795,7 @@ async function checkInternalLinks() {
     "links": [
       ...*[_id == "navigation"][0].mainLinks[].url,
       *[_id == "navigation"][0].headerCta.url,
-      ...*[_id == "footer"][0].columns[].links[].url,
+      ...*[_id == "footer"][0].columns[source != "services"].links[].url,
       ...*[_id == "footer"][0].legalLinks[].url
     ]
   }`);
