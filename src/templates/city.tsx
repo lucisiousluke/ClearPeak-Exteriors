@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { FiArrowRight, FiChevronRight, FiMapPin, FiCheck } from "react-icons/fi";
 import Layout from "~/components/layout/Layout";
 import SEO from "~/components/shared/SEO";
+import PortableTextBody from "~/components/shared/PortableTextBody";
 import { Container, Section, SectionHeading, Button, Photo } from "~/components/ui";
 import { ServiceCard } from "~/components/shared/ServiceCard";
 import FAQ from "~/components/sections/FAQ";
@@ -13,6 +14,8 @@ import FinalCTA from "~/components/sections/FinalCTA";
 import { services } from "~/data/services";
 import { getCityBySlug, cities } from "~/data/cities";
 import { faqs } from "~/data/faqs";
+import { site } from "~/data/site";
+import { useSiteUrl } from "~/hooks/useSiteUrl";
 
 interface CityPageContext {
   slug: string;
@@ -73,6 +76,16 @@ const CityTemplate: React.FC<PageProps<object, CityPageContext>> = ({ pageContex
           </div>
         </Container>
       </section>
+
+      {city.localContent.length > 0 && (
+        <Section background="white" className="pb-0 md:pb-0">
+          <Container narrow>
+            <article>
+              <PortableTextBody value={city.localContent} />
+            </article>
+          </Container>
+        </Section>
+      )}
 
       <Section background="white">
         <Container>
@@ -158,20 +171,25 @@ export default CityTemplate;
 
 export const Head: HeadFC<object, CityPageContext> = ({ pageContext }) => {
   const city = getCityBySlug(pageContext.slug)!;
+  const siteUrl = useSiteUrl();
   return (
     <SEO
-      title={`Exterior Cleaning in ${city.name}, CO | Pressure Washing & More`}
-      description={`Professional pressure washing, soft washing, and window cleaning in ${city.name}, CO. ${city.blurb}`}
+      title={`Pressure Washing & Soft Washing in ${city.name}, CO`}
+      description={`Pressure washing, soft washing & exterior cleaning in ${city.name}, CO. ${city.blurb}`}
       pathname={`/service-areas/${city.slug}`}
+      // A service offered in this city by the one business defined on the
+      // homepage (same @id), rather than a separate address-less business.
       structuredData={{
         "@context": "https://schema.org",
-        "@type": "LocalBusiness",
-        name: `ClearPeak Exterior - ${city.name}`,
-        areaServed: `${city.name}, CO`,
-        geo: {
-          "@type": "GeoCoordinates",
-          latitude: city.lat,
-          longitude: city.lng,
+        "@type": "Service",
+        name: `Exterior Cleaning in ${city.name}, CO`,
+        serviceType: "Exterior Cleaning",
+        url: `${siteUrl}/service-areas/${city.slug}`,
+        provider: { "@type": "HomeAndConstructionBusiness", "@id": `${siteUrl}/#business`, name: site.name, url: siteUrl },
+        areaServed: {
+          "@type": "City",
+          name: `${city.name}, CO`,
+          geo: { "@type": "GeoCoordinates", latitude: city.lat, longitude: city.lng },
         },
       }}
     />

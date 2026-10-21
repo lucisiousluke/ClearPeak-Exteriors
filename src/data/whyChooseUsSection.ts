@@ -4,7 +4,6 @@
 
 import {
   FiTool,
-  FiFeather,
   FiClock,
   FiHeart,
   FiDollarSign,
@@ -17,7 +16,6 @@ export const whyChooseUsSection = {
   description: "We built ClearPeak to be the exterior cleaning company Denver homeowners actually recommend to their neighbors.",
   reasons: [
     { icon: FiTool, title: "Professional Equipment", description: "Commercial-grade pressure washers and soft-wash systems calibrated for every surface type." },
-    { icon: FiFeather, title: "Eco-Friendly Products", description: "Biodegradable cleaning solutions that are safe for your family, pets, and landscaping." },
     { icon: FiClock, title: "Fast Response", description: "Most estimate requests are answered within one business hour, with flexible scheduling." },
     { icon: FiHeart, title: "Premium Customer Service", description: "Friendly, communicative crews who treat your property like their own." },
     { icon: FiDollarSign, title: "Transparent Pricing", description: "Upfront, itemized quotes with no hidden fees or last-minute upsells." },

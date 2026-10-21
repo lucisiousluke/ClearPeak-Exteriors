@@ -9,7 +9,7 @@ import { galleryPage } from "~/data/galleryPage";
 const GalleryPage: React.FC<PageProps> = () => {
   return (
     <Layout>
-      <PageSections sections={galleryPage.sections} />
+      <PageSections sections={galleryPage.sections} firstHeadingAsH1 />
       <FinalCTA />
     </Layout>
   );
@@ -19,8 +19,8 @@ export default GalleryPage;
 
 export const Head: HeadFC = () => (
   <SEO
-    title="Gallery"
-    description="Browse before-and-after transformations and a full project gallery from ClearPeak Exterior."
+    title="Exterior Cleaning Photo Gallery | Denver, CO"
+    description="Browse real exterior cleaning projects across the Denver Metro — house and roof soft washing, concrete, decks, fences and more from ClearPeak Exterior."
     pathname="/gallery"
   />
 );

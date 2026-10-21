@@ -19,6 +19,7 @@ interface GalleryProps {
   description?: string;
   showFilters?: boolean;
   limit?: number;
+  headingAs?: "h1" | "h2";
 }
 
 export const Gallery: React.FC<GalleryProps> = ({
@@ -29,6 +30,7 @@ export const Gallery: React.FC<GalleryProps> = ({
   description,
   showFilters = !compact,
   limit = compact ? 6 : undefined,
+  headingAs,
 }) => {
   const [filter, setFilter] = React.useState("All");
   const [activeIndex, setActiveIndex] = React.useState<number | null>(null);
@@ -45,6 +47,7 @@ export const Gallery: React.FC<GalleryProps> = ({
       <Container>
         {showHeading && (
           <SectionHeading
+            as={headingAs}
             eyebrow={eyebrow || siteContent.gallerySection.eyebrow}
             title={title || siteContent.gallerySection.title}
             description={description || siteContent.gallerySection.description}

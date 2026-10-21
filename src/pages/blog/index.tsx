@@ -18,6 +18,7 @@ const BlogIndexPage: React.FC<PageProps> = () => {
       <Section background="soft" className="pt-16 md:pt-20">
         <Container>
           <SectionHeading
+            as="h1"
             eyebrow={siteContent.blogSection.eyebrow}
             title={siteContent.blogSection.title}
             description={siteContent.blogSection.description}
@@ -92,8 +93,8 @@ export default BlogIndexPage;
 
 export const Head: HeadFC = () => (
   <SEO
-    title="Blog"
-    description="Tips, guides, and local know-how for keeping your Colorado home's exterior looking its best."
+    title="Exterior Cleaning Tips & Guides | ClearPeak Blog"
+    description="Expert tips and guides on pressure washing, soft washing and exterior care for Denver-area homes, from Colorado's local exterior cleaning pros."
     pathname="/blog"
   />
 );

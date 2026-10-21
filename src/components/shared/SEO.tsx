@@ -16,6 +16,27 @@ interface SEOProps {
   modifiedTime?: string;
 }
 
+const MAX_TITLE = 60;
+const MAX_DESCRIPTION = 160;
+
+// Built-in titles get the brand appended, shortened or dropped so the whole
+// thing fits in Google's ~60 characters.
+const withBrand = (title: string) => {
+  if (title.includes("ClearPeak")) return title;
+  for (const suffix of [" | ClearPeak Exterior", " | ClearPeak"]) {
+    if (title.length + suffix.length <= MAX_TITLE) return title + suffix;
+  }
+  return title;
+};
+
+// Trims at a word boundary so Google doesn't cut the sentence off mid-word.
+const fitDescription = (text: string) => {
+  const clean = text.replace(/\s+/g, " ").trim();
+  if (clean.length <= MAX_DESCRIPTION) return clean;
+  const cut = clean.slice(0, MAX_DESCRIPTION - 1);
+  return cut.slice(0, cut.lastIndexOf(" ")).replace(/[\s,.;:–—-]+$/, "") + "…";
+};
+
 /**
  * Renders raw <title>/<meta>/<link> tags for use inside a page's `Head` export.
  * Gatsby's Head API renders directly into <head> at SSR time — it does not
@@ -51,10 +72,11 @@ export const SEO: React.FC<SEOProps> = ({
 
   const meta = data.site.siteMetadata;
   const cms = pageSeo[pathname || "/"] ?? {};
-  // A CMS meta title is used exactly as written (the editor is counting
-  // characters); built-in titles get the brand appended.
-  const seoTitle = cms.metaTitle || (title.includes("ClearPeak") ? title : `${title} | ClearPeak Exterior`);
-  const seoDescription = cms.metaDescription || description || defaultSeo.metaDescription || meta.description;
+  // CMS values are used exactly as written (the editor sees length warnings
+  // in the Studio); built-in fallbacks are fitted to Google's limits.
+  const seoTitle = cms.metaTitle || withBrand(title);
+  const seoDescription =
+    cms.metaDescription || fitDescription(description || defaultSeo.metaDescription || meta.description);
   const url = `${meta.siteUrl}${pathname}`;
   const seoImage = cms.ogImage || image || defaultSeo.ogImage;
   const seoImageAlt = cms.ogImageAlt || imageAlt || defaultSeo.ogImageAlt || seoTitle;

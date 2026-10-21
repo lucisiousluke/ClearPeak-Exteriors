@@ -16,7 +16,7 @@ export const site = {
   },
   social: {
     facebook: "https://www.facebook.com/profile.php?id=61591666452703",
-    instagram: "https://instagram.com/clearpeakexteriors",
+    instagram: "https://www.instagram.com/clearpeak_exterior/",
     google: "https://maps.app.goo.gl/nXLpAaFsdZ2AauDp7",
   },
   hours: "Mon–Sat: 7:00am – 9:00pm",

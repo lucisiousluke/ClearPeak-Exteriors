@@ -30,7 +30,7 @@ export const Head: HeadFC = () => {
   return (
     <SEO
       title="ClearPeak Exterior | Denver's Premium Exterior Cleaning Company"
-      description="Denver Metro's premium exterior cleaning company. Pressure washing, soft washing, window cleaning, roof & concrete cleaning. Fully insured, locally owned, five-star rated."
+      description="Denver Metro's premium exterior cleaning company. House & roof soft washing, pressure washing, concrete, deck and gutter cleaning. Fully insured, locally owned."
       image={homepage.heroImage}
       structuredData={[
         {

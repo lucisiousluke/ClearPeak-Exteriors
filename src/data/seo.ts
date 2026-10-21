@@ -10,9 +10,10 @@ export const defaultSeo: SeoEntry = {
 
 export const pageSeo: Record<string, SeoEntry> = {
   "/": {
-    "metaTitle": "Pressure Washing & Exterior Cleaning Denver, CO | ClearPeak",
-    "metaDescription": "Professional pressure washing and exterior cleaning in Denver, CO. House soft washing, roof cleaning, concrete cleaning, and more. Get a free quote.",
-    "ogImage": "https://cdn.sanity.io/images/vgi0saae/production/ffe107793f0e9d70951dc8452b48a7cad0b987a4-800x600.jpg?rect=0,90,800,420&w=1200&h=630&fit=crop&auto=format"
+    "metaTitle": "Pressure Washing Denver, CO | ClearPeak Exterior",
+    "metaDescription": "Pressure washing and soft washing in Denver, CO. Clean driveways, house siding, roofs, patios, and more with ClearPeak Exterior. Get a free estimate.",
+    "ogImage": "https://cdn.sanity.io/images/vgi0saae/production/0e75039397ab7639cd1bc379587070d91703dc2b-1000x750.jpg?rect=0,113,1000,525&w=1200&h=630&fit=crop&auto=format",
+    "ogImageAlt": "A modern Colorado home exterior cleaned by ClearPeak Exterior, a Denver-area pressure washing and soft washing company.  Copy alt text"
   },
   "/about": {
     "metaTitle": "About ClearPeak Exterior | Denver Exterior Cleaning Company",
@@ -85,27 +86,45 @@ export const pageSeo: Record<string, SeoEntry> = {
     "ogImage": "https://cdn.sanity.io/images/vgi0saae/production/d9c65542c00625bbe87f5e918527582e5a228d87-1600x1200.jpg?rect=0,180,1600,840&w=1200&h=630&fit=crop&auto=format"
   },
   "/blog/best-time-to-wash-your-home-in-colorado": {
-    "ogImage": "https://cdn.sanity.io/images/vgi0saae/production/26e4bac0d3c0ab4972c25b027690f08f428b72f7-1600x1200.jpg?rect=0,180,1600,840&w=1200&h=630&fit=crop&auto=format"
-  },
-  "/blog/colorado-hard-water-stains": {
-    "ogImage": "https://cdn.sanity.io/images/vgi0saae/production/4004d7f44e706feeda2f75bcbc055a12b2d28877-1600x1200.jpg?rect=0,180,1600,840&w=1200&h=630&fit=crop&auto=format"
+    "metaTitle": "Best Time of Year to Wash Your House in Colorado",
+    "metaDescription": "Late spring is the best time to wash your Denver home, with early fall a close second. See how Colorado weather, pollen, and freezes affect timing.",
+    "ogImage": "https://cdn.sanity.io/images/vgi0saae/production/8605dfc7dc13dfe5427e120282f1453e1173cd52-1000x667.jpg?rect=0,72,1000,525&w=1200&h=630&fit=crop&auto=format",
+    "ogImageAlt": "green siding house in fall with white porch and large tree"
   },
   "/blog/concrete-cleaning-guide": {
-    "ogImage": "https://cdn.sanity.io/images/vgi0saae/production/f88188752e40b1faedfd082e06bff22e85014fda-800x600.jpg?rect=0,90,800,420&w=1200&h=630&fit=crop&auto=format"
+    "metaTitle": "Concrete Cleaning Guide for Denver Driveways and Patios",
+    "metaDescription": "Learn how to remove oil, rust, algae, and deicer stains from concrete, and how Colorado freeze-thaw cycles affect driveways, patios, and sidewalks.",
+    "ogImage": "https://cdn.sanity.io/images/vgi0saae/production/f88188752e40b1faedfd082e06bff22e85014fda-800x600.jpg?rect=0,90,800,420&w=1200&h=630&fit=crop&auto=format",
+    "ogImageAlt": "side walk being cleaned with a 20\" yellow surface cleaner"
   },
   "/blog/how-much-does-pressure-washing-cost": {
-    "ogImage": "https://cdn.sanity.io/images/vgi0saae/production/b44330a8c34b1ba688b15c1a7ed9001857475cdb-1600x1200.jpg?rect=0,180,1600,840&w=1200&h=630&fit=crop&auto=format"
+    "metaTitle": "Pressure Washing Cost in Denver: 2026 Price Guide",
+    "metaDescription": "See typical 2026 prices for house washing, driveways, roofs, and gutters in Denver, plus what affects the cost and how to get a fair, itemized quote.",
+    "ogImage": "https://cdn.sanity.io/images/vgi0saae/production/0e75039397ab7639cd1bc379587070d91703dc2b-1000x750.jpg?rect=0,113,1000,525&w=1200&h=630&fit=crop&auto=format",
+    "ogImageAlt": "two story house brick steps, red flowers, American flags clean sidewalk "
   },
   "/blog/how-often-should-you-wash-your-house": {
-    "ogImage": "https://cdn.sanity.io/images/vgi0saae/production/9131d22401ee30dbf46129c9edcd237015e60aef-1600x1200.jpg?rect=0,180,1600,840&w=1200&h=630&fit=crop&auto=format"
+    "metaTitle": "How Often Should You Wash Your House in Denver?",
+    "metaDescription": "Most Denver homes need a yearly exterior wash, but shade, trees, and construction can change that. See how often to clean siding, roof, gutters, and more.",
+    "ogImage": "https://cdn.sanity.io/images/vgi0saae/production/9131d22401ee30dbf46129c9edcd237015e60aef-1600x1200.jpg?rect=0,180,1600,840&w=1200&h=630&fit=crop&auto=format",
+    "ogImageAlt": "Brick house in the woods in early fall. sun coming through the trees, roof still wet from a washing"
   },
   "/blog/power-washing-vs-soft-washing": {
-    "ogImage": "https://cdn.sanity.io/images/vgi0saae/production/e005814ead91163b9546a5cb9183bccfae6c878e-1600x1200.jpg?rect=0,180,1600,840&w=1200&h=630&fit=crop&auto=format"
+    "metaTitle": "Pressure Washing vs. Soft Washing in Denver: Which to Use",
+    "metaDescription": "Pressure washing and soft washing aren't the same. Learn which method is safe for your Denver home's siding, roof, and concrete, and which one to avoid.",
+    "ogImage": "https://cdn.sanity.io/images/vgi0saae/production/320055446a59a4cce26e6d909f7a00b3a71d2bd7-1000x667.jpg?rect=0,72,1000,525&w=1200&h=630&fit=crop&auto=format",
+    "ogImageAlt": "clean brick and wood home with plants green grass."
   },
   "/blog/roof-cleaning-guide": {
-    "ogImage": "https://cdn.sanity.io/images/vgi0saae/production/2a7a863567c5e066189634b3b9a27314efe63a93-1600x1200.jpg?rect=0,180,1600,840&w=1200&h=630&fit=crop&auto=format"
+    "metaTitle": "Roof Cleaning in Denver: How to Remove Black Streaks Safely",
+    "metaDescription": "Black streaks on your roof are algae, not dirt. Learn how soft wash roof cleaning safely removes algae, moss, and lichen from Denver-area roofs.",
+    "ogImage": "https://cdn.sanity.io/images/vgi0saae/production/cd648e0866239fb1b337095b4579dd3c977b076a-1000x1500.jpg?rect=0,488,1000,525&w=1200&h=630&fit=crop&auto=format",
+    "ogImageAlt": "clean roof with chimney, second floor window brown siding with dark brown trim "
   },
-  "/blog/window-cleaning-tips": {
-    "ogImage": "https://cdn.sanity.io/images/vgi0saae/production/4de49f89a6b7b25383af39f7437d156ea62e458c-1600x1200.jpg?rect=0,180,1600,840&w=1200&h=630&fit=crop&auto=format"
+  "/blog/soft-washing-denver-colorado": {
+    "metaTitle": "Soft Washing in Denver: Why Colorado Homes Need It",
+    "metaDescription": "Soft washing protects Denver homes from sun, dust, mildew, and roof streaks, and it’s safer than pressure washing. Get a free quote from ClearPeak Exterior.",
+    "ogImage": "https://cdn.sanity.io/images/vgi0saae/production/440e29a10b5a064311f860b0d867f0f2fb5fe441-1000x923.jpg?rect=0,200,1000,525&w=1200&h=630&fit=crop&auto=format",
+    "ogImageAlt": "Clean home exterior with gray lap siding, white trim, and a covered front porch."
   }
 };

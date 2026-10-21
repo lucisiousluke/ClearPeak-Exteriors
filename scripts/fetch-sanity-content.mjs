@@ -4,7 +4,7 @@
 // the existing generated files are left in place.
 import { createClient } from "@sanity/client";
 import imageUrlBuilder from "@sanity/image-url";
-import { writeFileSync } from "node:fs";
+import { readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 
@@ -66,8 +66,9 @@ const arr = (items) => `[${(items || []).map(esc).join(", ")}]`;
 // Blog body is kept as Portable Text (headings, lists, bold, links, etc.)
 // and rendered on the site by PortableTextBody. Only the non-text members
 // are reshaped: images become a plain URL, tables become rows of strings.
-const portableTextForSite = (blocks = []) =>
-  blocks
+// GROQ returns null (not undefined) for empty fields, so guard explicitly.
+const portableTextForSite = (blocks) =>
+  (blocks || [])
     .map((b) => {
       if (b._type === "image") {
         if (!b.asset) return null;
@@ -161,7 +162,7 @@ async function fetchServices() {
 async function fetchCities() {
   const docs = await client.fetch(
     `*[_type == "serviceArea"] | order(_createdAt asc) {
-      name, "slug": slug.current, county, blurb, heroImage, zipCodes, neighborhoods, geo
+      name, "slug": slug.current, county, blurb, heroImage, zipCodes, neighborhoods, geo, localContent
     }`
   );
   if (!docs.length) return null;
@@ -176,6 +177,7 @@ async function fetchCities() {
     heroImage: ${esc(urlFor(c.heroImage))},
     zipCodes: ${arr(c.zipCodes)},
     neighborhoods: ${arr(c.neighborhoods)},
+    localContent: ${JSON.stringify(portableTextForSite(c.localContent))},
     lat: ${c.geo?.lat ?? 39.7392},
     lng: ${c.geo?.lng ?? -104.9903},
   }`
@@ -777,6 +779,56 @@ async function fetchBrandColors() {
   );
 }
 
+// Navigation and footer links are free-text URLs in the CMS, so a typo or a
+// renamed service silently becomes a 404 on every page. Warn about any
+// internal link that doesn't match a real page or a netlify.toml redirect.
+async function checkInternalLinks() {
+  const d = await client.fetch(`{
+    "services": *[_type == "service"].slug.current,
+    "areas": *[_type == "serviceArea"].slug.current,
+    "posts": *[_type == "blogPost"].slug.current,
+    "links": [
+      ...*[_id == "navigation"][0].mainLinks[].url,
+      *[_id == "navigation"][0].headerCta.url,
+      ...*[_id == "footer"][0].columns[].links[].url,
+      ...*[_id == "footer"][0].legalLinks[].url
+    ]
+  }`);
+
+  const pagesDir = path.join(__dirname, "../src/pages");
+  const staticPages = readdirSync(pagesDir, { recursive: true })
+    .filter((f) => /\.tsx?$/.test(f) && !f.startsWith("404"))
+    .map((f) => "/" + f.replace(/\.tsx?$/, "").replace(/(^|\/)index$/, ""))
+    .map((p) => (p.length > 1 ? p.replace(/\/$/, "") : "/"));
+  const redirects = [...readFileSync(path.join(__dirname, "../netlify.toml"), "utf8").matchAll(/from\s*=\s*"([^"]+)"/g)].map((m) => m[1]);
+
+  const valid = new Set([
+    ...staticPages,
+    ...(d.services || []).map((s) => `/services/${s}`),
+    ...(d.areas || []).map((s) => `/service-areas/${s}`),
+    ...(d.posts || []).map((s) => `/blog/${s}`),
+  ]);
+  const bad = [
+    ...new Set(
+      (d.links || [])
+        .filter((u) => typeof u === "string" && u.startsWith("/"))
+        .map((u) => u.split(/[?#]/)[0].replace(/(.)\/$/, "$1"))
+        .filter((u) => !valid.has(u))
+    ),
+  ];
+  const redirected = bad.filter((u) => redirects.includes(u));
+  const broken = bad.filter((u) => !redirects.includes(u));
+
+  if (broken.length) {
+    console.warn(`\n⚠ ${broken.length} Navigation/Footer link(s) point to pages that don't exist — fix them in the Studio:`);
+    broken.forEach((u) => console.warn(`   ${u}`));
+  }
+  if (redirected.length) {
+    console.warn(`\n⚠ ${redirected.length} Navigation/Footer link(s) only work via a redirect — update them in the Studio to the final URL:`);
+    redirected.forEach((u) => console.warn(`   ${u}`));
+  }
+}
+
 async function main() {
   const jobs = [
     ["services.ts", fetchServices],
@@ -814,6 +866,7 @@ async function main() {
   }
 
   console.log(`\nDone. ${written}/${jobs.length} data files refreshed from Sanity.`);
+  await checkInternalLinks();
 }
 
 main().catch((err) => {

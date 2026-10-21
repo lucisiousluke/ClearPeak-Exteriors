@@ -10,6 +10,8 @@ interface SectionHeadingProps {
   align?: "left" | "center";
   light?: boolean;
   className?: string;
+  // Use "h1" when this is the page's main heading (one per page).
+  as?: "h1" | "h2";
 }
 
 export const SectionHeading: React.FC<SectionHeadingProps> = ({
@@ -19,7 +21,9 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
   align = "center",
   light = false,
   className,
+  as = "h2",
 }) => {
+  const Heading = as === "h1" ? motion.h1 : motion.h2;
   return (
     <div
       className={clsx(
@@ -39,7 +43,7 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
           <Badge variant="aqua">{eyebrow}</Badge>
         </motion.div>
       )}
-      <motion.h2
+      <Heading
         initial={{ opacity: 0, y: 18 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-80px" }}
@@ -50,7 +54,7 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
         )}
       >
         {title}
-      </motion.h2>
+      </Heading>
       {description && (
         <motion.div
           initial={{ opacity: 0, y: 18 }}

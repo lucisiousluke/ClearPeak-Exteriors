@@ -14,6 +14,7 @@ const ServicesPage: React.FC<PageProps> = () => {
       <Section background="soft" className="pt-16 md:pt-20">
         <Container>
           <SectionHeading
+            as="h1"
             eyebrow={siteContent.servicesSection.eyebrow}
             title={siteContent.servicesSection.title}
             description={siteContent.servicesSection.description}
@@ -34,7 +35,7 @@ export default ServicesPage;
 
 export const Head: HeadFC = () => (
   <SEO
-    title="All Services"
+    title="Exterior Cleaning Services in Denver, CO"
     description="Explore ClearPeak Exterior's full range of residential and commercial exterior cleaning services in the Denver Metro area."
     pathname="/services"
   />
