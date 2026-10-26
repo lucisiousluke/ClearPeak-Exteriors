@@ -37,6 +37,63 @@ export default {
       description: "Shown as \"From {this}\" — enter just the amount, e.g. $149.",
       hidden: ({ parent }: { parent?: { customQuote?: boolean } }) => Boolean(parent?.customQuote),
     },
+    {
+      name: "estimate",
+      title: "Estimate Calculator Pricing",
+      type: "object",
+      description:
+        "How this service is priced on the /estimate calculator. Leave \"Show in Calculator\" off (or the rate empty) to keep it out of the calculator.",
+      options: { collapsible: true, collapsed: true },
+      hidden: ({ parent }: { parent?: { customQuote?: boolean } }) => Boolean(parent?.customQuote),
+      fields: [
+        { name: "enabled", title: "Show in Calculator", type: "boolean", initialValue: false },
+        {
+          name: "basis",
+          title: "Priced By",
+          type: "string",
+          initialValue: "homeSize",
+          options: {
+            layout: "radio",
+            list: [
+              { title: "Home size (uses the customer's home square footage)", value: "homeSize" },
+              { title: "Area of this surface (square feet the customer enters)", value: "area" },
+              { title: "Length (linear feet the customer enters — e.g. fences)", value: "linear" },
+              { title: "Flat price", value: "flat" },
+            ],
+          },
+        },
+        {
+          name: "rate",
+          title: "Rate",
+          type: "number",
+          description:
+            "Dollars per square foot (home size / area), per linear foot (length), or the full price (flat). E.g. 0.18 = 18¢ per sq ft.",
+          validation: (Rule: any) => Rule.min(0),
+        },
+        {
+          name: "minimum",
+          title: "Minimum Price",
+          type: "number",
+          description: "The estimate never goes below this for this service — usually the same as the Starting Price.",
+          validation: (Rule: any) => Rule.min(0),
+        },
+        {
+          name: "typicalSize",
+          title: "Typical Size",
+          type: "number",
+          description:
+            "Area/Length only: the number pre-filled for customers who don't know theirs (e.g. 600 sq ft for a 2-car driveway).",
+          hidden: ({ parent }: { parent?: { basis?: string } }) => parent?.basis !== "area" && parent?.basis !== "linear",
+        },
+        {
+          name: "sizeHint",
+          title: "Size Hint",
+          type: "string",
+          description: "Area/Length only: short help under the size input, e.g. \"2-car driveway ≈ 600 sq ft\".",
+          hidden: ({ parent }: { parent?: { basis?: string } }) => parent?.basis !== "area" && parent?.basis !== "linear",
+        },
+      ],
+    },
     { name: "featured", title: "Featured on Homepage", type: "boolean", initialValue: false },
     { name: "benefits", title: "Benefits", type: "array", of: [{ type: "string" }] },
     { name: "process", title: "Process Steps", type: "array", of: [{ type: "string" }] },

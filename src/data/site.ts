@@ -7,7 +7,7 @@ export const site = {
   tagline: "Denver's Premium Exterior Cleaning Company",
   phone: "(720) 410-6720",
   phoneHref: "tel:+17204106720",
-  email: "luke.hinrichs@gmail.com",
+  email: "info@clearpeakexterior.com",
   address: {
     street: "",
     city: "Denver",

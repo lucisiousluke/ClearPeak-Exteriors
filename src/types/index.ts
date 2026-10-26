@@ -14,10 +14,34 @@ export interface Service {
   faqs: { question: string; answer: string }[];
   startingPrice?: string;
   customQuote?: boolean;
+  estimate?: ServiceEstimate;
   featured?: boolean;
   idealFor?: string[];
   category?: string;
   categoryIcon?: IconType;
+}
+
+// How a service is priced on the /estimate calculator — see the
+// "Estimate Calculator Pricing" fields on the Sanity service document.
+export interface ServiceEstimate {
+  basis: "homeSize" | "area" | "linear" | "flat";
+  rate: number;
+  minimum: number;
+  typicalSize?: number;
+  sizeHint?: string;
+}
+
+export interface EstimatePageContent {
+  headline: string;
+  subheadline: string;
+  rangeSpread: number;
+  twoStoryUpcharge: number;
+  threeStoryUpcharge: number;
+  moderateUpcharge: number;
+  heavyUpcharge: number;
+  bundleMinServices: number;
+  bundleDiscount: number;
+  disclaimer: string;
 }
 
 export interface City {

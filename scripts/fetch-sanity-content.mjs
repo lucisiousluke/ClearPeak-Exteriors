@@ -116,11 +116,24 @@ const banner = (source) =>
   `// Do not edit directly — edit content in the Sanity Studio instead, then re-run\n` +
   `// \`npm run sync:sanity\` (or just \`npm run develop\` / \`npm run build\`).\n\n`;
 
+// Only services switched on for the calculator, with a rate set, get an
+// estimate — everything else is left out of /estimate rather than shown at $0.
+const ESTIMATE_BASES = ["homeSize", "area", "linear", "flat"];
+const estimateLiteral = (s) => {
+  const e = s.estimate;
+  if (s.customQuote || !e?.enabled || typeof e.rate !== "number") return "undefined";
+  const basis = ESTIMATE_BASES.includes(e.basis) ? e.basis : "homeSize";
+  const props = [`basis: ${esc(basis)}`, `rate: ${e.rate}`, `minimum: ${typeof e.minimum === "number" ? e.minimum : 0}`];
+  if ((basis === "area" || basis === "linear") && typeof e.typicalSize === "number") props.push(`typicalSize: ${e.typicalSize}`);
+  if ((basis === "area" || basis === "linear") && e.sizeHint) props.push(`sizeHint: ${esc(e.sizeHint)}`);
+  return `{ ${props.join(", ")} }`;
+};
+
 async function fetchServices() {
   const docs = await client.fetch(
     `*[_type == "service"] | order(_createdAt asc) {
       name, "slug": slug.current, icon, tagline, description, heroImage,
-      startingPrice, customQuote, featured, benefits, process, idealFor, order,
+      startingPrice, customQuote, estimate, featured, benefits, process, idealFor, order,
       "faqs": faqs[]->{question, answer},
       "category": category->{title, icon, order}
     }`
@@ -164,6 +177,7 @@ async function fetchServices() {
     heroImage: ${esc(urlFor(s.heroImage))},
     startingPrice: ${esc(s.startingPrice)},
     customQuote: ${!!s.customQuote},
+    estimate: ${estimateLiteral(s)},
     featured: ${!!s.featured},
     benefits: ${arr(s.benefits)},
     process: ${arr(s.process)},
@@ -424,6 +438,30 @@ async function fetchContactPage() {
     `  headline: ${esc(c.headline)},\n` +
     `  subheadline: ${esc(c.subheadline)},\n` +
     `  formFields: [\n${fieldsBody}\n  ] as ContactFormField[],\n` +
+    `};\n`
+  );
+}
+
+async function fetchEstimatePage() {
+  const e = await client.fetch(`*[_id == "estimatePage"][0]`);
+  // No document yet — keep the committed defaults so the page still works.
+  if (!e) return null;
+  const num = (v, fallback) => (typeof v === "number" ? v : fallback);
+
+  return (
+    banner("estimatePage document") +
+    `import type { EstimatePageContent } from "~/types";\n\n` +
+    `export const estimatePage: EstimatePageContent = {\n` +
+    `  headline: ${esc(e.headline)},\n` +
+    `  subheadline: ${esc(e.subheadline)},\n` +
+    `  rangeSpread: ${num(e.rangeSpread, 15)},\n` +
+    `  twoStoryUpcharge: ${num(e.twoStoryUpcharge, 0)},\n` +
+    `  threeStoryUpcharge: ${num(e.threeStoryUpcharge, 0)},\n` +
+    `  moderateUpcharge: ${num(e.moderateUpcharge, 0)},\n` +
+    `  heavyUpcharge: ${num(e.heavyUpcharge, 0)},\n` +
+    `  bundleMinServices: ${num(e.bundleMinServices, 0)},\n` +
+    `  bundleDiscount: ${num(e.bundleDiscount, 0)},\n` +
+    `  disclaimer: ${esc(e.disclaimer)},\n` +
     `};\n`
   );
 }
@@ -886,6 +924,7 @@ async function main() {
     ["gallery.ts", fetchGallery],
     ["site.ts", fetchSiteSettings],
     ["contactPage.ts", fetchContactPage],
+    ["estimatePage.ts", fetchEstimatePage],
     ["homepage.ts", fetchHomepage],
     ["galleryPage.ts", fetchGalleryPage],
     ["globalCta.ts", fetchGlobalCta],

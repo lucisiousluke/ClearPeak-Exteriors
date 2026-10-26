@@ -12,6 +12,7 @@ const singletonTypes = new Set([
   "footer",
   "globalCta",
   "contactPage",
+  "estimatePage",
   "galleryPage",
   "whyChooseUsSection",
   "trustBadgesSection",
@@ -40,6 +41,9 @@ export default defineConfig({
             S.listItem()
               .title("Contact Page")
               .child(S.document().schemaType("contactPage").documentId("contactPage")),
+            S.listItem()
+              .title("Estimate Calculator Page")
+              .child(S.document().schemaType("estimatePage").documentId("estimatePage")),
             S.listItem()
               .title("Gallery Page")
               .child(S.document().schemaType("galleryPage").documentId("galleryPage")),
