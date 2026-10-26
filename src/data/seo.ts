@@ -5,7 +5,7 @@
 import type { SeoEntry } from "../types";
 
 export const defaultSeo: SeoEntry = {
-  "ogImage": "https://cdn.sanity.io/images/vgi0saae/production/ffe107793f0e9d70951dc8452b48a7cad0b987a4-800x600.jpg?rect=0,90,800,420&w=1200&h=630&fit=crop&auto=format"
+  "ogImage": "https://cdn.sanity.io/images/vgi0saae/production/320055446a59a4cce26e6d909f7a00b3a71d2bd7-1000x667.jpg?rect=0,72,1000,525&w=1200&h=630&fit=crop&auto=format"
 };
 
 export const pageSeo: Record<string, SeoEntry> = {
@@ -85,6 +85,12 @@ export const pageSeo: Record<string, SeoEntry> = {
   "/service-areas/parker": {
     "ogImage": "https://cdn.sanity.io/images/vgi0saae/production/440e29a10b5a064311f860b0d867f0f2fb5fe441-1000x923.jpg?rect=0,200,1000,525&w=1200&h=630&fit=crop&auto=format"
   },
+  "/blog/how-much-does-pressure-washing-cost-in-denver": {
+    "metaTitle": "Pressure Washing Cost in Denver: 2026 Price Guide",
+    "metaDescription": "See typical 2026 prices for house washing, driveways, roofs, and gutters in Denver, plus what affects the cost and how to get a fair, itemized quote.",
+    "ogImage": "https://cdn.sanity.io/images/vgi0saae/production/0144f2d5c2efb9c86e6e47fb410ad11b7e54b734-1600x2133.jpg?rect=0,647,1600,840&w=1200&h=630&fit=crop&auto=format",
+    "ogImageAlt": "classic brick and siding two story house in arvada with leaves around it"
+  },
   "/blog/best-time-to-wash-your-home-in-colorado": {
     "metaTitle": "Best Time of Year to Wash Your House in Colorado",
     "metaDescription": "Late spring is the best time to wash your Denver home, with early fall a close second. See how Colorado weather, pollen, and freezes affect timing.",
@@ -120,6 +126,12 @@ export const pageSeo: Record<string, SeoEntry> = {
     "metaDescription": "Black streaks on your roof are algae, not dirt. Learn how soft wash roof cleaning safely removes algae, moss, and lichen from Denver-area roofs.",
     "ogImage": "https://cdn.sanity.io/images/vgi0saae/production/cd648e0866239fb1b337095b4579dd3c977b076a-1000x1500.jpg?rect=0,488,1000,525&w=1200&h=630&fit=crop&auto=format",
     "ogImageAlt": "clean roof with chimney, second floor window brown siding with dark brown trim "
+  },
+  "/blog/exterior-cleaning-for-real-estate-agents": {
+    "metaTitle": "Exterior Cleaning for Real Estate Agents | ClearPeak",
+    "metaDescription": "Help your Denver listings stand out. See how exterior cleaning boosts curb appeal, sharpens listing photos, and protects a home's value before sale.",
+    "ogImage": "https://cdn.sanity.io/images/vgi0saae/production/a33bbaf9331a79bd2f0d6fe20c522bd03bf915f5-1600x1067.jpg?rect=0,114,1600,840&w=1200&h=630&fit=crop&auto=format",
+    "ogImageAlt": "large home for sale with red roses in the front, clean exterior and well kept lawn. "
   },
   "/blog/soft-washing-denver-colorado": {
     "metaTitle": "Soft Washing in Denver: Why Colorado Homes Need It",
