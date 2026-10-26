@@ -15,6 +15,30 @@ const ContactPage: React.FC<PageProps> = () => {
   const [submitting, setSubmitting] = React.useState(false);
   const [otherChecked, setOtherChecked] = React.useState<Record<string, boolean>>({});
   const [otherSelected, setOtherSelected] = React.useState<Record<string, boolean>>({});
+  const formRef = React.useRef<HTMLFormElement>(null);
+
+  // Prefill from the /estimate calculator's "Get My Exact Quote" link
+  // (?service=...&service=...&details=...). Done on the DOM after mount
+  // because the fields are uncontrolled and the page is pre-rendered.
+  React.useEffect(() => {
+    const form = formRef.current;
+    if (!form) return;
+    const params = new URLSearchParams(window.location.search);
+    const picked = params.getAll("service");
+    const details = params.get("details");
+    if (!picked.length && !details) return;
+
+    const serviceField = contactPage.formFields.find((f) => f.dynamicOptionsSource === "services");
+    if (serviceField && picked.length) {
+      form.querySelectorAll<HTMLInputElement>(`input[type="checkbox"][name="${serviceField.name}[]"]`).forEach((box) => {
+        if (picked.includes(box.value)) box.checked = true;
+      });
+      const select = form.querySelector<HTMLSelectElement>(`select[name="${serviceField.name}"]`);
+      if (select && Array.from(select.options).some((o) => o.value === picked[0])) select.value = picked[0];
+    }
+    const textarea = form.querySelector<HTMLTextAreaElement>("textarea");
+    if (textarea && details && !textarea.value) textarea.value = details;
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -105,6 +129,7 @@ const ContactPage: React.FC<PageProps> = () => {
               </div>
             ) : (
               <form
+                ref={formRef}
                 name="quote-request"
                 method="POST"
                 data-netlify="true"
